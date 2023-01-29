@@ -1,5 +1,5 @@
 package com.isa.jjdzr;
-
+import java.util.Scanner;
 /**
  * Hello world!
  *
@@ -10,4 +10,6 @@ public class App
     {
         System.out.println( "JavaFanatic" );
     }
+
+
 }
