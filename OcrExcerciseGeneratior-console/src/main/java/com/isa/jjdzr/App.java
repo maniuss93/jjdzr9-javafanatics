@@ -36,8 +36,8 @@ public class App
 
         System.out.println("-------------------------------------------------------------------------------------------");
 
-        AssignLevelOfAdvancement assignLevelOfAdvancement = new AssignLevelOfAdvancement();
-        System.out.println(assignLevelOfAdvancement.assignLevelOfAdvancementInfo);
+        LevelOfAdvancement levelOfAdvancement = new LevelOfAdvancement();
+        System.out.println(levelOfAdvancement.assignLevelOfAdvancementInfo);
 
         System.out.println("-------------------------------------------------------------------------------------------");
 
@@ -46,8 +46,8 @@ public class App
 
         System.out.println("-------------------------------------------------------------------------------------------");
 
-        AddingExercises addingExercises = new AddingExercises();
-        System.out.println(addingExercises.addingExercisesInfo);
+        Exercises exercises = new Exercises();
+        System.out.println(exercises.addingExercisesInfo);
 
         System.out.println("-------------------------------------------------------------------------------------------");
 
