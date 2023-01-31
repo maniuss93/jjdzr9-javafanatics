@@ -4,10 +4,9 @@ import java.util.Scanner;
  * Hello world!
  *
  */
-public class App 
-{
-    public static void main( String[] args )    {
-        System.out.println( "JavaFanatic" );
+public class App {
+    public static void main(String[] args) {
+        System.out.println("JavaFanatic");
 
         System.out.println("-------------------------------------------------------------------------------------------");
 
@@ -46,12 +45,16 @@ public class App
 
         System.out.println("-------------------------------------------------------------------------------------------");
 
-        Exercises exercises = new Exercises();
-        System.out.println(exercises.addingExercisesInfo);
+        Exercises ex1 = new Exercises("some exercis ", "some description", "youtube.com");
+        Person person = new Person("Paweł", "hard", 'g', 34, ex1);
+        System.out.println(ex1.toJSON().toString());
+        System.out.println(person.toJson().toString());
+
+        System.out.println(ex1.addingExercisesInfo);
 
         System.out.println("-------------------------------------------------------------------------------------------");
 
     }
-
-
 }
+
+
