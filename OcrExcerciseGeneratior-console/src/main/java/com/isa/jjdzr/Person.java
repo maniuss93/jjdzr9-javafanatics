@@ -32,11 +32,11 @@ public class Person {
         this.age = age;
     }
 
-    public char getMale() {
+    public String getMale() {
         return male;
     }
 
-    public void setMale(char male) {
+    public void setMale(String male) {
         this.male = male;
     }
 
@@ -49,11 +49,11 @@ public class Person {
     }
 
     private int age;
-    private char male;
+    private String male;
 
     private Exercises exercises;
 
-    public Person(String name, String level, char male, int age,  Exercises exercises) {
+    public Person(String name, String level, String male, int age,  Exercises exercises) {
         this.name = name;
         this.level = level;
         this.male = male;
