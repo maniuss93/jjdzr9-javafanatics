@@ -1,12 +1,14 @@
 package com.isa.jjdzr;
 import java.io.IOException;
+import java.nio.file.FileSystemException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
 
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
 
         //
@@ -24,8 +26,8 @@ public class App {
 
         try {
             Files.writeString(path, toSave);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (FileSystemException exception) {
+            System.out.println("Error! Please check file with data.");;
         }
         // read file
         readFromPath(path);
@@ -35,8 +37,8 @@ public class App {
         try {
             String value = Files.readString(path);
             System.out.println(value);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            System.out.println("Error! Please check file with data.");;
         }
 
     }
