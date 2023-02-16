@@ -5,10 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class UserSignInAndLogIn {
 
@@ -17,22 +16,28 @@ public class UserSignInAndLogIn {
         Scanner scanner = new Scanner(System.in);
         List<User> usersList = null;
         try {
-            usersList = objectMapper.readValue
-                    (new File("src/main/resources/user.json"), new TypeReference<>() {
-                    });
+            usersList = objectMapper.readValue(new File("src/main/resources/user.json"), new TypeReference<>() {
+            });
         } catch (IOException e) {
             System.out.println("Nie można wczytać listy użytkowników");
         }
         List<String> usersNames = usersList.stream().map(User::getUserName).toList();
         System.out.println("Podaj nazwe użytkownika");
-        String name = scanner.nextLine();
-        while (!usersNames.contains(name)) {
+        String userName = scanner.nextLine();
+        while (!usersNames.contains(userName)) {
             System.out.println("Użytkownik nie istnieje \nPodaj nazwe użytkownika jeszcze raz");
-            name = scanner.nextLine();
+            userName = scanner.nextLine();
         }
-        String finalUser = name;
-        User user2 = usersList.stream().filter(user -> user.getUserName().equals(finalUser)).findFirst().orElseThrow();
-        System.out.println(user2.getUserPassword() + " " + user2.getUserEmail());
+        String finalUser = userName;
+        User user = usersList.stream().filter(u -> u.getUserName().equals(finalUser)).findFirst().orElseThrow();
         System.out.println("Podaj hasło");
+        String userPassword = scanner.nextLine();
+        while (!Objects.equals(user.getUserPassword(), userPassword)) {
+            System.out.println("Hasło nie jest poprawne");
+            userPassword = scanner.nextLine();
+        }
+        System.out.println("Zalogowano pomyślnie");
+        UserInterface userInterface = new UserInterface();
+        userInterface.showUserInterfaceMenu();
     }
 }

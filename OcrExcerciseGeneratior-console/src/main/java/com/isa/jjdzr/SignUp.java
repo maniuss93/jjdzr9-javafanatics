@@ -15,9 +15,11 @@ class SignUp {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             List<User> usersList = objectMapper.readValue
-                    (new File("src/main/resources/user.json"), new TypeReference<>() {});
+                    (new File("src/main/resources/user.json"), new TypeReference<>() {
+                    });
             users.addAll(usersList);
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj nazwe użytkownika");
         String userName = scanner.nextLine();
@@ -70,7 +72,7 @@ class SignUp {
             objectMapper.writeValue(new FileWriter
                     ("src/main/resources/user.json"), users);
         } catch (IOException e) {
-            System.out.println("Nie można utowrzyć użytkownika");
+            System.out.println("Nie można utworzyć użytkownika");
         }
     }
 }

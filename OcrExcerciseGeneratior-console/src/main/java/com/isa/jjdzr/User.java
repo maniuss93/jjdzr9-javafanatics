@@ -6,14 +6,6 @@ class User {
     private String userEmail;
     private int userAdvancementLevel;
 
-    public int getUserAdvancementLevel() {
-        return userAdvancementLevel;
-    }
-
-    public void setUserAdvancementLevel(int userAdvancementLevel) {
-        this.userAdvancementLevel = userAdvancementLevel;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -36,5 +28,13 @@ class User {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public int getUserAdvancementLevel() {
+        return userAdvancementLevel;
+    }
+
+    public void setUserAdvancementLevel(int userAdvancementLevel) {
+        this.userAdvancementLevel = userAdvancementLevel;
     }
 }
