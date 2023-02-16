@@ -12,7 +12,7 @@ public class Menu {
     }
 
     static void logowanieUzytkownika() {
-        System.out.println("Wybrano opcję zalogowania");
+    UserSignInAndLogIn.login();
     }
 
     static void bezLogowania() {

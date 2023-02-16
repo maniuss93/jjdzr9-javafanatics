@@ -22,8 +22,6 @@ public class App
         System.out.println("-------------------------------------------------------------------------------------------");
 
         UserSignInAndLogIn userSignInAndLogIn = new UserSignInAndLogIn();
-        System.out.println(userSignInAndLogIn.userSignInAndLogInInfo);
-
         System.out.println("-------------------------------------------------------------------------------------------");
 
         UserInterface userInterface = new UserInterface();

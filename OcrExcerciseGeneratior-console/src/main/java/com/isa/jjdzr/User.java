@@ -4,6 +4,15 @@ class User {
     private String userName;
     private String userPassword;
     private String userEmail;
+    private int userAdvancementLevel;
+
+    public int getUserAdvancementLevel() {
+        return userAdvancementLevel;
+    }
+
+    public void setUserAdvancementLevel(int userAdvancementLevel) {
+        this.userAdvancementLevel = userAdvancementLevel;
+    }
 
     public String getUserName() {
         return userName;
