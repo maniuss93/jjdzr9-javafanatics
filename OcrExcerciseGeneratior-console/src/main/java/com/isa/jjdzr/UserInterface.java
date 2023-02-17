@@ -27,7 +27,7 @@ public class UserInterface {
         System.out.println("     ****************************************");
         System.out.print("     *     TWÓJ POZIOM ZAAWANSOWANIA TO: ");
         printAdvancementLevel();
-        System.out.print("Wybierz opcje:\n1. Test poziomu zaawansowania\n2. Wygeneruj losowy zestaw ćwiczeń\n3. Zobacz historie treningów\n4. Dodaj ćwiczenie\n5.Koniec\n>>");
+        System.out.print("Wybierz opcje:\n1. Test poziomu zaawansowania\n2. Wygeneruj losowy zestaw ćwiczeń\n3. Zobacz historie treningów\n4. Dodaj ćwiczenie\n5. Powrót\n>>");
     }
 
     void userInterfaceMenu() {
@@ -50,7 +50,7 @@ public class UserInterface {
     }
 
     private void addUserExercise() {
-        System.out.println("Wybrano opcję DODAJ ĆWICZENIE");
+        AddExercises.createExercises();
     }
 
     private void showTrainingHistory() {
