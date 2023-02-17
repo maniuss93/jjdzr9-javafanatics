@@ -24,7 +24,6 @@ public class Exercises {
     public void setDescription(String description) {
         this.description = description;
     }
-
     public String getUrl() {
         return url;
     }

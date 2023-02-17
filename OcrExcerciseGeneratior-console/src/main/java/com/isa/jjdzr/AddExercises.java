@@ -19,7 +19,7 @@ class AddExercises {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             List<Exercises> exercisesList1 = objectMapper.readValue
-                    (new File("OcrExcerciseGeneratior-console/src/main/resources/exercises.json"), new TypeReference<>() {
+                    (new File("src/main/resources/exercises.json"), new TypeReference<>() {
                     });
             exerciseList.addAll(exercisesList1);
         } catch (IOException ignored) {
@@ -44,11 +44,11 @@ class AddExercises {
         System.out.println("Stwórz opis");
         String description = scanner.nextLine();
         exercise.setDescription(description);
-
+        exerciseList.add(exercise);
 
         try {
             objectMapper.writeValue(new FileWriter
-                    ("OcrExcerciseGeneratior-console/src/main/resources/exercises.json"), exerciseList);
+                    ("src/main/resources/exercises.json"), exerciseList);
         } catch (IOException e) {
             System.out.println("Nie można utworzyć cwiczenia"+ e);
         }
