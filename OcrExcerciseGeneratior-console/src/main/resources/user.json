@@ -1,1 +1,14 @@
-[{"userName":"maniuss93","userPassword":"12345","userEmail":"maniuss93@wp.pl","userAdvancementLevel":0},{"userName":"jacek","userPassword":"12345","userEmail":"w@wp.pl","userAdvancementLevel":0},{"userName":"kupa","userPassword":"siku","userEmail":"wp@wp.pl","userAdvancementLevel":0},{"userName":"krowa","userPassword":"1234","userEmail":"hop@e.pl","userAdvancementLevel":0}]
+[
+  {
+    "userName": "maniuss93",
+    "userPassword": "12345",
+    "userEmail": "maniuss93@wp.pl",
+    "userAdvancementLevel": 100
+  },
+  {
+    "userName": "jacek",
+    "userPassword": "12345",
+    "userEmail": "w@wp.pl",
+    "userAdvancementLevel": 0
+  }
+]

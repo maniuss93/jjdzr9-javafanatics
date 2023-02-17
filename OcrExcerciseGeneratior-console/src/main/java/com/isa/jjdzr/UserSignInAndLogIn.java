@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class UserSignInAndLogIn {
 
+
     static void login() {
         Scanner scanner = new Scanner(System.in);
         List<User> usersList = WriteAndReadFromFiles.readUserList();
@@ -24,9 +25,9 @@ public class UserSignInAndLogIn {
             userPassword = scanner.nextLine();
         }
         System.out.println("Zalogowano pomyślnie");
-
-        UserInterface userInterface = new UserInterface(user);
+        UserInterface userInterface = new UserInterface(user.getUserAdvancementLevel());
         userInterface.userInterfaceMenu();
+        user.setUserAdvancementLevel(userInterface.advancementLevelForm.getUserAdvancementLevel());
         WriteAndReadFromFiles.writeUserList(usersList);
     }
 }

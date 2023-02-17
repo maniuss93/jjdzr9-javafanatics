@@ -4,12 +4,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
-    private User user;
     Scanner scanner = new Scanner(System.in);
-    AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm(user.getUserAdvancementLevel());
+    int userLevel;
+    AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm(userLevel);
     RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
 
     void printAdvancementLevel() {
+
         if (advancementLevelForm.getUserAdvancementLevel() == 50) {
             System.out.println("POCZĄTKUJĄCY");
         } else if (advancementLevelForm.getUserAdvancementLevel() == 100) {
@@ -21,8 +22,8 @@ public class UserInterface {
         }
     }
 
-    public UserInterface(User user) {
-        this.user = user;
+    public UserInterface(int userLevel) {
+        this.userLevel = userLevel;
     }
 
     void showUserInterfaceMenu() {
@@ -36,6 +37,7 @@ public class UserInterface {
     }
 
     void userInterfaceMenu() {
+        advancementLevelForm.setUserAdvancementLevel(userLevel);
         try {
             int optionNumber;
             do {
@@ -69,7 +71,5 @@ public class UserInterface {
         advancementLevelForm.advancementLevelMenu();
     }
 
-    public void main(String[] args) {
-        userInterfaceMenu();
-    }
+
 }

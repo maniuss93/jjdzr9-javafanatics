@@ -8,7 +8,11 @@ public class AdvancementLevelForm {
     Integer beginner = 50;
     Integer advanced = 100;
     Integer professional = 150;
-    private Integer userAdvancementLevel = 0;
+    private int userAdvancementLevel;
+
+    public AdvancementLevelForm(int userAdvancementLevel) {
+        this.userAdvancementLevel = userAdvancementLevel;
+    }
 
     public Integer getUserAdvancementLevel() {
         return userAdvancementLevel;
@@ -16,13 +20,6 @@ public class AdvancementLevelForm {
 
     public void setUserAdvancementLevel(Integer userAdvancementLevel) {
         this.userAdvancementLevel = userAdvancementLevel;
-    }
-
-    public AdvancementLevelForm(Integer userAdvancementLevel) {
-        this.userAdvancementLevel = userAdvancementLevel;
-    }
-    public AdvancementLevelForm() {
-        this.userAdvancementLevel = 0;
     }
 
     static void showAdvancementLevelMenu() {
@@ -42,17 +39,14 @@ public class AdvancementLevelForm {
                     case 1 -> {
                         setUserAdvancementLevel(beginner);
                         System.out.println("Wybrano poziom: POCZĄTKUJĄCY");
-                        setUserAdvancementLevel(50);
                     }
                     case 2 -> {
                         setUserAdvancementLevel(advanced);
                         System.out.println("Wybrano poziom: ZAAWANSOWANY");
-                        setUserAdvancementLevel(100);
                     }
                     case 3 -> {
                         setUserAdvancementLevel(professional);
                         System.out.println("Wybrano poziom: PROFESJONALNY");
-                        setUserAdvancementLevel(150);
                     }
                     default -> System.out.println("Nieznana opcja");
                 }
