@@ -1,1 +1,0 @@
-{"name":"Paweł","level":"hard","male":"G","age":34,"exercises":{"name":"some exercis ","description":"some description","url":"youtube.com"}}
