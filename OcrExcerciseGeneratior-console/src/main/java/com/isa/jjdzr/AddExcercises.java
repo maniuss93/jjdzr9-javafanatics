@@ -19,16 +19,16 @@ class AddExcercises {
         Exercises exercise = new Exercises();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            List<Exercises> usersList = objectMapper.readValue
+            List<Exercises> exercisesList1 = objectMapper.readValue
                     (new File("src/main/resources/exercises.json"), new TypeReference<>() {
                     });
-            exercise.addAll(usersList);
+            exerciseList.addAll(exercisesList1);
         } catch (IOException ignored) {
         }
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj nazwe cwiczenia");
         String exerciseName = scanner.nextLine();
-        List<String> listOfExercisesName = exercise.stream().map(Exercises::getName).toList();
+        List<String> listOfExercisesName = exerciseList.stream().map(Exercises::getName).toList();
         while (listOfExercisesName.contains(exerciseName) || exerciseName.length() > 10 || exerciseName.length() < 2) {
             if (listOfExercisesName.contains(exerciseName)) {
                 System.out.println("Ta nazwa cwiczenia już istnieje");
