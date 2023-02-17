@@ -2,7 +2,7 @@ package com.isa.jjdzr;
 
 import java.util.*;
 
-class SignUp {
+class UserSignUp {
     private static final List<User> allUsers = new ArrayList<>();
 
     static void createUser() {

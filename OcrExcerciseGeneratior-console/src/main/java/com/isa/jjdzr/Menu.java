@@ -7,7 +7,7 @@ public class Menu {
     static Scanner in = new Scanner(System.in);
 
     static void nowyUzytkownik() {
-        SignUp.createUser();
+        UserSignUp.createUser();
     }
 
     static void logowanieUzytkownika() {
