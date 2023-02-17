@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+
         //wygeneruj poziom zaawansowania
 //        UserInterface userInterface = new UserInterface();
 //        userInterface.userInterfaceMenu();

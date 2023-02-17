@@ -1,13 +1,23 @@
 [
   {
-    "name": "kupa",
-    "description": "siku",
-    "url": null
+    "exercisePoints": null,
+    "exerciseName": "vvvvv",
+    "description": "vvvvvvv",
+    "url": null,
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
   },
   {
-    "name": "kupa1",
-    "description": "siku1",
-    "url": null
+    "exercisePoints": null,
+    "exerciseName": "cwiczenie",
+    "description": "dobre cwiczenie lubimy",
+    "url": null,
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },
+  {
+    "exercisePoints": null,
+    "exerciseName": "nowe",
+    "description": "cwiczenie nowe",
+    "url": null,
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
   }
-
 ]

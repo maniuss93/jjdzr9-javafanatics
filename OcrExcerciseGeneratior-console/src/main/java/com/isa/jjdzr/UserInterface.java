@@ -4,8 +4,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
+    private User user;
     Scanner scanner = new Scanner(System.in);
-    AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm();
+    AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm(user.getUserAdvancementLevel());
     RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
 
     void printAdvancementLevel() {
@@ -18,6 +19,10 @@ public class UserInterface {
         } else {
             System.out.println("BRAK");
         }
+    }
+
+    public UserInterface(User user) {
+        this.user = user;
     }
 
     void showUserInterfaceMenu() {

@@ -18,6 +18,8 @@ public class Menu {
         System.out.println("Wybrano opcję bez zalogowania");
     }
 
+    JavaFanaticsTerminalLogo javaFanaticsTerminalLogo = new JavaFanaticsTerminalLogo();
+
     static void pokazMenu() {
         System.out.println("     ****************************************");
         System.out.println("     *                 MENU                 *");
@@ -45,6 +47,9 @@ public class Menu {
     }
 
     public static void main(String[] args) {
+        JavaFanaticsTerminalLogo.javaFanaticsLogo();
         menu();
+
+
     }
 }

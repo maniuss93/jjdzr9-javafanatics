@@ -1,14 +1,9 @@
 
 package com.isa.jjdzr;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 class AddExercises {
 
@@ -16,18 +11,12 @@ class AddExercises {
 
     static void createExercises() {
         Exercises exercise = new Exercises();
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            List<Exercises> exercisesList1 = objectMapper.readValue
-                    (new File("src/main/resources/exercises.json"), new TypeReference<>() {
-                    });
-            exerciseList.addAll(exercisesList1);
-        } catch (IOException ignored) {
-        }
+
+        exerciseList.addAll(WriteAndReadFromFiles.readExercisesList());
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj nazwe cwiczenia");
         String exerciseName = scanner.nextLine();
-        List<String> listOfExercisesName = exerciseList.stream().map(Exercises::getName).toList();
+        List<String> listOfExercisesName = exerciseList.stream().map(Exercises::getExerciseName).toList();
         while (listOfExercisesName.contains(exerciseName) || exerciseName.length() > 10 || exerciseName.length() < 3) {
             if (listOfExercisesName.contains(exerciseName)) {
                 System.out.println("Ta nazwa cwiczenia już istnieje");
@@ -40,18 +29,13 @@ class AddExercises {
                 exerciseName = scanner.nextLine();
             }
         }
-        exercise.setName(exerciseName);
+        exercise.setExerciseName(exerciseName);
         System.out.println("Stwórz opis");
         String description = scanner.nextLine();
         exercise.setDescription(description);
         exerciseList.add(exercise);
+        WriteAndReadFromFiles.writeExercisesList(exerciseList);
 
-        try {
-            objectMapper.writeValue(new FileWriter
-                    ("src/main/resources/exercises.json"), exerciseList);
-        } catch (IOException e) {
-            System.out.println("Nie można utworzyć cwiczenia"+ e);
-        }
     }
 }
 

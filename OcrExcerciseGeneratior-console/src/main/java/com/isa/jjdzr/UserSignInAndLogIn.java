@@ -25,7 +25,8 @@ public class UserSignInAndLogIn {
         }
         System.out.println("Zalogowano pomyślnie");
 
-        UserInterface userInterface = new UserInterface();
+        UserInterface userInterface = new UserInterface(user);
         userInterface.userInterfaceMenu();
+        WriteAndReadFromFiles.writeUserList(usersList);
     }
 }

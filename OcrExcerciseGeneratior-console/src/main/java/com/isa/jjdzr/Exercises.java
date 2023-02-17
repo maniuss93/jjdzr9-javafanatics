@@ -1,9 +1,10 @@
 package com.isa.jjdzr;
 
 public class Exercises {
-    private String exerciseName;
+
+
     private Integer exercisePoints;
-    private String name;
+    private String exerciseName;
     private String description;
     private String url;
 
@@ -15,14 +16,6 @@ public class Exercises {
         this.exercisePoints = exercisePoints;
     }
 
-    public String getExerciseName() {
-        return exerciseName;
-    }
-
-    public void setExerciseName(String exerciseName) {
-        this.exerciseName = exerciseName;
-    }
-
     public Integer getExercisePoints() {
         return exercisePoints;
     }
@@ -30,16 +23,16 @@ public class Exercises {
     public void setExercisePoints(Integer exercisePoints) {
         this.exercisePoints = exercisePoints;
     }
+
     String addingExercisesInfo = "This will be the Adding Exercises Class";
 
 
-
-    public String getName() {
-        return name;
+    public String getExerciseName() {
+        return exerciseName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setExerciseName(String exerciseName) {
+        this.exerciseName = exerciseName;
     }
 
     public String getDescription() {
@@ -49,12 +42,21 @@ public class Exercises {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getUrl() {
         return url;
     }
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getAddingExercisesInfo() {
+        return addingExercisesInfo;
+    }
+
+    public void setAddingExercisesInfo(String addingExercisesInfo) {
+        this.addingExercisesInfo = addingExercisesInfo;
     }
 
 

@@ -22,6 +22,17 @@ public class WriteAndReadFromFiles {
         }
         return usersList;
     }
+    public static List<Exercises> readExercisesList() {
+        List<Exercises> exercisesList= null;
+        try {
+            exercisesList= objectMapper.readValue
+                    (new File("src/main/resources/exercises.json"), new TypeReference<>() {
+                    });
+        } catch (IOException e) {
+            System.out.println("Nie można wczytać listy ćwiczeń");
+        }
+        return exercisesList;
+    }
     public static void writeUserList(List <User> usersList) {
         try {
             objectMapper.writeValue(new FileWriter
@@ -30,4 +41,14 @@ public class WriteAndReadFromFiles {
             System.out.println("Nie można utworzyć użytkownika");
         }
     }
+    public static void writeExercisesList(List <Exercises> exercisesList) {
+        try {
+            objectMapper.writeValue(new FileWriter
+                    ("src/main/resources/exercises.json"), exercisesList );
+        } catch (IOException e) {
+            System.out.println("Nie można utworzyć ćwiczenia");
+        }
+    }
+
+
 }
