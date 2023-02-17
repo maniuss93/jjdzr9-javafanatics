@@ -10,10 +10,6 @@ public class AdvancementLevelForm {
     Integer professional = 150;
     private int userAdvancementLevel;
 
-    public AdvancementLevelForm(int userAdvancementLevel) {
-        this.userAdvancementLevel = userAdvancementLevel;
-    }
-
     public Integer getUserAdvancementLevel() {
         return userAdvancementLevel;
     }

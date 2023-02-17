@@ -6,11 +6,10 @@ import java.util.Scanner;
 public class UserInterface {
     Scanner scanner = new Scanner(System.in);
     int userLevel;
-    AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm(userLevel);
+    AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm();
     RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
 
     void printAdvancementLevel() {
-
         if (advancementLevelForm.getUserAdvancementLevel() == 50) {
             System.out.println("POCZĄTKUJĄCY");
         } else if (advancementLevelForm.getUserAdvancementLevel() == 100) {

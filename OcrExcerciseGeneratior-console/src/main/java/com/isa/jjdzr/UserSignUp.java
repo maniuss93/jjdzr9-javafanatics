@@ -56,7 +56,6 @@ class UserSignUp {
         user.setUserEmail(email);
         System.out.println("Utworzono użytkownika '" + user.getUserName() + "'");
         allUsers.add(user);
-
         WriteAndReadFromFiles.writeUserList(allUsers);
     }
 }
