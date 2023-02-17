@@ -8,14 +8,17 @@ import java.util.*;
 
 class SignUp {
     private static final List<User> users = new ArrayList<>();
+
     static void createUser() {
         User user = new User();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             List<User> usersList = objectMapper.readValue
-                    (new File("src/main/resources/user.json"), new TypeReference<>() {});
+                    (new File("src/main/resources/user.json"), new TypeReference<>() {
+                    });
             users.addAll(usersList);
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj nazwe użytkownika");
         String userName = scanner.nextLine();

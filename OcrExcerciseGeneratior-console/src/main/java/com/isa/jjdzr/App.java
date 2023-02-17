@@ -1,9 +1,11 @@
 package com.isa.jjdzr;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 public class App {
-    public static void main( String[] args )    {
+    public static void main(String[] args) {
         //wygeneruj poziom zaawansowania
 //        UserInterface userInterface = new UserInterface();
 //        userInterface.userInterfaceMenu();
@@ -81,7 +83,7 @@ public class App {
 ////        List<Exercises> generatedStretchingList = randomExerciseGenerator.generateExercise(stretchingList, userAdvancementLevel, randomExerciseGenerator.getIndicatorOfStretching());
 ////        for (int i = 0; i < generatedStretchingList.size(); i++) {
 ////            System.out.println(generatedStretchingList.get(i).getExerciseName());
-        }
+    }
 
 //        System.out.println("-------------------------------------------------------------------------------------------");
 //
@@ -124,5 +126,5 @@ public class App {
 //        System.out.println(exercises.addingExercisesInfo);
 //
 //        System.out.println("-------------------------------------------------------------------------------------------");
-    }
+}
 //}
