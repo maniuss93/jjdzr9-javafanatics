@@ -71,7 +71,7 @@ class SignUp {
             objectMapper.writeValue(new FileWriter
                     ("src/main/resources/user.json"), users);
         } catch (IOException e) {
-            System.out.println("Nie można utowrzyć użytkownika");
+            System.out.println("Nie można utworzyć użytkownika");
         }
     }
 }

@@ -1,7 +1,8 @@
 [
   {
     "userName": "maniuss93",
-    "userPassword": "1234",
-    "userEmail": "maniuss93@wp.pl"
+    "userPassword": "12345",
+    "userEmail": "maniuss93@wp.pl",
+    "userAdvancementLevel": 0
   }
 ]
