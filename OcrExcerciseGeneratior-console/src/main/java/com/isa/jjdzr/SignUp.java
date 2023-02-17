@@ -7,9 +7,7 @@ import java.io.*;
 import java.util.*;
 
 class SignUp {
-
     private static final List<User> users = new ArrayList<>();
-
     static void createUser() {
         User user = new User();
         ObjectMapper objectMapper = new ObjectMapper();
