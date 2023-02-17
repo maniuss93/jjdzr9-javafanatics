@@ -1,28 +1,17 @@
 package com.isa.jjdzr;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.*;
 import java.util.*;
 
 class SignUp {
-    private static final List<User> users = new ArrayList<>();
+    private static final List<User> allUsers = new ArrayList<>();
 
     static void createUser() {
         User user = new User();
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            List<User> usersList = objectMapper.readValue
-                    (new File("src/main/resources/user.json"), new TypeReference<>() {
-                    });
-            users.addAll(usersList);
-        } catch (IOException ignored) {
-        }
+        allUsers.addAll(WriteAndReadFromFiles.readUserList());
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj nazwe użytkownika");
         String userName = scanner.nextLine();
-        List<String> listOfUsersName = users.stream().map(User::getUserName).toList();
+        List<String> listOfUsersName = allUsers.stream().map(User::getUserName).toList();
         while (listOfUsersName.contains(userName) || userName.length() > 10 || userName.length() < 2) {
             if (listOfUsersName.contains(userName)) {
                 System.out.println("Ta nazwa użytkownika już istnieje");
@@ -54,7 +43,7 @@ class SignUp {
         user.setUserPassword(password);
         System.out.println("Podaj adres email");
         String email = scanner.nextLine();
-        List<String> listOfEmails = users.stream().map(User::getUserEmail).toList();
+        List<String> listOfEmails = allUsers.stream().map(User::getUserEmail).toList();
         while (listOfEmails.contains(email) || email.length() < 6 || !email.contains("@") || !email.contains(".")) {
             if (listOfEmails.contains(email)) {
                 System.out.println("Ten adres email posiada już konto. Proszę użyc inny adres email.");
@@ -66,13 +55,9 @@ class SignUp {
         }
         user.setUserEmail(email);
         System.out.println("Utworzono użytkownika '" + user.getUserName() + "'");
-        users.add(user);
-        try {
-            objectMapper.writeValue(new FileWriter
-                    ("src/main/resources/user.json"), users);
-        } catch (IOException e) {
-            System.out.println("Nie można utworzyć użytkownika");
-        }
+        allUsers.add(user);
+
+        WriteAndReadFromFiles.writeUserList(allUsers);
     }
 }
 
