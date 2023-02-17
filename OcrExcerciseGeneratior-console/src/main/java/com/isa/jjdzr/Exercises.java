@@ -1,7 +1,6 @@
 package com.isa.jjdzr;
 
-import javax.json.Json;
-import javax.json.JsonObject;
+
 
 public class Exercises {
     String addingExercisesInfo = "This will be the Adding Exercises Class";
