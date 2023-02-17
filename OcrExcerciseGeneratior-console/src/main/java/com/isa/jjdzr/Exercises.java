@@ -3,6 +3,9 @@ package com.isa.jjdzr;
 public class Exercises {
     private String exerciseName;
     private Integer exercisePoints;
+    private String name;
+    private String description;
+    private String url;
 
     public Exercises() {
     }
@@ -27,4 +30,32 @@ public class Exercises {
     public void setExercisePoints(Integer exercisePoints) {
         this.exercisePoints = exercisePoints;
     }
+    String addingExercisesInfo = "This will be the Adding Exercises Class";
+
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+
 }
