@@ -17,12 +17,12 @@ class AddExercises {
         System.out.println("Podaj nazwe cwiczenia");
         String exerciseName = scanner.nextLine();
         List<String> listOfExercisesName = exerciseList.stream().map(Exercises::getExerciseName).toList();
-        while (listOfExercisesName.contains(exerciseName) || exerciseName.length() > 10 || exerciseName.length() < 3) {
+        while (listOfExercisesName.contains(exerciseName) || exerciseName.length() > 20 || exerciseName.length() < 3) {
             if (listOfExercisesName.contains(exerciseName)) {
                 System.out.println("Ta nazwa cwiczenia już istnieje");
                 exerciseName = scanner.nextLine();
-            } else if (exerciseName.length() > 10) {
-                System.out.println("Nazwa cwiczenia jest zbyt długa. Maksymalnie 10 znaków");
+            } else if (exerciseName.length() > 20) {
+                System.out.println("Nazwa cwiczenia jest zbyt długa. Maksymalnie 20 znaków");
                 exerciseName = scanner.nextLine();
             } else {
                 System.out.println("Nazwa cwiczenia jest zbyt krótka. Conajmniej 3 znaki");
@@ -33,6 +33,10 @@ class AddExercises {
         System.out.println("Stwórz opis");
         String description = scanner.nextLine();
         exercise.setDescription(description);
+        System.out.println("Podaj adres url (np youtube)");
+        String url = scanner.nextLine();
+        exercise.setUrl(url);
+
         exerciseList.add(exercise);
         WriteAndReadFromFiles.writeExercisesList(exerciseList);
 

@@ -19,5 +19,12 @@
     "description": "cwiczenie nowe",
     "url": null,
     "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },
+  {
+    "exercisePoints": null,
+    "exerciseName": "super cw",
+    "description": "bardzo długi opis",
+    "url": "youtube.com",
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
   }
 ]
