@@ -11,14 +11,12 @@ public class Menu {
     }
 
     static void logowanieUzytkownika() {
-    UserSignInAndLogIn.login();
+        UserSignInAndLogIn.login();
     }
 
     static void bezLogowania() {
         System.out.println("Wybrano opcję bez zalogowania");
     }
-
-    JavaFanaticsTerminalLogo javaFanaticsTerminalLogo = new JavaFanaticsTerminalLogo();
 
     static void pokazMenu() {
         System.out.println("     ****************************************");
@@ -29,27 +27,37 @@ public class Menu {
     }
 
     static void menu() {
-        try {
-            int nrOpcji;
-            do {
+        int nrOpcji = 0;
+        while (nrOpcji != 4) {
+            try {
                 pokazMenu();
                 nrOpcji = in.nextInt();
                 switch (nrOpcji) {
-                    case 1 -> nowyUzytkownik();
-                    case 2 -> logowanieUzytkownika();
-                    case 3 -> bezLogowania();
+                    case 1:
+                        nowyUzytkownik();
+                        break;
+                    case 2:
+                        logowanieUzytkownika();
+                        break;
+                    case 3:
+                        bezLogowania();
+                        break;
+                    case 4:
+                        System.out.println("Koniec programu");
+                        break;
+                    default:
+                        System.out.println("Niepoprawna opcja");
+                        break;
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Niepoprawna opcja");
+                in.nextLine();
             }
-            while (nrOpcji != 4);
-        } catch (InputMismatchException e) {
-            System.out.println("Niepoprawna opcja");
         }
     }
 
     public static void main(String[] args) {
         JavaFanaticsTerminalLogo.javaFanaticsLogo();
         menu();
-
-
     }
 }
