@@ -71,7 +71,7 @@ public class UserInterface {
         randomExerciseGenerator.generateExercise(userLevel);
 
         for (Exercises exercises : randomExerciseGenerator.exerciseList) {
-            System.out.println(exercises.getCategory() +" "+exercises.getExerciseName() +" "+ exercises.getDescription());
+            System.out.println("Kategoria: " +exercises.getCategory() +" Nazwa ćwiczenia: "+exercises.getExerciseName() +"\nOpis:  "+ exercises.getDescription() +"\n");
         }
     }
 

@@ -1,102 +1,186 @@
 [
   {
     "exercisePoints": 5,
-    "exerciseName": "vvvvv",
-    "description": "vvvvvvv",
-    "url": null,
-    "category": "warmUp",
-    "addingExercisesInfo": "This will be the Adding Exercises Class"
-  },
-  {
-    "exercisePoints": 5,
-    "exerciseName": "cwiczenie",
-    "description": "dobre cwiczenie lubimy",
-    "url": null,
-    "category": "warmUp",
-    "addingExercisesInfo": "This will be the Adding Exercises Class"
-  },
-  {
-    "exercisePoints": 5,
-    "exerciseName": "nowe",
-    "description": "cwiczenie nowe",
+    "exerciseName": "Push-up",
+    "description": "A full push-up with a hold-up tightens the muscles of the buttocks and abdomen. If you have a problem with maintaining a good position or doing the whole set, you will do a push-up on your knees or on a platform",
     "url": null,
     "category": "coreExercises",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
   },
   {
     "exercisePoints": 5,
-    "exerciseName": "super cw",
-    "description": "bardzo długi opis",
+    "exerciseName": "Front dumbbell raises",
+    "description": "Light dumbbells, tighten your glutes and raise the dumbbells in front of you",
+    "url": null,
+    "category": "coreExercises",
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },
+  {
+    "exercisePoints": 5,
+    "exerciseName": "Side raises with dumbbells",
+    "description": "Light dumbbells, tighten your buttocks and raise the dumbbells to the side",
+    "url": null,
+    "category": "coreExercises",
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },
+  {
+    "exercisePoints": 5,
+    "exerciseName": "Hanging",
+    "description": "Hanging on a straight bar. You hang with both hands for 20 seconds with a 20 second break. Active hang, shoulders tense, legs in front of you. If you are unable to hang for 20 seconds without a break, put a box under the legs of the chair or support yourself, but you must not let go of the bar for 20 seconds.",
     "url": "youtube.com",
     "category": "coreExercises",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
   },
   {
     "exercisePoints": 5,
-    "exerciseName": "Pajacyki",
-    "description": "Pajacyki boczne",
+    "exerciseName": "Crunches",
+    "description": "Ten different exercises for abs, 1 pull-up, 2 russian twist, 3 touching hands and legs, 4 leg raises; 5board; 6slant alternating; 7 hollow body; 8 side board; 9 side board; 10 bikes. You exercise 20 seconds, rest 40 seconds. You do it with your mobile watch. Download the tabata application and set the time you will work.",
     "url": "ffff",
-    "category": "stretching",
+    "category": "coreExercises",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
   },
   {
     "exercisePoints": 5,
-    "exerciseName": "Pajacyki",
-    "description": "Pajacyki wzdłużne",
+    "exerciseName": "Lowering from straight bar",
+    "description": "Setting up in the upper position on the bar from, for example, a chair. Then hang, and as slowly as possible lower down to outstretched arms.",
     "url": "ffff",
-    "category": "stretching",
+    "category": "coreExercises",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
   },
   {
     "exercisePoints": 5,
-    "exerciseName": "Skakanka",
-    "description": "",
-    "url": "brak",
-    "category": "warmUp",
-    "addingExercisesInfo": "This will be the Adding Exercises Class"
-  },
-  {
-    "exercisePoints": 5,
-    "exerciseName": "Podciąganie",
-    "description": "Szeroko rozstawione ręce",
+    "exerciseName": "Angle pull-up on a rope",
+    "description": "Pull-ups in the leg-forward position on the rope, holding both ends evenly.",
     "url": "brak",
     "category": "coreExercises",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
   },
   {
     "exercisePoints": 5,
-    "exerciseName": "Rozciąganie pleców",
-    "description": "Rozciąganie pleców stojąc.",
+    "exerciseName": "3km run",
+    "description": "Calm, continuous running at an even pace. You start calmly and run at an even pace for about 18-20 minutes.",
     "url": "brak",
-    "category": "stretching",
+    "category": "warmUp",
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },
+  {
+    "exercisePoints": 10,
+    "exerciseName": "Walking with your hands on the bars",
+    "description": "After the run, transition on straight arms (swing) sticks (every 2 sticks) you start once from the right hand once from the left hand.",
+    "url": "brak",
+    "category": "coreExercises",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
   },
   {
     "exercisePoints": 5,
-    "exerciseName": "Bieg 20 minut",
-    "description": "Swobodny trucht we własnym rytmie.",
+    "exerciseName": "Side rompers",
+    "description": "Side rompers performed for 1 min",
     "url": "brak",
     "category": "warmUp",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
   },
   {
     "exercisePoints": 5,
-    "exerciseName": "super cw2",
-    "description": "bardzo długi opis",
+    "exerciseName": "Front rompers",
+    "description": "Front rompers performed for 1 min",
     "url": "youtube.com",
-    "category": "coreExercises",
+    "category": "warmUp",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
   },  {
   "exercisePoints": 5,
-  "exerciseName": "super cw3",
-  "description": "bardzo długi opis",
+  "exerciseName": "Boxing run",
+  "description": "Boxing run for 1 min",
   "url": "youtube.com",
   "category": "coreExercises",
   "addingExercisesInfo": "This will be the Adding Exercises Class"
 },  {
   "exercisePoints": 5,
-  "exerciseName": "super cw4",
-  "description": "bardzo długi opis",
+  "exerciseName": "Turning circles with your hands",
+  "description": "Rotate the circles with your arms forward, then backward, and finally alternately. Total 2 minutes.",
+  "url": "youtube.com",
+  "category": "warmUp",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 5,
+  "exerciseName": "Rotating circles with your hips",
+  "description": "Rotate the hips in circles with the legs and head still.",
+  "url": "youtube.com",
+  "category": "warmUp",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 5,
+  "exerciseName": "Bends with swing",
+  "description": "Bends with alternately touching the feet and swinging the hand up, we try to look after the hand going up. Total 1-2 minutes.",
+  "url": "youtube.com",
+  "category": "warmUp",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 5,
+  "exerciseName": "Shoulder twists",
+  "description": "Alternately twisting the arms at the shoulders, straight torso, palms up and down 180 degrees. Deep muscle activation.",
+  "url": "youtube.com",
+  "category": "warmUp",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 5,
+  "exerciseName": "Burpees",
+  "description": "Feet shoulder-width apart, 10-30 degrees open, flat. 2) Body weight transferred to the heels (they do not leave the ground even for a moment). 3) Back straight, torso tense, head in a natural position, eyes directed forward.",
+  "url": "youtube.com",
+  "category": "coreExercises",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 10,
+  "exerciseName": "Back stretching",
+  "description": "After the workout, kneel down and lower your body down. Rest your buttocks on your legs and your chest on your thighs. In this pose, known as the \"Japanese bow\", the back is arched, which helps relieve the tension of the night. You can stretch your back by resting your hands on the edge of a table or armchair while bending over. Remember not to slouch or hunch your shoulders.",
+  "url": "youtube.com",
+  "category": "stretching",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 10,
+  "exerciseName": "Full body stretching",
+  "description": "Lie on your stomach with your arms and legs stretched out. Raise your head and chest slightly and carefully raise one arm, along with the opposite leg. Repeat on both sides of your body to lengthen and straighten your spine and limbs.",
+  "url": "youtube.com",
+  "category": "stretching",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 5,
+  "exerciseName": "Stretching the back and abdomen",
+  "description": "Lie on your back, bend your knees, place your feet flat and place your arms along your body. Lift your butt and hips slowly upward, resting your weight on your feet and shoulders. In this position, all muscles work, even the deep ones. If you have a soft mattress, this exercise can be challenging. In this case, you can move to the floor using an exercise mat.",
+  "url": "youtube.com",
+  "category": "stretching",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 5,
+  "exerciseName": "Stretching the neck",
+  "description": "Tilt your head slightly to the side or slightly forward and press your head gently with your hand. Repeat on the other side. This exercise should be performed with particular care, as the neck muscles are quite delicate.",
+  "url": "youtube.com",
+  "category": "stretching",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 5,
+  "exerciseName": "Shoulder stretching",
+  "description": "Extend your arm to the side, then bend at the elbow with your palm up (like a student hesitantly submitting to answer). Now rest your forearm against the door frame or bookshelf and, gently twisting at the hips, slowly stretch your shoulder. Do the same exercise with the other hand.",
+  "url": "youtube.com",
+  "category": "stretching",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 5,
+  "exerciseName": "Forearm stretch",
+  "description": "Reach your arm out in front of you and let your hand drop loosely. With the other hand, press on the palm.",
+  "url": "youtube.com",
+  "category": "stretching",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 5,
+  "exerciseName": "Leg stretching",
+  "description": "To begin with, try to stand with your feet wider and bend to the right leg, forward and left. Sit with your feet together and try to bring your heels in as close as possible without lifting your knees. You can also put your straight leg on a chair and bend towards it.",
+  "url": "youtube.com",
+  "category": "stretching",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 5,
+  "exerciseName": "Plank",
+  "description": "The plank is a bodyweight exercise which involves holding the trunk part of your body in a straight line off the ground. The static exercise engages multiple muscle groups at the same time which makes it extremely effective at strengthening your core, whilst also working the shoulders, arms and glutes. ",
   "url": "youtube.com",
   "category": "coreExercises",
   "addingExercisesInfo": "This will be the Adding Exercises Class"
