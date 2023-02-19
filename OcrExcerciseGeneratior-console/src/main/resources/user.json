@@ -3,12 +3,24 @@
     "userName": "maniuss93",
     "userPassword": "12345",
     "userEmail": "maniuss93@wp.pl",
-    "userAdvancementLevel": 100
+    "userAdvancementLevel": 50
   },
   {
     "userName": "jacek",
     "userPassword": "12345",
     "userEmail": "w@wp.pl",
-    "userAdvancementLevel": 0
+    "userAdvancementLevel": 50
+  },
+  {
+    "userName": "Zayl",
+    "userPassword": "abc1",
+    "userEmail": "zayl@zayl.com",
+    "userAdvancementLevel": 50
+  },
+  {
+    "userName": "Hella",
+    "userPassword": "asd1",
+    "userEmail": "asd@wp.pl",
+    "userAdvancementLevel": 50
   }
 ]

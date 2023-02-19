@@ -33,21 +33,11 @@ public class Menu {
                 pokazMenu();
                 nrOpcji = in.nextInt();
                 switch (nrOpcji) {
-                    case 1:
-                        nowyUzytkownik();
-                        break;
-                    case 2:
-                        logowanieUzytkownika();
-                        break;
-                    case 3:
-                        bezLogowania();
-                        break;
-                    case 4:
-                        System.out.println("Koniec programu");
-                        break;
-                    default:
-                        System.out.println("Niepoprawna opcja");
-                        break;
+                    case 1 -> nowyUzytkownik();
+                    case 2 -> logowanieUzytkownika();
+                    case 3 -> bezLogowania();
+                    case 4 -> System.out.println("Koniec programu");
+                    default -> System.out.println("Niepoprawna opcja");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Niepoprawna opcja");

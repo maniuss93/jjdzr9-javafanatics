@@ -8,9 +8,10 @@ public class Exercises {
     private String description;
     private String url;
 
+    private String category;
     public Exercises() {
     }
-
+//TODO
     public Exercises(String exerciseName, Integer exercisePoints) {
         this.exerciseName = exerciseName;
         this.exercisePoints = exercisePoints;
@@ -58,6 +59,11 @@ public class Exercises {
     public void setAddingExercisesInfo(String addingExercisesInfo) {
         this.addingExercisesInfo = addingExercisesInfo;
     }
-
+    public String getCategory() {
+        return category;
+    }
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
 }

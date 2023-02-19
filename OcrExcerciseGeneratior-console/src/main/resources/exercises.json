@@ -1,30 +1,104 @@
 [
   {
-    "exercisePoints": null,
+    "exercisePoints": 5,
     "exerciseName": "vvvvv",
     "description": "vvvvvvv",
     "url": null,
+    "category": "warmUp",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
   },
   {
-    "exercisePoints": null,
+    "exercisePoints": 5,
     "exerciseName": "cwiczenie",
     "description": "dobre cwiczenie lubimy",
     "url": null,
+    "category": "warmUp",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
   },
   {
-    "exercisePoints": null,
+    "exercisePoints": 5,
     "exerciseName": "nowe",
     "description": "cwiczenie nowe",
     "url": null,
+    "category": "coreExercises",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
   },
   {
-    "exercisePoints": null,
+    "exercisePoints": 5,
     "exerciseName": "super cw",
     "description": "bardzo długi opis",
     "url": "youtube.com",
+    "category": "coreExercises",
     "addingExercisesInfo": "This will be the Adding Exercises Class"
-  }
+  },
+  {
+    "exercisePoints": 5,
+    "exerciseName": "Pajacyki",
+    "description": "Pajacyki boczne",
+    "url": "ffff",
+    "category": "stretching",
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },
+  {
+    "exercisePoints": 5,
+    "exerciseName": "Pajacyki",
+    "description": "Pajacyki wzdłużne",
+    "url": "ffff",
+    "category": "stretching",
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },
+  {
+    "exercisePoints": 5,
+    "exerciseName": "Skakanka",
+    "description": "",
+    "url": "brak",
+    "category": "warmUp",
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },
+  {
+    "exercisePoints": 5,
+    "exerciseName": "Podciąganie",
+    "description": "Szeroko rozstawione ręce",
+    "url": "brak",
+    "category": "coreExercises",
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },
+  {
+    "exercisePoints": 5,
+    "exerciseName": "Rozciąganie pleców",
+    "description": "Rozciąganie pleców stojąc.",
+    "url": "brak",
+    "category": "stretching",
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },
+  {
+    "exercisePoints": 5,
+    "exerciseName": "Bieg 20 minut",
+    "description": "Swobodny trucht we własnym rytmie.",
+    "url": "brak",
+    "category": "warmUp",
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },
+  {
+    "exercisePoints": 5,
+    "exerciseName": "super cw2",
+    "description": "bardzo długi opis",
+    "url": "youtube.com",
+    "category": "coreExercises",
+    "addingExercisesInfo": "This will be the Adding Exercises Class"
+  },  {
+  "exercisePoints": 5,
+  "exerciseName": "super cw3",
+  "description": "bardzo długi opis",
+  "url": "youtube.com",
+  "category": "coreExercises",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+},  {
+  "exercisePoints": 5,
+  "exerciseName": "super cw4",
+  "description": "bardzo długi opis",
+  "url": "youtube.com",
+  "category": "coreExercises",
+  "addingExercisesInfo": "This will be the Adding Exercises Class"
+}
 ]
