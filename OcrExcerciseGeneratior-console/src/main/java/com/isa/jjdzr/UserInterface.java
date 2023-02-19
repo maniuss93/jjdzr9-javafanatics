@@ -62,16 +62,16 @@ public class UserInterface {
     }
 
     private void showTrainingHistory() {
-        System.out.println("Wybrano opcję POKAŻ HISTORIĘ ĆWICZEŃ");
+        System.out.println("Dostępne wkrótce");
     }
 
 
     private void generateExerciseSet() {
 //        RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
-        randomExerciseGenerator.generateExercise(userLevel);
+        randomExerciseGenerator.generateExercise(advancementLevelForm.getUserAdvancementLevel());
 
         for (Exercises exercises : randomExerciseGenerator.exerciseList) {
-            System.out.println("Kategoria: " +exercises.getCategory() +" Nazwa ćwiczenia: "+exercises.getExerciseName() +"\nOpis:  "+ exercises.getDescription() +"\n");
+            System.out.println("Kategoria: " +exercises.getCategory() +" \nNazwa ćwiczenia: "+exercises.getExerciseName() +"\nOpis:  "+ exercises.getDescription() +"\n");
         }
     }
 

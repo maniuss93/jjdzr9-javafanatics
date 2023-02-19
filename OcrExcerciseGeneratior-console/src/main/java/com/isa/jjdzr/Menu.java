@@ -15,7 +15,7 @@ public class Menu {
     }
 
     static void bezLogowania() {
-        System.out.println("Wybrano opcję bez zalogowania");
+        System.out.println("Dostępne wkrótce");
     }
 
     static void pokazMenu() {

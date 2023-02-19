@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.isa.jjdzr</groupId>
-  <artifactId>OcrExcerciseGeneratior-console</artifactId>
+  <artifactId>OcrExerciseGeneratior-console</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
 
-  <name>OcrExcerciseGeneratior-console</name>
+  <name>OcrExerciseGeneratior-console</name>
   <url>http://maven.apache.org</url>
 
   <properties>
