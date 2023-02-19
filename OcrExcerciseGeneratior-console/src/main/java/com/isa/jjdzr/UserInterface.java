@@ -1,12 +1,14 @@
 package com.isa.jjdzr;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
     Scanner scanner = new Scanner(System.in);
     int userLevel;
     AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm();
+
     RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
 
     void printAdvancementLevel() {
@@ -63,7 +65,14 @@ public class UserInterface {
         System.out.println("Wybrano opcję POKAŻ HISTORIĘ ĆWICZEŃ");
     }
 
+
     private void generateExerciseSet() {
+//        RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
+        randomExerciseGenerator.generateExercise(userLevel);
+
+        for (Exercises exercises : randomExerciseGenerator.exerciseList) {
+            System.out.println(exercises.getCategory() +" "+exercises.getExerciseName() +" "+ exercises.getDescription());
+        }
     }
 
     private void takeAdvancementTest() {

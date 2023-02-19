@@ -1,5 +1,7 @@
 package com.isa.jjdzr;
 
+import java.util.List;
+
 class User {
     private String userName;
     private String userPassword;
