@@ -1,9 +1,12 @@
-package com.isa.jjdzr;
+package com.isa.jjdzr.console;
+
+import com.isa.jjdzr.UserSignInAndLogIn;
+import com.isa.jjdzr.UserSignUp;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-public class Menu {
+public class Menu implements Printable {
     static Scanner in = new Scanner(System.in);
 
     static void nowyUzytkownik() {
@@ -26,7 +29,7 @@ public class Menu {
         System.out.print("Wybierz opcje:\n1. Tworzenie użytkownika\n2. Logowanie\n3. Bez zalogowania\n4. Koniec\n>> ");
     }
 
-    static void menu() {
+    public static void menu() {
         int nrOpcji = 0;
         while (nrOpcji != 4) {
             try {
@@ -45,8 +48,24 @@ public class Menu {
             }
         }
     }
-    public static void main(String[] args) {
-        JavaFanaticsTerminalLogo.javaFanaticsLogo();
-        menu();
+
+    @Override
+    public void printActualLine(String line) {
+        System.out.println(line);
+    }
+
+    @Override
+    public void printUserNameInBrackes(String line) {
+        System.out.println("Utworzono użytkownika '" + line + "'");
+    }
+
+    @Override
+    public void printExerciseName(String line) {
+        System.out.println("\nNowe ćwiczenie: " + line + ", zostało dodane :)");
+    }
+
+    @Override
+    public void printExercise(String line1, String line2, String line3) {
+        System.out.println("Kategoria: " + line1 + " \nNazwa ćwiczenia: " + line2 + "\nOpis:  " + line3 + "\n");
     }
 }

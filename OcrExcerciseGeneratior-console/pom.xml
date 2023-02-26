@@ -51,7 +51,7 @@
           <manifest>
             <addClasspath>true</addClasspath>
             <classpathPrefix>lib/</classpathPrefix>
-            <mainClass>com.isa.jjdzr.Menu</mainClass>
+            <mainClass>com.isa.jjdzr.console.Menu</mainClass>
           </manifest>
         </archive>
       </configuration>

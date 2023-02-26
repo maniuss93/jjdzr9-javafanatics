@@ -1,60 +1,64 @@
 package com.isa.jjdzr;
 
+import com.isa.jjdzr.console.Menu;
+import com.isa.jjdzr.console.Printable;
+
 import java.util.*;
 
-class UserSignUp {
+public class UserSignUp {
     private static final List<User> allUsers = new ArrayList<>();
+    static Printable menu = new Menu();
 
-    static void createUser() {
+    public static void createUser() {
         User user = new User();
         allUsers.addAll(WriteAndReadFromFiles.readUserList());
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj nazwe użytkownika");
+        menu.printActualLine("Podaj nazwe użytkownika");
         String userName = scanner.nextLine();
         List<String> listOfUsersName = allUsers.stream().map(User::getUserName).toList();
         while (listOfUsersName.contains(userName) || userName.length() > 10 || userName.length() < 2) {
             if (listOfUsersName.contains(userName)) {
-                System.out.println("Ta nazwa użytkownika już istnieje");
+                menu.printActualLine("Ta nazwa użytkownika już istnieje");
                 userName = scanner.nextLine();
             } else if (userName.length() > 10) {
-                System.out.println("Nazwa użytkownika jest zbyt długa. Maksymalnie 10 znaków");
+                menu.printActualLine("Nazwa użytkownika jest zbyt długa. Maksymalnie 10 znaków");
                 userName = scanner.nextLine();
             } else {
-                System.out.println("Nazwa użytkownika jest zbyt krótka. Conajmniej 2 znaki");
+                menu.printActualLine("Nazwa użytkownika jest zbyt krótka. Conajmniej 2 znaki");
                 userName = scanner.nextLine();
             }
         }
         user.setUserName(userName);
-        System.out.println("Stwórz hasło");
+        menu.printActualLine("Stwórz hasło");
         String password = scanner.nextLine();
         while (password.length() > 10 || password.length() < 3) {
             if (password.length() > 10) {
-                System.out.println("Hasło jest zbyt długie. Maksymalnie 10 znaków");
+                menu.printActualLine("Hasło jest zbyt długie. Maksymalnie 10 znaków");
                 password = scanner.nextLine();
             } else {
-                System.out.println("Hasło jest zbyt krótkie. Conajmniej 3 znaki");
+                menu.printActualLine("Hasło jest zbyt krótkie. Conajmniej 3 znaki");
                 password = scanner.nextLine();
             }
         }
-        System.out.println("Powtórz hasło");
+        menu.printActualLine("Powtórz hasło");
         while (!Objects.equals(password, scanner.nextLine())) {
-            System.out.println("Hasła nie są identyczne\nPowtórz hasło");
+            menu.printActualLine("Hasła nie są identyczne\nPowtórz hasło");
         }
         user.setUserPassword(password);
-        System.out.println("Podaj adres email");
+        menu.printActualLine("Podaj adres email");
         String email = scanner.nextLine();
         List<String> listOfEmails = allUsers.stream().map(User::getUserEmail).toList();
         while (listOfEmails.contains(email) || email.length() < 6 || !email.contains("@") || !email.contains(".")) {
             if (listOfEmails.contains(email)) {
-                System.out.println("Ten adres email posiada już konto. Proszę użyc inny adres email.");
+                menu.printActualLine("Ten adres email posiada już konto. Proszę użyc inny adres email.");
                 email = scanner.nextLine();
             } else {
-                System.out.println("To nie jest adres email");
+                menu.printActualLine("To nie jest adres email");
                 email = scanner.nextLine();
             }
         }
         user.setUserEmail(email);
-        System.out.println("Utworzono użytkownika '" + user.getUserName() + "'");
+        menu.printUserNameInBrackes(user.getUserName());
         allUsers.add(user);
         WriteAndReadFromFiles.writeUserList(allUsers);
     }
