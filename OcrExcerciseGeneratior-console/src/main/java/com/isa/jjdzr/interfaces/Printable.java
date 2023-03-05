@@ -1,4 +1,4 @@
-package com.isa.jjdzr.console;
+package com.isa.jjdzr.interfaces;
 
 public interface Printable {
     void printActualLine(String line);

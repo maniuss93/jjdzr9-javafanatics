@@ -1,6 +1,6 @@
-package com.isa.jjdzr;
+package com.isa.jjdzr.exercise.model;
 
-public class Exercises {
+public class Exercise {
 
 
     private Integer exercisePoints;
@@ -9,10 +9,10 @@ public class Exercises {
     private String url;
 
     private String category;
-    public Exercises() {
+    public Exercise() {
     }
 //TODO
-    public Exercises(String exerciseName, Integer exercisePoints) {
+    public Exercise(String exerciseName, Integer exercisePoints) {
         this.exerciseName = exerciseName;
         this.exercisePoints = exercisePoints;
     }

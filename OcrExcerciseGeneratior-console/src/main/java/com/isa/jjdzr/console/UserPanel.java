@@ -1,17 +1,19 @@
-package com.isa.jjdzr;
+package com.isa.jjdzr.console;
 
-import com.isa.jjdzr.console.Menu;
-import com.isa.jjdzr.console.Printable;
+import com.isa.jjdzr.interfaces.Printable;
+import com.isa.jjdzr.exercise.service.AddExercise;
+import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
+import com.isa.jjdzr.user.service.AdvancementLevelForm;
 
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
-public class UserInterface {
+public class UserPanel {
     Printable menu = new Menu();
     Scanner scanner = new Scanner(System.in);
     int userLevel;
-    AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm();
+    public AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm();
 
     RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
 
@@ -27,26 +29,26 @@ public class UserInterface {
         }
     }
 
-    public UserInterface(int userLevel) {
+    public UserPanel(int userLevel) {
         this.userLevel = userLevel;
     }
 
-    void showUserInterfaceMenu() {
+    void showUserPanelMenu() {
         menu.printActualLine("");
         menu.printActualLine("     ****************************************");
-        menu.printActualLine("     *        USER INFORMATION PANEL        *");
+        menu.printActualLine("     *            PANEL UŻYTKOWNIKA         *");
         menu.printActualLine("     ****************************************");
         menu.printActualLine("     *     TWÓJ POZIOM ZAAWANSOWANIA TO: ");
         printAdvancementLevel();
         menu.printActualLine("Wybierz opcje:\n1. Test poziomu zaawansowania\n2. Wygeneruj losowy zestaw ćwiczeń\n3. Zobacz historie treningów\n4. Dodaj ćwiczenie\n5. Powrót\n>>");
     }
 
-    void userInterfaceMenu() {
+    public void userPanelMenu() {
         advancementLevelForm.setUserAdvancementLevel(userLevel);
         try {
             int optionNumber;
             do {
-                showUserInterfaceMenu();
+                showUserPanelMenu();
                 optionNumber = scanner.nextInt();
                 switch (optionNumber) {
                     case 1 -> takeAdvancementTest();
@@ -62,7 +64,7 @@ public class UserInterface {
     }
 
     private void addUserExercise() {
-        AddExercises.createExercises();
+        AddExercise.createExercises();
     }
 
     private void showTrainingHistory() {
@@ -74,8 +76,8 @@ public class UserInterface {
 //        RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
         randomExerciseGenerator.generateExercise(advancementLevelForm.getUserAdvancementLevel());
 
-        for (Exercises exercises : randomExerciseGenerator.exerciseList) {
-            menu.printExercise(exercises.getCategory(), exercises.getExerciseName(), exercises.getDescription());
+        for (Exercise exercise : randomExerciseGenerator.exerciseList) {
+            menu.printExercise(exercise.getCategory(), exercise.getExerciseName(), exercise.getDescription());
         }
     }
 

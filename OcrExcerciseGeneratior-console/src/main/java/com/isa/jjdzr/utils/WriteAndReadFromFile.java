@@ -1,14 +1,16 @@
-package com.isa.jjdzr;
+package com.isa.jjdzr.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.user.model.User;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class WriteAndReadFromFiles {
+public class WriteAndReadFromFile {
     static ObjectMapper objectMapper = new ObjectMapper();
 
     public static List<User> readUserList () {
@@ -22,16 +24,16 @@ public class WriteAndReadFromFiles {
         }
         return usersList;
     }
-    public static List<Exercises> readExercisesList() {
-        List<Exercises> exercisesList= null;
+    public static List<Exercise> readExercisesList() {
+        List<Exercise> exerciseList = null;
         try {
-            exercisesList= objectMapper.readValue
+            exerciseList = objectMapper.readValue
                     (new File("src/main/resources/exercises.json"), new TypeReference<>() {
                     });
         } catch (IOException e) {
             System.out.println("Nie można wczytać listy ćwiczeń");
         }
-        return exercisesList;
+        return exerciseList;
     }
     public static void writeUserList(List <User> usersList) {
         try {
@@ -41,10 +43,10 @@ public class WriteAndReadFromFiles {
             System.out.println("Nie można utworzyć użytkownika");
         }
     }
-    public static void writeExercisesList(List <Exercises> exercisesList) {
+    public static void writeExercisesList(List <Exercise> exerciseList) {
         try {
             objectMapper.writeValue(new FileWriter
-                    ("src/main/resources/exercises.json"), exercisesList );
+                    ("src/main/resources/exercises.json"), exerciseList);
         } catch (IOException e) {
             System.out.println("Nie można utworzyć ćwiczenia");
         }

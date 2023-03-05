@@ -1,7 +1,10 @@
-package com.isa.jjdzr;
+package com.isa.jjdzr.user.service;
 
+import com.isa.jjdzr.console.UserPanel;
 import com.isa.jjdzr.console.Menu;
-import com.isa.jjdzr.console.Printable;
+import com.isa.jjdzr.interfaces.Printable;
+import com.isa.jjdzr.user.model.User;
+import com.isa.jjdzr.utils.WriteAndReadFromFile;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +16,7 @@ public class UserSignInAndLogIn {
 
     public static void login() {
         Scanner scanner = new Scanner(System.in);
-        List<User> usersList = WriteAndReadFromFiles.readUserList();
+        List<User> usersList = WriteAndReadFromFile.readUserList();
         menu.printActualLine("Podaj nazwe użytkownika");
         String userName = scanner.nextLine();
         while (!usersList.stream().map(User::getUserName).toList().contains(userName)) {
@@ -29,9 +32,9 @@ public class UserSignInAndLogIn {
             userPassword = scanner.nextLine();
         }
         menu.printActualLine("Zalogowano pomyślnie");
-        UserInterface userInterface = new UserInterface(user.getUserAdvancementLevel());
-        userInterface.userInterfaceMenu();
-        user.setUserAdvancementLevel(userInterface.advancementLevelForm.getUserAdvancementLevel());
-        WriteAndReadFromFiles.writeUserList(usersList);
+        UserPanel userPanel = new UserPanel(user.getUserAdvancementLevel());
+        userPanel.userPanelMenu();
+        user.setUserAdvancementLevel(userPanel.advancementLevelForm.getUserAdvancementLevel());
+        WriteAndReadFromFile.writeUserList(usersList);
     }
 }

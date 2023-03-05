@@ -1,8 +1,8 @@
-package com.isa.jjdzr;
+package com.isa.jjdzr.user.model;
 
 import java.util.List;
 
-class User {
+public class User {
     private String userName;
     private String userPassword;
     private String userEmail;

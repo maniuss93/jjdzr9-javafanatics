@@ -1,7 +1,8 @@
 package com.isa.jjdzr.console;
 
-import com.isa.jjdzr.UserSignInAndLogIn;
-import com.isa.jjdzr.UserSignUp;
+import com.isa.jjdzr.interfaces.Printable;
+import com.isa.jjdzr.user.service.UserSignInAndLogIn;
+import com.isa.jjdzr.user.service.UserSignUp;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;

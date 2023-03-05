@@ -1,23 +1,25 @@
 
-package com.isa.jjdzr;
+package com.isa.jjdzr.exercise.service;
 
 import com.isa.jjdzr.console.Menu;
-import com.isa.jjdzr.console.Printable;
+import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.interfaces.Printable;
+import com.isa.jjdzr.utils.WriteAndReadFromFile;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-class AddExercises {
+public class AddExercise {
 
-    private static final List<Exercises> exerciseList = new ArrayList<>();
+    private static final List<Exercise> exerciseList = new ArrayList<>();
     static Printable menu = new Menu();
 
-    static void createExercises() {
-        Exercises exercise = new Exercises();
+    public static void createExercises() {
+        Exercise exercise = new Exercise();
         Scanner scanner = new Scanner(System.in);
-        exerciseList.addAll(WriteAndReadFromFiles.readExercisesList());
+        exerciseList.addAll(WriteAndReadFromFile.readExercisesList());
         menu.printActualLine("Wybierz kategorię ćwiczenia: \n1. Rozgrzewka \n2. Główne \n3. Rozciąganie");
         try {
             int optionNumber;
@@ -44,7 +46,7 @@ class AddExercises {
         Scanner scanner2 = new Scanner(System.in);
         menu.printActualLine("Podaj nazwe cwiczenia");
         String exerciseName = scanner2.nextLine();
-        List<String> listOfExercisesName = exerciseList.stream().map(Exercises::getExerciseName).toList();
+        List<String> listOfExercisesName = exerciseList.stream().map(Exercise::getExerciseName).toList();
         while (listOfExercisesName.contains(exerciseName) || exerciseName.length() > 20 || exerciseName.length() < 3) {
             if (listOfExercisesName.contains(exerciseName)) {
                 menu.printActualLine("Ta nazwa cwiczenia już istnieje");
@@ -68,7 +70,7 @@ class AddExercises {
         Integer effortPoints = scanner2.nextInt();
         exercise.setExercisePoints(effortPoints);
         exerciseList.add(exercise);
-        WriteAndReadFromFiles.writeExercisesList(exerciseList);
+        WriteAndReadFromFile.writeExercisesList(exerciseList);
         menu.printExerciseName(exerciseName);
     }
 }
