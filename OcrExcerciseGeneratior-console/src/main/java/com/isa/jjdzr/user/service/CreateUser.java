@@ -5,8 +5,6 @@ import com.isa.jjdzr.utils.WriteAndReadFromFile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
 
 @Service
 class CreateUser {
@@ -14,7 +12,7 @@ class CreateUser {
     User createUser(User user) {
         List<User> allUsers = WriteAndReadFromFile.readUserList();
         List<String> listOfUsersName = allUsers.stream().map(User::getUserName).toList();
-        while (listOfUsersName.contains(user.getUserName()) || user.getUserName().length() > 10 || user.getUserName().length() < 2) {
+        if (listOfUsersName.contains(user.getUserName()) || user.getUserName().length() > 10 || user.getUserName().length() < 2) {
             if (listOfUsersName.contains(user.getUserName())) {
                 throw new RuntimeException("Ta nazwa użytkownika już istnieje");
             } else if (user.getUserName().length() > 10) {
@@ -24,8 +22,7 @@ class CreateUser {
             }
         }
 
-
-        while (user.getUserPassword().length() > 10 || user.getUserPassword().length() < 3) {
+        if (user.getUserPassword().length() > 10 || user.getUserPassword().length() < 3) {
             if (user.getUserPassword().length() > 10) {
                 throw new RuntimeException("Hasło jest zbyt długie. Maksymalnie 10 znaków");
             } else {
@@ -34,7 +31,7 @@ class CreateUser {
         }
 
         List<String> listOfEmails = allUsers.stream().map(User::getUserEmail).toList();
-        while (listOfEmails.contains(user.getUserEmail()) || user.getUserEmail().length() < 6 || !user.getUserEmail().contains("@") || !user.getUserEmail().contains(".")) {
+        if (listOfEmails.contains(user.getUserEmail()) || user.getUserEmail().length() < 6 || !user.getUserEmail().contains("@") || !user.getUserEmail().contains(".")) {
             if (listOfEmails.contains(user.getUserEmail())) {
                 throw new RuntimeException("Ten adres email posiada już konto. Proszę użyc inny adres email.");
 
@@ -46,7 +43,7 @@ class CreateUser {
 
         allUsers.add(user);
         WriteAndReadFromFile.writeUserList(allUsers);
-        return allUsers.stream().filter(u -> u.getUserEmail().equals(user.getUserEmail())).findAny().orElseThrow(new RuntimeException("Błąd");
+        return allUsers.stream().filter(u -> u.getUserEmail().equals(user.getUserEmail())).findAny().orElseThrow();
     }
 }
 

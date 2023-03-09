@@ -61,6 +61,7 @@ public class UserSignUp {
             }
         }
         user.setUserEmail(email);
+        user.setUserID(GenerateID.generateUserID(allUsers));
         menu.printUserNameInBrackes(user.getUserName());
         allUsers.add(user);
         WriteAndReadFromFile.writeUserList(allUsers);

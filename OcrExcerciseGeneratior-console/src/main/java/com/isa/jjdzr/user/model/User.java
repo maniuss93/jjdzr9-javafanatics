@@ -1,42 +1,18 @@
 package com.isa.jjdzr.user.model;
 
+import com.isa.jjdzr.exercise.model.Exercise;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Getter
+@Setter
 public class User {
+    private int userID;
     private String userName;
     private String userPassword;
     private String userEmail;
     private int userAdvancementLevel;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public int getUserAdvancementLevel() {
-        return userAdvancementLevel;
-    }
-
-    public void setUserAdvancementLevel(int userAdvancementLevel) {
-        this.userAdvancementLevel = userAdvancementLevel;
-    }
+    private List<Exercise> userExercises;
 }

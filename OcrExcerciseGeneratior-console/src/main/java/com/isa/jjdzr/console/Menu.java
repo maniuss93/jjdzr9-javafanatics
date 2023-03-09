@@ -1,14 +1,18 @@
 package com.isa.jjdzr.console;
 
+import com.isa.jjdzr.exercise.model.Exercise;
 import com.isa.jjdzr.interfaces.Printable;
 import com.isa.jjdzr.user.service.UserSignInAndLogIn;
 import com.isa.jjdzr.user.service.UserSignUp;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Menu implements Printable {
     static Scanner in = new Scanner(System.in);
+    static UserPanel userPanel = new UserPanel(50, new ArrayList<>());
 
     static void nowyUzytkownik() {
         UserSignUp.createUser();
@@ -19,7 +23,8 @@ public class Menu implements Printable {
     }
 
     static void bezLogowania() {
-        System.out.println("Dostępne wkrótce");
+
+        userPanel.userPanelMenu();
     }
 
     static void pokazMenu() {
@@ -63,6 +68,13 @@ public class Menu implements Printable {
     @Override
     public void printExerciseName(String line) {
         System.out.println("\nNowe ćwiczenie: " + line + ", zostało dodane :)");
+    }
+
+    @Override
+    public void printExerciseList(List<Exercise> exercises) {
+        for (Exercise exercise : exercises) {
+           printExercise(exercise.getCategory(), exercise.getExerciseName(), exercise.getDescription());
+        }
     }
 
     @Override

@@ -6,13 +6,16 @@ import com.isa.jjdzr.exercise.model.Exercise;
 import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
 import com.isa.jjdzr.user.service.AdvancementLevelForm;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserPanel {
     Printable menu = new Menu();
-    Scanner scanner = new Scanner(System.in);
-    int userLevel;
+    private final int userLevel;
+    private List<Exercise> userExercises;
+    private List<Exercise> randomExerciseList;
     public AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm();
 
     RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
@@ -29,8 +32,9 @@ public class UserPanel {
         }
     }
 
-    public UserPanel(int userLevel) {
+    public UserPanel(int userLevel, List<Exercise> userExercises) {
         this.userLevel = userLevel;
+        this.userExercises = userExercises;
     }
 
     void showUserPanelMenu() {
@@ -44,6 +48,7 @@ public class UserPanel {
     }
 
     public void userPanelMenu() {
+        Scanner scanner = new Scanner(System.in);
         advancementLevelForm.setUserAdvancementLevel(userLevel);
         try {
             int optionNumber;
@@ -68,16 +73,33 @@ public class UserPanel {
     }
 
     private void showTrainingHistory() {
-        menu.printActualLine("Dostępne wkrótce");
+        if (userExercises != null) {
+            menu.printExerciseList(userExercises);
+        } else {
+            menu.printActualLine("Nie posiadasz histori treningu");
+        }
     }
 
-
     private void generateExerciseSet() {
-//        RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
-        randomExerciseGenerator.generateExercise(advancementLevelForm.getUserAdvancementLevel());
+        this.randomExerciseList = randomExerciseGenerator
+                .generateExercise(advancementLevelForm.getUserAdvancementLevel());;
+        menu.printExerciseList(randomExerciseList);
+        saveExerciseSet();
+    }
 
-        for (Exercise exercise : randomExerciseGenerator.exerciseList) {
-            menu.printExercise(exercise.getCategory(), exercise.getExerciseName(), exercise.getDescription());
+    private void saveExerciseSet() {
+        Scanner scanner = new Scanner(System.in);
+        menu.printActualLine("Chcesz zapisać listę ćwiczeń do Twojej histori? T/N");
+        String answear = scanner.nextLine();
+        while (!((answear.equals("T") || answear.equals("N")))) {
+            menu.printActualLine("Niepoprawna opcja");
+            answear = scanner.nextLine();
+        }
+        if (answear.equals("T")) {
+            if(userExercises == null) {
+                userExercises = new ArrayList<>();
+            }
+            userExercises.addAll(randomExerciseList);
         }
     }
 
@@ -85,5 +107,7 @@ public class UserPanel {
         advancementLevelForm.advancementLevelMenu();
     }
 
-
+    public List<Exercise> getUserExercises() {
+        return userExercises;
+    }
 }

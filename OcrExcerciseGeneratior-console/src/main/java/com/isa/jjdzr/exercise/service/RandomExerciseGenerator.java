@@ -8,20 +8,19 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomExerciseGenerator {
-    public List<Exercise> exerciseList = new ArrayList<>();
-    Double indicatorOfWarmUp = 0.2;
-    Double indicatorOfCoreExercises = 0.6;
-    Double indicatorOfStretching = 0.2;
+    double indicatorOfWarmUp = 0.2;
+    double indicatorOfCoreExercises = 0.6;
+    double indicatorOfStretching = 0.2;
 
-    public void generateExercise(int userlevel) {
+    public List<Exercise> generateExercise(int userlevel) {
+        List<Exercise> exerciseList = new ArrayList<>();
         List<Exercise> listFromFile = WriteAndReadFromFile.readExercisesList();
         if (userlevel != 0) {
-//            String finalWarmUp = "warmUp";
             List<Exercise> warmUp = listFromFile.stream().filter(u -> u.getCategory().equals("warmUp")).toList();
-            Double warmUpPoints = userlevel * indicatorOfWarmUp;
-            Double coreExercisesPoints = userlevel * indicatorOfCoreExercises;
-            Double stretchingPoints = userlevel * indicatorOfStretching;
-            Double counter1 = 0.0;
+            double warmUpPoints = userlevel * indicatorOfWarmUp;
+            double coreExercisesPoints = userlevel * indicatorOfCoreExercises;
+            double stretchingPoints = userlevel * indicatorOfStretching;
+            double counter1 = 0.0;
             List<Integer> drawnIndexes1 = new ArrayList<>();
             while (counter1 < warmUpPoints) {
                 Random generator = new Random();
@@ -35,7 +34,7 @@ public class RandomExerciseGenerator {
                 }
             }
             List<Exercise> coreExercises = listFromFile.stream().filter(u -> u.getCategory().equals("coreExercises")).toList();
-            Double counter2 = 0.0;
+            double counter2 = 0.0;
             List<Integer> drawnIndexes2 = new ArrayList<>();
             while (counter2 < coreExercisesPoints) {
                 Random generator = new Random();
@@ -49,7 +48,7 @@ public class RandomExerciseGenerator {
                 }
             }
             List<Exercise> stretching= listFromFile.stream().filter(u -> u.getCategory().equals("stretching")).toList();
-            Double counter3 = 0.0;
+            double counter3 = 0.0;
             List<Integer> drawnIndexes3 = new ArrayList<>();
             while (counter3 < stretchingPoints) {
                 Random generator = new Random();
@@ -65,6 +64,7 @@ public class RandomExerciseGenerator {
         } else {
             System.out.println("Proszę wykonać: Test poziomu zaawansowania");
         }
+        return exerciseList;
     }
         private int getIndexDrawn (List <Exercise> warmUpList, Random generator, int indexDrawn){
             for (int i = 0; i < warmUpList.size(); i++) {

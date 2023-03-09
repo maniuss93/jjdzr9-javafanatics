@@ -35,6 +35,7 @@ public class WriteAndReadFromFile {
         }
         return exerciseList;
     }
+
     public static void writeUserList(List <User> usersList) {
         try {
             objectMapper.writeValue(new FileWriter

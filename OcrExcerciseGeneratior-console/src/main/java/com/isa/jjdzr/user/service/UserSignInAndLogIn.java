@@ -32,9 +32,10 @@ public class UserSignInAndLogIn {
             userPassword = scanner.nextLine();
         }
         menu.printActualLine("Zalogowano pomyślnie");
-        UserPanel userPanel = new UserPanel(user.getUserAdvancementLevel());
+        UserPanel userPanel = new UserPanel(user.getUserAdvancementLevel(), user.getUserExercises());
         userPanel.userPanelMenu();
         user.setUserAdvancementLevel(userPanel.advancementLevelForm.getUserAdvancementLevel());
+        user.setUserExercises(userPanel.getUserExercises());
         WriteAndReadFromFile.writeUserList(usersList);
     }
 }
