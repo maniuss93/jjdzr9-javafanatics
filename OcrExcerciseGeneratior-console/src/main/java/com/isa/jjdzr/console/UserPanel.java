@@ -82,7 +82,8 @@ public class UserPanel {
 
     private void generateExerciseSet() {
         this.randomExerciseList = randomExerciseGenerator
-                .generateExercise(advancementLevelForm.getUserAdvancementLevel());;
+                .generateExercise(advancementLevelForm.getUserAdvancementLevel());
+        ;
         menu.printExerciseList(randomExerciseList);
         saveExerciseSet();
     }
@@ -91,12 +92,12 @@ public class UserPanel {
         Scanner scanner = new Scanner(System.in);
         menu.printActualLine("Chcesz zapisać listę ćwiczeń do Twojej histori? T/N");
         String answear = scanner.nextLine();
-        while (!((answear.equals("T") || answear.equals("N")))) {
+        while (!((answear.equalsIgnoreCase("T") || answear.equalsIgnoreCase("N")))) {
             menu.printActualLine("Niepoprawna opcja");
             answear = scanner.nextLine();
         }
-        if (answear.equals("T")) {
-            if(userExercises == null) {
+        if (answear.equalsIgnoreCase("T")) {
+            if (userExercises == null) {
                 userExercises = new ArrayList<>();
             }
             userExercises.addAll(randomExerciseList);
