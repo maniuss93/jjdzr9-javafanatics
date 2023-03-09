@@ -1,17 +1,20 @@
-package com.isa.jjdzr;
+package com.isa.jjdzr.user.service;
 
 import com.isa.jjdzr.console.Menu;
-import com.isa.jjdzr.console.Printable;
+import com.isa.jjdzr.interfaces.Printable;
+import com.isa.jjdzr.user.model.User;
+import com.isa.jjdzr.utils.WriteAndReadFromFile;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
-
+@Service
 public class UserSignUp {
     private static final List<User> allUsers = new ArrayList<>();
     static Printable menu = new Menu();
 
     public static void createUser() {
         User user = new User();
-        allUsers.addAll(WriteAndReadFromFiles.readUserList());
+        allUsers.addAll(WriteAndReadFromFile.readUserList());
         Scanner scanner = new Scanner(System.in);
         menu.printActualLine("Podaj nazwe użytkownika");
         String userName = scanner.nextLine();
@@ -58,9 +61,10 @@ public class UserSignUp {
             }
         }
         user.setUserEmail(email);
+        user.setUserID(GenerateID.generateUserID(allUsers));
         menu.printUserNameInBrackes(user.getUserName());
         allUsers.add(user);
-        WriteAndReadFromFiles.writeUserList(allUsers);
+        WriteAndReadFromFile.writeUserList(allUsers);
     }
 }
 

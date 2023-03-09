@@ -1,17 +1,22 @@
-package com.isa.jjdzr;
+package com.isa.jjdzr.console;
 
-import com.isa.jjdzr.console.Menu;
-import com.isa.jjdzr.console.Printable;
+import com.isa.jjdzr.interfaces.Printable;
+import com.isa.jjdzr.exercise.service.AddExercise;
+import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
+import com.isa.jjdzr.user.service.AdvancementLevelForm;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserInterface {
+public class UserPanel {
     Printable menu = new Menu();
-    Scanner scanner = new Scanner(System.in);
-    int userLevel;
-    AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm();
+    private final int userLevel;
+    private List<Exercise> userExercises;
+    private List<Exercise> randomExerciseList;
+    public AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm();
 
     RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
 
@@ -27,26 +32,28 @@ public class UserInterface {
         }
     }
 
-    public UserInterface(int userLevel) {
+    public UserPanel(int userLevel, List<Exercise> userExercises) {
         this.userLevel = userLevel;
+        this.userExercises = userExercises;
     }
 
-    void showUserInterfaceMenu() {
+    void showUserPanelMenu() {
         menu.printActualLine("");
         menu.printActualLine("     ****************************************");
-        menu.printActualLine("     *        USER INFORMATION PANEL        *");
+        menu.printActualLine("     *            PANEL UŻYTKOWNIKA         *");
         menu.printActualLine("     ****************************************");
         menu.printActualLine("     *     TWÓJ POZIOM ZAAWANSOWANIA TO: ");
         printAdvancementLevel();
         menu.printActualLine("Wybierz opcje:\n1. Test poziomu zaawansowania\n2. Wygeneruj losowy zestaw ćwiczeń\n3. Zobacz historie treningów\n4. Dodaj ćwiczenie\n5. Powrót\n>>");
     }
 
-    void userInterfaceMenu() {
+    public void userPanelMenu() {
+        Scanner scanner = new Scanner(System.in);
         advancementLevelForm.setUserAdvancementLevel(userLevel);
         try {
             int optionNumber;
             do {
-                showUserInterfaceMenu();
+                showUserPanelMenu();
                 optionNumber = scanner.nextInt();
                 switch (optionNumber) {
                     case 1 -> takeAdvancementTest();
@@ -62,20 +69,37 @@ public class UserInterface {
     }
 
     private void addUserExercise() {
-        AddExercises.createExercises();
+        AddExercise.createExercises();
     }
 
     private void showTrainingHistory() {
-        menu.printActualLine("Dostępne wkrótce");
+        if (userExercises != null) {
+            menu.printExerciseList(userExercises);
+        } else {
+            menu.printActualLine("Nie posiadasz histori treningu");
+        }
     }
 
-
     private void generateExerciseSet() {
-//        RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
-        randomExerciseGenerator.generateExercise(advancementLevelForm.getUserAdvancementLevel());
+        this.randomExerciseList = randomExerciseGenerator
+                .generateExercise(advancementLevelForm.getUserAdvancementLevel());;
+        menu.printExerciseList(randomExerciseList);
+        saveExerciseSet();
+    }
 
-        for (Exercises exercises : randomExerciseGenerator.exerciseList) {
-            menu.printExercise(exercises.getCategory(), exercises.getExerciseName(), exercises.getDescription());
+    private void saveExerciseSet() {
+        Scanner scanner = new Scanner(System.in);
+        menu.printActualLine("Chcesz zapisać listę ćwiczeń do Twojej histori? T/N");
+        String answear = scanner.nextLine();
+        while (!((answear.equals("T") || answear.equals("N")))) {
+            menu.printActualLine("Niepoprawna opcja");
+            answear = scanner.nextLine();
+        }
+        if (answear.equals("T")) {
+            if(userExercises == null) {
+                userExercises = new ArrayList<>();
+            }
+            userExercises.addAll(randomExerciseList);
         }
     }
 
@@ -83,5 +107,7 @@ public class UserInterface {
         advancementLevelForm.advancementLevelMenu();
     }
 
-
+    public List<Exercise> getUserExercises() {
+        return userExercises;
+    }
 }

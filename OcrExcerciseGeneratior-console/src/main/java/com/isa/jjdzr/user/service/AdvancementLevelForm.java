@@ -1,4 +1,4 @@
-package com.isa.jjdzr;
+package com.isa.jjdzr.user.service;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -25,7 +25,7 @@ public class AdvancementLevelForm {
         System.out.print("Wybierz poziom zaawansowania:\n1. Początkujący (50pkt)\n2. Zaawansowany (100pkt)\n3. Profesjonalny (150pkt)\n4. Wróć\n>>");
     }
 
-    void advancementLevelMenu() {
+    public void advancementLevelMenu() {
         try {
             int optionNumber;
             do {

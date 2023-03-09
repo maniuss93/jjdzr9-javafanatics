@@ -1,30 +1,26 @@
-package com.isa.jjdzr;
+package com.isa.jjdzr.exercise.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.utils.WriteAndReadFromFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class RandomExerciseGenerator {
-    List<Exercises> exerciseList = new ArrayList<>();
-    Double indicatorOfWarmUp = 0.2;
-    Double indicatorOfCoreExercises = 0.6;
-    Double indicatorOfStretching = 0.2;
+    double indicatorOfWarmUp = 0.2;
+    double indicatorOfCoreExercises = 0.6;
+    double indicatorOfStretching = 0.2;
 
-    public void generateExercise(int userlevel) {
-        List<Exercises> listFromFile = WriteAndReadFromFiles.readExercisesList();
+    public List<Exercise> generateExercise(int userlevel) {
+        List<Exercise> exerciseList = new ArrayList<>();
+        List<Exercise> listFromFile = WriteAndReadFromFile.readExercisesList();
         if (userlevel != 0) {
-//            String finalWarmUp = "warmUp";
-            List<Exercises> warmUp = listFromFile.stream().filter(u -> u.getCategory().equals("warmUp")).toList();
-            Double warmUpPoints = userlevel * indicatorOfWarmUp;
-            Double coreExercisesPoints = userlevel * indicatorOfCoreExercises;
-            Double stretchingPoints = userlevel * indicatorOfStretching;
-            Double counter1 = 0.0;
+            List<Exercise> warmUp = listFromFile.stream().filter(u -> u.getCategory().equals("warmUp")).toList();
+            double warmUpPoints = userlevel * indicatorOfWarmUp;
+            double coreExercisesPoints = userlevel * indicatorOfCoreExercises;
+            double stretchingPoints = userlevel * indicatorOfStretching;
+            double counter1 = 0.0;
             List<Integer> drawnIndexes1 = new ArrayList<>();
             while (counter1 < warmUpPoints) {
                 Random generator = new Random();
@@ -32,13 +28,13 @@ public class RandomExerciseGenerator {
                 indexDrawn = getIndexDrawn(warmUp, generator, indexDrawn);
                 if (!drawnIndexes1.contains(indexDrawn)) {
                     drawnIndexes1.add(indexDrawn);
-                    Exercises exercisesDrawn = warmUp.get(indexDrawn);
-                    exerciseList.add(exercisesDrawn);
-                    counter1 = counter1 + exercisesDrawn.getExercisePoints();
+                    Exercise exerciseDrawn = warmUp.get(indexDrawn);
+                    exerciseList.add(exerciseDrawn);
+                    counter1 = counter1 + exerciseDrawn.getExercisePoints();
                 }
             }
-            List<Exercises> coreExercises = listFromFile.stream().filter(u -> u.getCategory().equals("coreExercises")).toList();
-            Double counter2 = 0.0;
+            List<Exercise> coreExercises = listFromFile.stream().filter(u -> u.getCategory().equals("coreExercises")).toList();
+            double counter2 = 0.0;
             List<Integer> drawnIndexes2 = new ArrayList<>();
             while (counter2 < coreExercisesPoints) {
                 Random generator = new Random();
@@ -46,13 +42,13 @@ public class RandomExerciseGenerator {
                 indexDrawn = getIndexDrawn(coreExercises, generator, indexDrawn);
                 if (!drawnIndexes2.contains(indexDrawn)) {
                     drawnIndexes2.add(indexDrawn);
-                    Exercises exercisesDrawn = coreExercises.get(indexDrawn);
-                    exerciseList.add(exercisesDrawn);
-                    counter2 = counter2 + exercisesDrawn.getExercisePoints();
+                    Exercise exerciseDrawn = coreExercises.get(indexDrawn);
+                    exerciseList.add(exerciseDrawn);
+                    counter2 = counter2 + exerciseDrawn.getExercisePoints();
                 }
             }
-            List<Exercises> stretching= listFromFile.stream().filter(u -> u.getCategory().equals("stretching")).toList();
-            Double counter3 = 0.0;
+            List<Exercise> stretching= listFromFile.stream().filter(u -> u.getCategory().equals("stretching")).toList();
+            double counter3 = 0.0;
             List<Integer> drawnIndexes3 = new ArrayList<>();
             while (counter3 < stretchingPoints) {
                 Random generator = new Random();
@@ -60,16 +56,17 @@ public class RandomExerciseGenerator {
                 indexDrawn = getIndexDrawn(stretching, generator, indexDrawn);
                 if (!drawnIndexes3.contains(indexDrawn)) {
                     drawnIndexes3.add(indexDrawn);
-                    Exercises exercisesDrawn = stretching.get(indexDrawn);
-                    exerciseList.add(exercisesDrawn);
-                    counter3 = counter3 + exercisesDrawn.getExercisePoints();
+                    Exercise exerciseDrawn = stretching.get(indexDrawn);
+                    exerciseList.add(exerciseDrawn);
+                    counter3 = counter3 + exerciseDrawn.getExercisePoints();
                 }
             }
         } else {
             System.out.println("Proszę wykonać: Test poziomu zaawansowania");
         }
+        return exerciseList;
     }
-        private int getIndexDrawn (List < Exercises > warmUpList, Random generator,int indexDrawn){
+        private int getIndexDrawn (List <Exercise> warmUpList, Random generator, int indexDrawn){
             for (int i = 0; i < warmUpList.size(); i++) {
                 indexDrawn = generator.nextInt(warmUpList.size());
             }
