@@ -1,21 +1,21 @@
 package com.isa.jjdzr.console;
 
-import com.isa.jjdzr.interfaces.Printable;
-import com.isa.jjdzr.exercise.service.AddExercise;
 import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.exercise.service.AddExercise;
 import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
+import com.isa.jjdzr.interfaces.Printable;
 import com.isa.jjdzr.user.service.AdvancementLevelForm;
+import com.isa.jjdzr.utils.WriteAndReadFromFile;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class UserPanel {
     Printable menu = new Menu();
     private final int userLevel;
+    private final String userName;
     private List<Exercise> userExercises;
     private List<Exercise> randomExerciseList;
+    private List<Exercise> temporaryList;
     public AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm();
 
     RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
@@ -32,9 +32,9 @@ public class UserPanel {
         }
     }
 
-    public UserPanel(int userLevel, List<Exercise> userExercises) {
+    public UserPanel(int userLevel, String userName) {
         this.userLevel = userLevel;
-        this.userExercises = userExercises;
+        this.userName = userName;
     }
 
     void showUserPanelMenu() {
@@ -48,6 +48,7 @@ public class UserPanel {
     }
 
     public void userPanelMenu() {
+        System.out.println(userName);
         Scanner scanner = new Scanner(System.in);
         advancementLevelForm.setUserAdvancementLevel(userLevel);
         try {
@@ -73,42 +74,52 @@ public class UserPanel {
     }
 
     private void showTrainingHistory() {
+        if (Objects.equals(userName, "")) {
+             menu.printActualLine("Musisz sie zalogować, aby wyswietlić historie");
+             return;
+        }
+        userExercises = WriteAndReadFromFile.readUserExerciseList(userName);
         if (userExercises != null) {
             menu.printExerciseList(userExercises);
         } else {
-            menu.printActualLine("Nie posiadasz histori treningu");
+            if (randomExerciseList != null) {
+                menu.printExerciseList(randomExerciseList);
+            } else {
+                menu.printActualLine("Nie posiadasz histori treningu");
+            }
         }
     }
 
     private void generateExerciseSet() {
-        this.randomExerciseList = randomExerciseGenerator
+        this.temporaryList = randomExerciseGenerator
                 .generateExercise(advancementLevelForm.getUserAdvancementLevel());
-        ;
-        menu.printExerciseList(randomExerciseList);
+        menu.printExerciseList(temporaryList);
+        if (Objects.equals(userName, "")) {
+            return;
+        }
         saveExerciseSet();
     }
 
     private void saveExerciseSet() {
-        Scanner scanner = new Scanner(System.in);
         menu.printActualLine("Chcesz zapisać listę ćwiczeń do Twojej histori? T/N");
+        Scanner scanner = new Scanner(System.in);
         String answear = scanner.nextLine();
-        while (!((answear.equalsIgnoreCase("T") || answear.equalsIgnoreCase("N")))) {
+        while (!(answear.equalsIgnoreCase("T") || answear.equalsIgnoreCase("N"))) {
             menu.printActualLine("Niepoprawna opcja");
             answear = scanner.nextLine();
         }
         if (answear.equalsIgnoreCase("T")) {
             if (userExercises == null) {
-                userExercises = new ArrayList<>();
+                randomExerciseList = temporaryList;
+                WriteAndReadFromFile.writeUserExerciseList(userName, randomExerciseList);
+            } else {
+                userExercises.addAll(temporaryList);
+                WriteAndReadFromFile.writeUserExerciseList(userName, userExercises);
             }
-            userExercises.addAll(randomExerciseList);
         }
     }
-
     private void takeAdvancementTest() {
         advancementLevelForm.advancementLevelMenu();
     }
-
-    public List<Exercise> getUserExercises() {
-        return userExercises;
-    }
 }
+

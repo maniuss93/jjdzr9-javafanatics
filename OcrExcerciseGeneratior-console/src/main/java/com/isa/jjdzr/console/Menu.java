@@ -5,14 +5,13 @@ import com.isa.jjdzr.interfaces.Printable;
 import com.isa.jjdzr.user.service.UserSignInAndLogIn;
 import com.isa.jjdzr.user.service.UserSignUp;
 
-import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.InputMismatchException;
 
 public class Menu implements Printable {
     static Scanner in = new Scanner(System.in);
-    static UserPanel userPanel = new UserPanel(50, new ArrayList<>());
+    static UserPanel userPanel = new UserPanel(50, "");
 
     static void nowyUzytkownik() {
         UserSignUp.createUser();

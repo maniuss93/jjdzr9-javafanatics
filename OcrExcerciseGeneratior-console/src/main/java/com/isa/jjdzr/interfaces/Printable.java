@@ -9,6 +9,6 @@ public interface Printable {
     void printUserNameInBrackes(String line);
     void printExerciseName(String line);
     void printExerciseList(List<Exercise> exercises);
-    void  printExercise(String line1, String line2, String line3);
+    void printExercise(String line1, String line2, String line3);
 
 }

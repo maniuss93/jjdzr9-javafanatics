@@ -26,15 +26,9 @@ public class AddExercise {
             do {
                 optionNumber = scanner.nextInt();
                 switch (optionNumber) {
-                    case 1 -> {
-                        exercise.setCategory("warmUp");
-                    }
-                    case 2 -> {
-                        exercise.setCategory("coreExercises");
-                    }
-                    case 3 -> {
-                        exercise.setCategory("stretching");
-                    }
+                    case 1 -> exercise.setCategory("warmUp");
+                    case 2 -> exercise.setCategory("coreExercises");
+                    case 3 -> exercise.setCategory("stretching");
                 }
             }
             while (optionNumber != 3 && optionNumber != 2 && optionNumber != 1);
@@ -74,5 +68,3 @@ public class AddExercise {
         menu.printExerciseName(exerciseName);
     }
 }
-
-

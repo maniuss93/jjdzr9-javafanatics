@@ -46,5 +46,3 @@ class CreateUser {
         return allUsers.stream().filter(u -> u.getUserEmail().equals(user.getUserEmail())).findAny().orElseThrow();
     }
 }
-
-

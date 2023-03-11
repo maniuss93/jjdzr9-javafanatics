@@ -67,6 +67,3 @@ public class UserSignUp {
         WriteAndReadFromFile.writeUserList(allUsers);
     }
 }
-
-
-
