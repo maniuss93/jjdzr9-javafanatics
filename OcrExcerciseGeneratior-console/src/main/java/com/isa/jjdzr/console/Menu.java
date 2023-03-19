@@ -2,7 +2,8 @@ package com.isa.jjdzr.console;
 
 import com.isa.jjdzr.exercise.model.Exercise;
 import com.isa.jjdzr.interfaces.Printable;
-import com.isa.jjdzr.user.service.UserSignInAndLogIn;
+import com.isa.jjdzr.user.service.UserDataBase;
+import com.isa.jjdzr.user.service.UserSignIn;
 import com.isa.jjdzr.user.service.UserSignUp;
 
 import java.util.InputMismatchException;
@@ -10,49 +11,58 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Menu implements Printable {
-    static Scanner in = new Scanner(System.in);
-    static UserPanel userPanel = new UserPanel(50, "");
+    static Scanner scanner = new Scanner(System.in);
 
-    static void nowyUzytkownik() {
-        UserSignUp.createUser();
+    static void userSighUp() {
+        UserDataBase.saveUserToDataBase(UserSignUp.createUser(UserDataBase.getAllUsers()));
     }
 
-    static void logowanieUzytkownika() {
-        UserSignInAndLogIn.login();
+    static void userSignIn() {
+        new UserPanel(UserSignIn.login(UserDataBase.getAllUsers()));
+        UserPanel.userPanelMenu();
     }
 
-    static void bezLogowania() {
-
-        userPanel.userPanelMenu();
+    static void withNoLogin() {
+        UserPanel.user.setUserName("");
+        UserPanel.user.setUserAdvancementLevel(0);
+        UserPanel.userPanelMenu();
     }
 
-    static void pokazMenu() {
-        System.out.println("     ****************************************");
-        System.out.println("     *                 MENU                 *");
-        System.out.println("     ****************************************");
-
-        System.out.print("Wybierz opcje:\n1. Tworzenie użytkownika\n2. Logowanie\n3. Bez zalogowania\n4. Koniec\n>> ");
+    static void printMenu() {
+        System.out.println("""
+                ****************************************
+                *                 MENU                 *
+                ****************************************""");
+        System.out.print("""
+                Wybierz opcje:
+                1. Tworzenie użytkownika
+                2. Logowanie
+                3. Bez zalogowania
+                4. Koniec
+                >> """);
     }
 
     public static void menu() {
         int nrOpcji = 0;
         while (nrOpcji != 4) {
             try {
-                pokazMenu();
-                nrOpcji = in.nextInt();
+                printMenu();
+                nrOpcji = scanner.nextInt();
                 switch (nrOpcji) {
-                    case 1 -> nowyUzytkownik();
-                    case 2 -> logowanieUzytkownika();
-                    case 3 -> bezLogowania();
+                    case 1 -> userSighUp();
+                    case 2 -> userSignIn();
+                    case 3 -> withNoLogin();
                     case 4 -> System.out.println("Koniec programu");
-                    default -> System.out.println("Niepoprawna opcja");
+                    default -> System.out.println(UserPanel.wrongInput);
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Niepoprawna opcja");
-                in.nextLine();
+                System.out.println(UserPanel.wrongInput);
+                scanner.nextLine();
             }
         }
     }
+
+
 
     @Override
     public void printActualLine(String line) {
@@ -66,13 +76,13 @@ public class Menu implements Printable {
 
     @Override
     public void printExerciseName(String line) {
-        System.out.println("\nNowe ćwiczenie: " + line + ", zostało dodane :)");
+        System.out.println("Nowe ćwiczenie: " + line + ", zostało dodane :)");
     }
 
     @Override
     public void printExerciseList(List<Exercise> exercises) {
         for (Exercise exercise : exercises) {
-           printExercise(exercise.getCategory(), exercise.getExerciseName(), exercise.getDescription());
+            printExercise(exercise.getCategory(), exercise.getExerciseName(), exercise.getDescription());
         }
     }
 

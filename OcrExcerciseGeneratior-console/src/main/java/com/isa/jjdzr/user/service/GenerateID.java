@@ -10,7 +10,6 @@ class GenerateID {
         return usersList.stream().map(User::getUserID)
                 .reduce((first, second) -> second).orElse(0) + 1;
     }
-
     private GenerateID() {
     }
 }

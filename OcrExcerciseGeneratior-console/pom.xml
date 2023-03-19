@@ -10,7 +10,7 @@
   </parent>
   <groupId>com.isa</groupId>
   <artifactId>jjdzr</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <name>jjdzr</name>
   <description>OcrExerciseGenerator</description>
   <properties>

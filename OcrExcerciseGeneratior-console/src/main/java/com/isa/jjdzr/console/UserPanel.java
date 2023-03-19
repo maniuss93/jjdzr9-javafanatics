@@ -2,55 +2,57 @@ package com.isa.jjdzr.console;
 
 import com.isa.jjdzr.exercise.model.Exercise;
 import com.isa.jjdzr.exercise.service.AddExercise;
+import com.isa.jjdzr.exercise.service.ExerciseDataBase;
 import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
+import com.isa.jjdzr.exercise.service.TrainingHistory;
 import com.isa.jjdzr.interfaces.Printable;
+import com.isa.jjdzr.user.model.User;
 import com.isa.jjdzr.user.service.AdvancementLevelForm;
-import com.isa.jjdzr.utils.WriteAndReadFromFile;
+import com.isa.jjdzr.user.service.UserDataBase;
+import com.isa.jjdzr.utils.Validation;
 
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
 public class UserPanel {
-    Printable menu = new Menu();
-    private final int userLevel;
-    private final String userName;
-    private List<Exercise> userExercises;
-    private List<Exercise> randomExerciseList;
-    private List<Exercise> temporaryList;
-    public AdvancementLevelForm advancementLevelForm = new AdvancementLevelForm();
+    static Printable menu = new Menu();
+    static User user = new User();
+    public static final String wrongInput = "Niepoprawna opcja";
+    private static List<Exercise> randomExerciseList;
 
-    RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
 
-    void printAdvancementLevel() {
-        if (advancementLevelForm.getUserAdvancementLevel() == 50) {
+    static void printAdvancementLevel() {
+        if (user.getUserAdvancementLevel() == 50) {
             menu.printActualLine("POCZĄTKUJĄCY");
-        } else if (advancementLevelForm.getUserAdvancementLevel() == 100) {
+        } else if (user.getUserAdvancementLevel() == 100) {
             menu.printActualLine("ZAAWANSOWANY");
-        } else if (advancementLevelForm.getUserAdvancementLevel() == 150) {
+        } else if (user.getUserAdvancementLevel() == 150) {
             menu.printActualLine("PROFESJONALNY");
         } else {
             menu.printActualLine("BRAK");
         }
     }
 
-    public UserPanel(int userLevel, String userName) {
-        this.userLevel = userLevel;
-        this.userName = userName;
-    }
-
-    void showUserPanelMenu() {
-        menu.printActualLine("");
-        menu.printActualLine("     ****************************************");
-        menu.printActualLine("     *            PANEL UŻYTKOWNIKA         *");
-        menu.printActualLine("     ****************************************");
-        menu.printActualLine("     *     TWÓJ POZIOM ZAAWANSOWANIA TO: ");
+    static void showUserPanelMenu() {
+        menu.printActualLine("""
+                ****************************************
+                *            PANEL UŻYTKOWNIKA         *
+                ****************************************
+                *     TWÓJ POZIOM ZAAWANSOWANIA TO:    *""");
         printAdvancementLevel();
-        menu.printActualLine("Wybierz opcje:\n1. Test poziomu zaawansowania\n2. Wygeneruj losowy zestaw ćwiczeń\n3. Zobacz historie treningów\n4. Dodaj ćwiczenie\n5. Powrót\n>>");
+        menu.printActualLine("""
+                Wybierz opcje:
+                1. Test poziomu zaawansowania
+                2. Wygeneruj losowy zestaw ćwiczeń
+                3. Zobacz historie treningów
+                4. Dodaj ćwiczenie
+                5. Powrót
+                >> """);
     }
 
-    public void userPanelMenu() {
-        System.out.println(userName);
+    public static void userPanelMenu() {
         Scanner scanner = new Scanner(System.in);
-        advancementLevelForm.setUserAdvancementLevel(userLevel);
         try {
             int optionNumber;
             do {
@@ -58,68 +60,49 @@ public class UserPanel {
                 optionNumber = scanner.nextInt();
                 switch (optionNumber) {
                     case 1 -> takeAdvancementTest();
-                    case 2 -> generateExerciseSet();
+                    case 2 -> {
+                        randomExerciseList = generateExerciseSet();
+                        menu.printExerciseList(randomExerciseList);
+                        if ((Validation.isUserSignedUp(user)) && user.getUserAdvancementLevel() != 0) {
+                            TrainingHistory.saveNewTrainingHistory(user, randomExerciseList);
+                        }
+                    }
                     case 3 -> showTrainingHistory();
-                    case 4 -> addUserExercise();
+                    case 4 -> addNewExercise();
+                    default -> menu.printActualLine(wrongInput);
                 }
             }
             while (optionNumber != 5);
         } catch (InputMismatchException e) {
-            menu.printActualLine("Niepoprawna opcja");
+            menu.printActualLine(wrongInput);
         }
+
     }
 
-    private void addUserExercise() {
-        AddExercise.createExercises();
-    }
-
-    private void showTrainingHistory() {
-        if (Objects.equals(userName, "")) {
-             menu.printActualLine("Musisz sie zalogować, aby wyswietlić historie");
-             return;
-        }
-        userExercises = WriteAndReadFromFile.readUserExerciseList(userName);
-        if (userExercises != null) {
-            menu.printExerciseList(userExercises);
-        } else {
-            if (randomExerciseList != null) {
-                menu.printExerciseList(randomExerciseList);
-            } else {
-                menu.printActualLine("Nie posiadasz histori treningu");
-            }
-        }
-    }
-
-    private void generateExerciseSet() {
-        this.temporaryList = randomExerciseGenerator
-                .generateExercise(advancementLevelForm.getUserAdvancementLevel());
-        menu.printExerciseList(temporaryList);
-        if (Objects.equals(userName, "")) {
+    public static void addNewExercise() {
+        if (!(Validation.isUserSignedUp(user))) {
+            menu.printActualLine("Musisz być zalogowany aby dodać ćwiczenie");
             return;
         }
-        saveExerciseSet();
+        ExerciseDataBase.saveNewExerciseToDataBase(AddExercise.createExercise(ExerciseDataBase.getExerciseList()));
     }
 
-    private void saveExerciseSet() {
-        menu.printActualLine("Chcesz zapisać listę ćwiczeń do Twojej histori? T/N");
-        Scanner scanner = new Scanner(System.in);
-        String answear = scanner.nextLine();
-        while (!(answear.equalsIgnoreCase("T") || answear.equalsIgnoreCase("N"))) {
-            menu.printActualLine("Niepoprawna opcja");
-            answear = scanner.nextLine();
-        }
-        if (answear.equalsIgnoreCase("T")) {
-            if (userExercises == null) {
-                randomExerciseList = temporaryList;
-                WriteAndReadFromFile.writeUserExerciseList(userName, randomExerciseList);
-            } else {
-                userExercises.addAll(temporaryList);
-                WriteAndReadFromFile.writeUserExerciseList(userName, userExercises);
-            }
-        }
+    public static void showTrainingHistory() {
+        TrainingHistory.showTrainingHistory(user, randomExerciseList);
     }
-    private void takeAdvancementTest() {
-        advancementLevelForm.advancementLevelMenu();
+
+    public static List<Exercise> generateExerciseSet() {
+        return RandomExerciseGenerator
+                .generateExercise(user.getUserAdvancementLevel());
+    }
+
+    public static void takeAdvancementTest() {
+        user.setUserAdvancementLevel(AdvancementLevelForm.advancementLevelMenu(user));
+        UserDataBase.saveUserToDataBase(user);
+    }
+
+    public UserPanel(User user) {
+        UserPanel.user = user;
     }
 }
 

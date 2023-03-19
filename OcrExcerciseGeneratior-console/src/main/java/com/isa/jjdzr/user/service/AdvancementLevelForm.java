@@ -1,31 +1,28 @@
 package com.isa.jjdzr.user.service;
 
+import com.isa.jjdzr.console.Menu;
+import com.isa.jjdzr.console.UserPanel;
+import com.isa.jjdzr.interfaces.Printable;
+import com.isa.jjdzr.user.model.User;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AdvancementLevelForm {
-    static Scanner scanner = new Scanner(System.in);
-    Integer beginner = 50;
-    Integer advanced = 100;
-    Integer professional = 150;
-    private int userAdvancementLevel;
+    static Printable menu = new Menu();
+    private static final int beginner = 50;
+    private static final int advanced = 100;
+    private static final int professional = 150;
 
-    public Integer getUserAdvancementLevel() {
-        return userAdvancementLevel;
+    public static void showAdvancementLevelMenu() {
+        menu.printActualLine("     ****************************************");
+        menu.printActualLine("     *   POZIOM ZAAWANSOWANIA UŻYTKOWNIKA    ");
+        menu.printActualLine("     ****************************************");
+        menu.printActualLine("Wybierz poziom zaawansowania:\n1. Początkujący (50pkt)\n2. Zaawansowany (100pkt)\n3. Profesjonalny (150pkt)\n4. Wróć\n>>");
     }
 
-    public void setUserAdvancementLevel(Integer userAdvancementLevel) {
-        this.userAdvancementLevel = userAdvancementLevel;
-    }
-
-    static void showAdvancementLevelMenu() {
-        System.out.println("     ****************************************");
-        System.out.println("     *   POZIOM ZAAWANSOWANIA UŻYTKOWNIKA    ");
-        System.out.println("     ****************************************");
-        System.out.print("Wybierz poziom zaawansowania:\n1. Początkujący (50pkt)\n2. Zaawansowany (100pkt)\n3. Profesjonalny (150pkt)\n4. Wróć\n>>");
-    }
-
-    public void advancementLevelMenu() {
+    public static int advancementLevelMenu(User user) {
+        Scanner scanner = new Scanner(System.in);
         try {
             int optionNumber;
             do {
@@ -33,24 +30,24 @@ public class AdvancementLevelForm {
                 optionNumber = scanner.nextInt();
                 switch (optionNumber) {
                     case 1 -> {
-                        setUserAdvancementLevel(beginner);
-                        System.out.println("Wybrano poziom: POCZĄTKUJĄCY");
+                        user.setUserAdvancementLevel(beginner);
+                        menu.printActualLine("Wybrano poziom: POCZĄTKUJĄCY");
                     }
                     case 2 -> {
-                        setUserAdvancementLevel(advanced);
-                        System.out.println("Wybrano poziom: ZAAWANSOWANY");
+                        user.setUserAdvancementLevel(advanced);
+                        menu.printActualLine("Wybrano poziom: ZAAWANSOWANY");
                     }
                     case 3 -> {
-                        setUserAdvancementLevel(professional);
-                        System.out.println("Wybrano poziom: PROFESJONALNY");
+                        user.setUserAdvancementLevel(professional);
+                        menu.printActualLine("Wybrano poziom: PROFESJONALNY");
                     }
-                    default -> System.out.println("Nieznana opcja");
+                    default -> menu.printActualLine(UserPanel.wrongInput);
                 }
             }
             while (optionNumber != 4 && optionNumber != 1 && optionNumber != 2 && optionNumber != 3);
         } catch (InputMismatchException e) {
-            System.out.println("Niepoprawna opcja");
+            menu.printActualLine(UserPanel.wrongInput);
         }
+        return user.getUserAdvancementLevel();
     }
-
 }
