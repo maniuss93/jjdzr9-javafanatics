@@ -4,7 +4,6 @@ import com.isa.jjdzr.user.model.User;
 import com.isa.jjdzr.utils.WriteAndReadFromFile;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class UserDataBase {
     private static final List<User> allUsers = WriteAndReadFromFile.readUserList();
