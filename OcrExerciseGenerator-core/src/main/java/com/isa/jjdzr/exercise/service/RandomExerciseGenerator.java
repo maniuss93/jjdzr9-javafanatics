@@ -20,7 +20,8 @@ public class RandomExerciseGenerator {
         double coreExercisesPoints = userLevel * indicatorOfCoreExercises;
         double stretchingPoints = userLevel * indicatorOfStretching;
         if (userLevel != 0) {
-            exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory("warmUp"), warmUpPoints));
+            exerciseList.addAll(fillExerciseList(ExerciseDataBase.
+                    findExerciseByCategory("warmUp"), warmUpPoints));
             exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory("coreExercises"), coreExercisesPoints));
             exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory("stretching"), stretchingPoints));
         } else {
