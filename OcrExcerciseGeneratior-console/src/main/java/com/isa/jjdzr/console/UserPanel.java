@@ -98,9 +98,10 @@ public class UserPanel {
 
     public static void takeAdvancementTest() {
         user.setUserAdvancementLevel(AdvancementLevelForm.advancementLevelMenu(user));
-        UserDataBase.saveUserToDataBase(user);
+        if (Validation.isUserSignedUp(user)) {
+            UserDataBase.saveUserToDataBase(user);
+        }
     }
-
     public UserPanel(User user) {
         UserPanel.user = user;
     }
