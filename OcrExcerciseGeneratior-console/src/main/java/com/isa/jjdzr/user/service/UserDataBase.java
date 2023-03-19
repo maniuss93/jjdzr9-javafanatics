@@ -4,15 +4,19 @@ import com.isa.jjdzr.user.model.User;
 import com.isa.jjdzr.utils.WriteAndReadFromFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDataBase {
     private static final List<User> allUsers = WriteAndReadFromFile.readUserList();
 
     public static void saveUserToDataBase(User user) {
-        allUsers.add(user);
+        if (allUsers.contains(user)) {
+            allUsers.set(allUsers.indexOf(user), user);
+        } else {
+            allUsers.add(user);
+        }
         WriteAndReadFromFile.writeUserList(allUsers);
     }
-
     public static List<User> getAllUsers() {
         return allUsers;
     }

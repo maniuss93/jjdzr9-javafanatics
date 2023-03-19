@@ -48,7 +48,7 @@ public class UserPanel {
                 3. Zobacz historie treningów
                 4. Dodaj ćwiczenie
                 5. Powrót
-                >> """);
+                >>""");
     }
 
     public static void userPanelMenu() {
@@ -69,6 +69,7 @@ public class UserPanel {
                     }
                     case 3 -> showTrainingHistory();
                     case 4 -> addNewExercise();
+                    case 5 -> {}
                     default -> menu.printActualLine(wrongInput);
                 }
             }
@@ -92,16 +93,14 @@ public class UserPanel {
     }
 
     public static List<Exercise> generateExerciseSet() {
-        return RandomExerciseGenerator
-                .generateExercise(user.getUserAdvancementLevel());
+        return RandomExerciseGenerator.generateExercise(user.getUserAdvancementLevel());
     }
 
     public static void takeAdvancementTest() {
         user.setUserAdvancementLevel(AdvancementLevelForm.advancementLevelMenu(user));
-        if (Validation.isUserSignedUp(user)) {
-            UserDataBase.saveUserToDataBase(user);
-        }
+        UserDataBase.saveUserToDataBase(user);
     }
+
     public UserPanel(User user) {
         UserPanel.user = user;
     }

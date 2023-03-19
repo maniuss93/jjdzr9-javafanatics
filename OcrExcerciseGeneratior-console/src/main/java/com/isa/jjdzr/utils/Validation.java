@@ -131,9 +131,7 @@ public class Validation {
                 menu.printActualLine("Dodaj wartość punktową ćwiczenia (5, 10 lub 20)");
                 effortPoints = scanner.nextInt();
                 switch (effortPoints) {
-                    case 5 -> {}
-                    case 10 -> {}
-                    case 15 -> {}
+                    case 5, 10, 15 -> {}
                     default -> menu.printActualLine(UserPanel.wrongInput);
                 }
             } catch (InputMismatchException e) {

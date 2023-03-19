@@ -20,6 +20,10 @@ public class TrainingHistory {
             menu.printActualLine("Musisz być zalogowany aby zobaczyć historie ćwiczeń");
             return;
         }
+        if (user.getUserAdvancementLevel() == 0) {
+            menu.printActualLine("Nie posiadasz histori treningu");
+            return;
+        }
         userExerciseList = ExerciseDataBase.getUserExerciseList(user);
         if (userExerciseList != null) {
             menu.printExerciseList(userExerciseList);

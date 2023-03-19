@@ -39,7 +39,7 @@ public class Menu implements Printable {
                 2. Logowanie
                 3. Bez zalogowania
                 4. Koniec
-                >> """);
+                >>""");
     }
 
     public static void menu() {
@@ -61,7 +61,6 @@ public class Menu implements Printable {
             }
         }
     }
-
 
 
     @Override

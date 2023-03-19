@@ -15,10 +15,10 @@ public class ExercisePanel {
                 1. Rozgrzewka
                 2. Główne
                 3. Rozciąganie
-                >> """);
+                >>""");
     }
 
-    public static Exercise printExerciseMenu(Exercise exercise) {
+    public static void printExerciseMenu(Exercise exercise) {
         Scanner scanner = new Scanner(System.in);
         showAddExerciseMenu();
         int optionNumber = 0;
@@ -36,6 +36,5 @@ public class ExercisePanel {
                 scanner.nextLine();
             }
         }
-        return exercise;
     }
 }
