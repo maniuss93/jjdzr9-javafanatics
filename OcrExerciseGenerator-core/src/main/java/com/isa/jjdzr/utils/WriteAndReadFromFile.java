@@ -2,9 +2,7 @@ package com.isa.jjdzr.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.isa.jjdzr.console.Menu;
 import com.isa.jjdzr.exercise.model.Exercise;
-import com.isa.jjdzr.interfaces.Printable;
 import com.isa.jjdzr.user.model.User;
 
 import java.io.File;
@@ -14,7 +12,6 @@ import java.util.List;
 
 public class WriteAndReadFromFile {
     static ObjectMapper objectMapper = new ObjectMapper();
-    static Printable menu = new Menu();
 
     public static List<User> readUserList() {
         List<User> usersList = null;
@@ -23,7 +20,7 @@ public class WriteAndReadFromFile {
                     (new File("src/main/resources/user.json"), new TypeReference<>() {
                     });
         } catch (IOException e) {
-            menu.printActualLine("Nie można wczytać listy użytkowników");
+            System.out.println("Nie można wczytać listy użytkowników");
         }
         return usersList;
     }
@@ -35,7 +32,7 @@ public class WriteAndReadFromFile {
                     (new File("src/main/resources/exercises.json"), new TypeReference<>() {
                     });
         } catch (IOException e) {
-            menu.printActualLine("Nie można wczytać listy ćwiczeń");
+            System.out.println("Nie można wczytać listy ćwiczeń");
         }
         return exerciseList;
     }
@@ -55,7 +52,7 @@ public class WriteAndReadFromFile {
             objectMapper.writeValue(new FileWriter
                     ("src/main/resources/" + userName + ".json"), userExerciseList);
         } catch (IOException e) {
-            menu.printActualLine("Nie można zapisać ćwiczeń");
+            System.out.println("Nie można zapisać ćwiczeń");
         }
     }
 
@@ -64,7 +61,7 @@ public class WriteAndReadFromFile {
             objectMapper.writeValue(new FileWriter
                     ("src/main/resources/user.json"), usersList);
         } catch (IOException e) {
-            menu.printActualLine("Nie można utworzyć użytkownika");
+            System.out.println("Nie można utworzyć użytkownika");
         }
     }
 
@@ -73,7 +70,7 @@ public class WriteAndReadFromFile {
             objectMapper.writeValue(new FileWriter
                     ("src/main/resources/exercises.json"), exerciseList);
         } catch (IOException e) {
-            menu.printActualLine("Nie można utworzyć ćwiczenia");
+            System.out.println("Nie można utworzyć ćwiczenia");
         }
     }
 }

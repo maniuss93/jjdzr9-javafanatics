@@ -6,15 +6,14 @@
   <artifactId>OcrExerciseGenerator-web</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
+  <name>OcrExerciseGenerator-web</name>
+
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>3.0.4</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-
-  <name>OcrExerciseGenerator-web</name>
-  <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

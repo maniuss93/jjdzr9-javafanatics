@@ -1,7 +1,6 @@
-package com.isa.jjdzr.console;
+package com.isa.jjdzr;
 
 import com.isa.jjdzr.exercise.model.Exercise;
-import com.isa.jjdzr.interfaces.Printable;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

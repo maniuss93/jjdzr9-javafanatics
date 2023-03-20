@@ -1,9 +1,7 @@
-package com.isa.jjdzr.exercise.service;
+package com.isa.jjdzr;
 
-import com.isa.jjdzr.console.Menu;
-import com.isa.jjdzr.console.UserPanel;
 import com.isa.jjdzr.exercise.model.Exercise;
-import com.isa.jjdzr.interfaces.Printable;
+import com.isa.jjdzr.exercise.service.ExerciseDataBase;
 import com.isa.jjdzr.user.model.User;
 import com.isa.jjdzr.utils.Validation;
 import com.isa.jjdzr.utils.WriteAndReadFromFile;

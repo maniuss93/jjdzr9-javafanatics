@@ -1,7 +1,6 @@
-package com.isa.jjdzr.console;
+package com.isa.jjdzr;
 
 import com.isa.jjdzr.exercise.model.Exercise;
-import com.isa.jjdzr.interfaces.Printable;
 import com.isa.jjdzr.user.service.UserDataBase;
 import com.isa.jjdzr.user.service.UserSignIn;
 import com.isa.jjdzr.user.service.UserSignUp;
@@ -66,11 +65,6 @@ public class Menu implements Printable {
     @Override
     public void printActualLine(String line) {
         System.out.println(line);
-    }
-
-    @Override
-    public void printUserNameInBrackes(String line) {
-        System.out.println("Utworzono użytkownika '" + line + "'");
     }
 
     @Override

@@ -1,15 +1,12 @@
 package com.isa.jjdzr.exercise.service;
 
-import com.isa.jjdzr.console.Menu;
 import com.isa.jjdzr.exercise.model.Exercise;
-import com.isa.jjdzr.interfaces.Printable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class RandomExerciseGenerator {
-    static Printable menu = new Menu();
     private static final double indicatorOfWarmUp = 0.2;
     private static final double indicatorOfCoreExercises = 0.6;
     private static final double indicatorOfStretching = 0.2;
@@ -25,7 +22,7 @@ public class RandomExerciseGenerator {
             exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory("coreExercises"), coreExercisesPoints));
             exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory("stretching"), stretchingPoints));
         } else {
-            menu.printActualLine("Proszę wykonać: Test poziomu zaawansowania");
+            System.out.println("Proszę wykonać: Test poziomu zaawansowania");
         }
         return exerciseList;
     }

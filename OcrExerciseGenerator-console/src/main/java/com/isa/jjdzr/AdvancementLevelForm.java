@@ -1,12 +1,10 @@
-package com.isa.jjdzr.user.service;
+package com.isa.jjdzr;
 
-import com.isa.jjdzr.console.Menu;
-import com.isa.jjdzr.console.UserPanel;
-import com.isa.jjdzr.interfaces.Printable;
 import com.isa.jjdzr.user.model.User;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 
 public class AdvancementLevelForm {
     static Printable menu = new Menu();
@@ -18,7 +16,13 @@ public class AdvancementLevelForm {
         menu.printActualLine("     ****************************************");
         menu.printActualLine("     *   POZIOM ZAAWANSOWANIA UŻYTKOWNIKA    ");
         menu.printActualLine("     ****************************************");
-        menu.printActualLine("Wybierz poziom zaawansowania:\n1. Początkujący (50pkt)\n2. Zaawansowany (100pkt)\n3. Profesjonalny (150pkt)\n4. Wróć\n>>");
+        menu.printActualLine("""
+                  Wybierz poziom zaawansowania:
+                1. Początkujący (50pkt)
+                2. Zaawansowany (100pkt)
+                3. Profesjonalny (150pkt)
+                4. Wróć
+                >>""");
     }
 
     public static int advancementLevelMenu(User user) {

@@ -1,13 +1,10 @@
-package com.isa.jjdzr.console;
+package com.isa.jjdzr;
 
 import com.isa.jjdzr.exercise.model.Exercise;
 import com.isa.jjdzr.exercise.service.AddExercise;
 import com.isa.jjdzr.exercise.service.ExerciseDataBase;
 import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
-import com.isa.jjdzr.exercise.service.TrainingHistory;
-import com.isa.jjdzr.interfaces.Printable;
 import com.isa.jjdzr.user.model.User;
-import com.isa.jjdzr.user.service.AdvancementLevelForm;
 import com.isa.jjdzr.user.service.UserDataBase;
 import com.isa.jjdzr.utils.Validation;
 
@@ -16,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserPanel {
-    static Printable menu = new Menu();
+    public static Printable menu = new Menu();
     static User user = new User();
     public static final String wrongInput = "Niepoprawna opcja";
     private static List<Exercise> randomExerciseList;
@@ -35,6 +32,7 @@ public class UserPanel {
     }
 
     static void showUserPanelMenu() {
+        menu.printActualLine("Witaj " + user.getUserName());
         menu.printActualLine("""
                 ****************************************
                 *            PANEL UŻYTKOWNIKA         *
@@ -69,7 +67,8 @@ public class UserPanel {
                     }
                     case 3 -> showTrainingHistory();
                     case 4 -> addNewExercise();
-                    case 5 -> {}
+                    case 5 -> {
+                    }
                     default -> menu.printActualLine(wrongInput);
                 }
             }
