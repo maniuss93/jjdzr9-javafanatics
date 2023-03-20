@@ -1,4 +1,4 @@
-package com.isa.jjdzr;
+package com.isa.jjdzr.controller;
 
 import com.isa.jjdzr.user.model.User;
 import com.isa.jjdzr.user.service.UserService;

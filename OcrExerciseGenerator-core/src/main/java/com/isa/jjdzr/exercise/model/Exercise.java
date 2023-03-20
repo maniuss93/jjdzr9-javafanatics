@@ -1,11 +1,20 @@
 package com.isa.jjdzr.exercise.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table (name = "exercises")
 public class Exercise {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long exerciseId;
+
     private int exercisePoints;
     private String exerciseName;
     private String description;
     private String url;
     private String category;
+
 
     public Exercise() {
     }
@@ -56,4 +65,11 @@ public class Exercise {
         this.category = category;
     }
 
+    public void setExerciseId(Long exerciseId) {
+        this.exerciseId = exerciseId;
+    }
+
+    public Long getExerciseId() {
+        return exerciseId;
+    }
 }
