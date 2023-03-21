@@ -2,10 +2,13 @@ package com.isa.jjdzr.user.service;
 
 import com.isa.jjdzr.user.model.User;
 import com.isa.jjdzr.utils.WriteAndReadFromFile;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class UserDataBase {
+
     private static final List<User> allUsers = WriteAndReadFromFile.readUserList();
 
     public static void saveUserToDataBase(User user) {

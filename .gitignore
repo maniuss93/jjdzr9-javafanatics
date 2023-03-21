@@ -1,7 +1,3 @@
-*.iml
-*.json
-*.yml
 *.db
 target
-resources
 .idea
