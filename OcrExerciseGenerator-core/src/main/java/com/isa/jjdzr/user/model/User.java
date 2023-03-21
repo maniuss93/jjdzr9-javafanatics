@@ -1,6 +1,7 @@
 package com.isa.jjdzr.user.model;
 
 import jakarta.persistence.*;
+import lombok.NonNull;
 
 @Entity
 @Table(name = "users")
@@ -8,12 +9,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
-
+    @NonNull
     private String userName;
+    @NonNull
     private String userPassword;
+    @NonNull
     private String userEmail;
     private int userAdvancementLevel;
-
 
     public int getUserID() {
         return userID;
