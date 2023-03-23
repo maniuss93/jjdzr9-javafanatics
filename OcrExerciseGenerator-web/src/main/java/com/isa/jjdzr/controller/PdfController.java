@@ -37,8 +37,8 @@ public class PdfController {
         document.open();
 
         // Dodaj treść do dokumentu
-        document.add((Element) RandomExerciseGenerator.generateExercise(1));
-
+       // document.add((Element) RandomExerciseGenerator.generateExercise(1));
+            document.add(new Paragraph("Kupa i siku"));
         // Zakończ dokument
         document.close();
 
