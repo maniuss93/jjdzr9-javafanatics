@@ -2,7 +2,6 @@ package com.isa.jjdzr.user.model;
 
 import com.isa.jjdzr.user.service.AdvancementLevelCategory;
 import jakarta.persistence.*;
-import lombok.NonNull;
 
 @Entity
 @Table(name = "users")
@@ -10,14 +9,20 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false)
     private Long userID;
-    @NonNull
+
+    @Column(name = "user_name", nullable = false)
     private String userName;
-    @NonNull
+
+    @Column(name = "user_password", nullable = false)
     private String userPassword;
-    @NonNull
+
+    @Column(name = "user_password", nullable = false)
     private String userEmail;
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "user_advancement_level", nullable = false)
     private AdvancementLevelCategory userAdvancementLevel;
 
     public Long getUserID() {

@@ -1,6 +1,7 @@
 package com.isa.jjdzr;
 
 import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.user.service.AdvancementLevelCategory;
 import com.isa.jjdzr.user.service.UserDataBase;
 import com.isa.jjdzr.user.service.UserSignIn;
 import com.isa.jjdzr.user.service.UserSignUp;
@@ -23,7 +24,7 @@ public class Menu implements Printable {
 
     static void withNoLogin() {
         UserPanel.user.setUserName("");
-        UserPanel.user.setUserAdvancementLevel(0);
+        UserPanel.user.setUserAdvancementLevel(AdvancementLevelCategory.ADVANCE);
         UserPanel.userPanelMenu();
     }
 

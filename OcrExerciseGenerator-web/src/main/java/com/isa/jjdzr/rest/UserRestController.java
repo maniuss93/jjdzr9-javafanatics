@@ -23,7 +23,7 @@ public class UserRestController {
     public ResponseEntity createUser(@RequestBody User user) {
         Optional<User> userFromDB = userService.findByUserName(user.getUserName());
         if (userFromDB.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         return ResponseEntity.ok(userService.createUser(user));
     }
