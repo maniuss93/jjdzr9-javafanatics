@@ -1,5 +1,6 @@
 [
   {
+    "exerciseId": 1,
     "exercisePoints": 10,
     "exerciseName": "Push-up",
     "description": "A full push-up with a hold-up tightens the muscles of the buttocks and abdomen. If you have a problem with maintaining a good position or doing the whole set, you will do a push-up on your knees or on a platform",
@@ -7,6 +8,7 @@
     "category": "coreExercises"
   },
   {
+    "exerciseId": 2,
     "exercisePoints": 10,
     "exerciseName": "Front dumbbell raises",
     "description": "Light dumbbells, tighten your glutes and raise the dumbbells in front of you",
@@ -14,6 +16,7 @@
     "category": "coreExercises"
   },
   {
+    "exerciseId": 3,
     "exercisePoints": 10,
     "exerciseName": "Side raises with dumbbells",
     "description": "Light dumbbells, tighten your buttocks and raise the dumbbells to the side",
@@ -21,6 +24,7 @@
     "category": "coreExercises"
   },
   {
+    "exerciseId": 4,
     "exercisePoints": 10,
     "exerciseName": "Hanging",
     "description": "Hanging on a straight bar. You hang with both hands for 20 seconds with a 20 second break. Active hang, shoulders tense, legs in front of you. If you are unable to hang for 20 seconds without a break, put a box under the legs of the chair or support yourself, but you must not let go of the bar for 20 seconds.",
