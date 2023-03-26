@@ -17,7 +17,7 @@ public class UserRestController {
 
     private final UserService userService;
 
-    // http://localhost:8080/user/new
+    // http://localhost:8080/api/user/new
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity createUser(@RequestBody User user) {
@@ -28,14 +28,14 @@ public class UserRestController {
         return ResponseEntity.ok(userService.createUser(user));
     }
 
-    // http://localhost:8080/user/all
+    // http://localhost:8080/api/user/all
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<User> getAll() {
         return userService.findAll();
     }
 
-    // http://localhost:8080/user/delete/id
+    // http://localhost:8080/api/user/delete/id
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {

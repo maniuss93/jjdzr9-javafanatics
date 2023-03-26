@@ -17,6 +17,32 @@ public class User {
     private String userEmail;
     private int userAdvancementLevel;
 
+
+    public User(int userID, @NonNull String userName, @NonNull String userPassword, @NonNull String userEmail, int userAdvancementLevel) {
+        this.userID = userID;
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.userAdvancementLevel = userAdvancementLevel;
+    }
+
+    public User(int userID, @NonNull String userName, @NonNull String userPassword, @NonNull String userEmail) {
+        this.userID = userID;
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+    }
+
+    public User(@NonNull String userName, @NonNull String userPassword, @NonNull String userEmail, int userAdvancementLevel) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.userAdvancementLevel = userAdvancementLevel;
+    }
+
+    public User() {
+    }
+
     public int getUserID() {
         return userID;
     }
