@@ -35,6 +35,28 @@ public class UserRestController {
         return userService.findAll();
     }
 
+    // http://localhost:8080/api/user/all
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public User getById(@PathVariable Long id) {
+        return userService.findByUserId(id);
+    }
+
+    // http://localhost:8080/api/user/edit
+    @PutMapping("/edit")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity editUser(@RequestBody User user){
+        User updated = userService.editUser(user);
+
+        return updated != null ?
+                ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body(updated) :
+                ResponseEntity
+                        .badRequest()
+                        .build();
+    }
+
     // http://localhost:8080/api/user/delete/id
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)

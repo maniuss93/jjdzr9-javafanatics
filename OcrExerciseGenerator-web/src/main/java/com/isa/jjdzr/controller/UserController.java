@@ -13,11 +13,14 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("user")
 public class UserController {
 
     private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/new")
     public String getNewUserForm(Model model){
@@ -26,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/new")
-    public String createUser(@Valid @ModelAttribute ("user") Model model, User user){
+    public String createUser(@Valid @ModelAttribute ("user") User user, Model model){
         model.addAttribute("user", userService.createUser(user));
         return "home";
     }

@@ -1,53 +1,30 @@
 package com.isa.jjdzr.user.model;
 
+import com.isa.jjdzr.user.service.AdvancementLevelCategory;
 import jakarta.persistence.*;
 import lombok.NonNull;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userID;
+    private Long userID;
     @NonNull
     private String userName;
     @NonNull
     private String userPassword;
     @NonNull
     private String userEmail;
-    private int userAdvancementLevel;
+    @Enumerated(EnumType.STRING)
+    private AdvancementLevelCategory userAdvancementLevel;
 
-
-    public User(int userID, @NonNull String userName, @NonNull String userPassword, @NonNull String userEmail, int userAdvancementLevel) {
-        this.userID = userID;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userEmail = userEmail;
-        this.userAdvancementLevel = userAdvancementLevel;
-    }
-
-    public User(int userID, @NonNull String userName, @NonNull String userPassword, @NonNull String userEmail) {
-        this.userID = userID;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userEmail = userEmail;
-    }
-
-    public User(@NonNull String userName, @NonNull String userPassword, @NonNull String userEmail, int userAdvancementLevel) {
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userEmail = userEmail;
-        this.userAdvancementLevel = userAdvancementLevel;
-    }
-
-    public User() {
-    }
-
-    public int getUserID() {
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 
@@ -75,11 +52,11 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public int getUserAdvancementLevel() {
+    public AdvancementLevelCategory getUserAdvancementLevel() {
         return userAdvancementLevel;
     }
 
-    public void setUserAdvancementLevel(int userAdvancementLevel) {
+    public void setUserAdvancementLevel(AdvancementLevelCategory userAdvancementLevel) {
         this.userAdvancementLevel = userAdvancementLevel;
     }
 
