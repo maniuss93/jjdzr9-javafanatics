@@ -30,8 +30,6 @@ public class PdfExerciseGenerator {
         PdfWriter.getInstance(document, outputStream);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
         String id = formatter.format(new Date());
-
-
         // Otwórz dokument
         document.open();
 
