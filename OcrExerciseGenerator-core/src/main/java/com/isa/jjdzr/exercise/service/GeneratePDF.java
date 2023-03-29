@@ -3,6 +3,7 @@ package com.isa.jjdzr.exercise.service;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,7 +11,7 @@ import java.io.OutputStream;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+@Service
 public class GeneratePDF {
     public static void generatePdf() {
         try {

@@ -19,14 +19,6 @@ public class HomeController {
     public String getHome(){
         return "home";
     }
-    @GetMapping(path = "/generate-pdf")
-    public String generatePdf(){
-        try {
-            exerciseService.generatePdf();
-        }catch (Exception e){
-            System.out.println("Could not generate pdf ! :(\n" + e.getMessage());
-        }
-        return "home";
-    }
+
 
 }

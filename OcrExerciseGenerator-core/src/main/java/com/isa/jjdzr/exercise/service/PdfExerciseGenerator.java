@@ -21,14 +21,13 @@ import java.util.Date;
 @Service
 public class PdfExerciseGenerator {
 
-
-    public void generatePdf() throws Exception {
+    public ResponseEntity<byte[]> generatePdf() throws Exception {
         // Utwórz dokument PDF
         Document document = new Document();
 
         // Utwórz strumień wyjściowy dla pliku PDF
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        PdfWriter.getInstance(document, outputStream);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PdfWriter.getInstance(document, outputStream);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
         String id = formatter.format(new Date());
 
@@ -37,17 +36,19 @@ public class PdfExerciseGenerator {
         document.open();
 
         // Dodaj treść do dokumentu
-        //document.add((Element) RandomExerciseGenerator.generateExercise(50));
-            document.add(new Paragraph("Kupa i siku"));
+        //document.add((Element) RandomExerciseGenerator.generateExercise(1));
+        document.add(new Paragraph("Jacek is the best"));
+
         // Zakończ dokument
         document.close();
-        String filePath = "/home/jacek/Desktop/jjdzr9-javafanatics/OcrExerciseGenerator-core/src/main/resources/newpdf.pdf";
 
+        // Utwórz nagłówek odpowiedzi
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "exercise(" + id + ").pdf");
 
-
-
-
-
-
+        // Utwórz odpowiedź z byte[] zawierającym plik PDF
+        ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(outputStream.toByteArray(), headers, HttpStatus.OK);
+        return response;
     }
 }
