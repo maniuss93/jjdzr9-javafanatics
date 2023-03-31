@@ -11,6 +11,8 @@ public class RandomExerciseGenerator {
     private static final double indicatorOfCoreExercises = 0.6;
     private static final double indicatorOfStretching = 0.2;
 
+
+
     public static List<Exercise> generateExercise(int userLevel) {
         List<Exercise> exerciseList = new ArrayList<>();
         double warmUpPoints = userLevel * indicatorOfWarmUp;
@@ -50,6 +52,7 @@ public class RandomExerciseGenerator {
         }
         return indexDrawn;
     }
+
 
     private RandomExerciseGenerator() {
     }

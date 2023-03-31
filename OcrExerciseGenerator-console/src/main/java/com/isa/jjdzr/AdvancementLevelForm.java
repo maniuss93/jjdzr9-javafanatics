@@ -1,6 +1,7 @@
 package com.isa.jjdzr;
 
 import com.isa.jjdzr.user.model.User;
+import com.isa.jjdzr.user.service.AdvancementLevelCategory;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,9 +9,6 @@ import java.util.Scanner;
 
 public class AdvancementLevelForm {
     static Printable menu = new Menu();
-    private static final int beginner = 50;
-    private static final int advanced = 100;
-    private static final int professional = 150;
 
     public static void showAdvancementLevelMenu() {
         menu.printActualLine("     ****************************************");
@@ -18,14 +16,14 @@ public class AdvancementLevelForm {
         menu.printActualLine("     ****************************************");
         menu.printActualLine("""
                   Wybierz poziom zaawansowania:
-                1. Początkujący (50pkt)
-                2. Zaawansowany (100pkt)
-                3. Profesjonalny (150pkt)
+                1. Początkujący
+                2. Zaawansowany
+                3. Profesjonalny
                 4. Wróć
                 >>""");
     }
 
-    public static int advancementLevelMenu(User user) {
+    public static AdvancementLevelCategory advancementLevelMenu(User user) {
         Scanner scanner = new Scanner(System.in);
         try {
             int optionNumber;
@@ -34,15 +32,15 @@ public class AdvancementLevelForm {
                 optionNumber = scanner.nextInt();
                 switch (optionNumber) {
                     case 1 -> {
-                        user.setUserAdvancementLevel(beginner);
+                        user.setUserAdvancementLevel(AdvancementLevelCategory.BEGINNER);
                         menu.printActualLine("Wybrano poziom: POCZĄTKUJĄCY");
                     }
                     case 2 -> {
-                        user.setUserAdvancementLevel(advanced);
+                        user.setUserAdvancementLevel(AdvancementLevelCategory.ADVANCE);
                         menu.printActualLine("Wybrano poziom: ZAAWANSOWANY");
                     }
                     case 3 -> {
-                        user.setUserAdvancementLevel(professional);
+                        user.setUserAdvancementLevel(AdvancementLevelCategory.PROFESSIONAL);
                         menu.printActualLine("Wybrano poziom: PROFESJONALNY");
                     }
                     default -> menu.printActualLine(UserPanel.wrongInput);
@@ -53,5 +51,18 @@ public class AdvancementLevelForm {
             menu.printActualLine(UserPanel.wrongInput);
         }
         return user.getUserAdvancementLevel();
+    }
+
+    public static int convertAdvancementLevel(AdvancementLevelCategory category){
+        if(category == null) {
+            return 0;
+        }
+        else if(category.equals(AdvancementLevelCategory.BEGINNER)) {
+            return 50;
+        } else if (category.equals(AdvancementLevelCategory.ADVANCE)) {
+            return 100;
+        } else {
+            return 150;
+        }
     }
 }
