@@ -1,9 +1,9 @@
 package com.isa.jjdzr.user.service;
 
 public enum AdvancementLevelCategory {
-    BEGINNER("Beginner"),
-    ADVANCE("Advance"),
-    PROFESSIONAL("Professional");
+    BEGINNER("Początkujący"),
+    ADVANCE("Zaawansowany"),
+    PROFESSIONAL("Profesionalny");
 
     private String description;
 

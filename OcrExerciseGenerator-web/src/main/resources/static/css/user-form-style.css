@@ -5,6 +5,9 @@ body {
     align-items: center;
     height: 100vh;
 }
+error-message {
+    color: red;
+}
 
 .form-container {
     max-width: 500px;
