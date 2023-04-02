@@ -24,12 +24,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    //localhost:8080/user/new
     @GetMapping("/new")
     public String getNewUserForm(Model model) {
         model.addAttribute("user", new User());
         return "user-form";
     }
 
+    //localhost:8080/user/new
     @PostMapping(value = "/new")
     public String createUser(@ModelAttribute("user") User user, Model model) {
         Optional<User> userByName = userService.findByUserName(user.getUserName());
@@ -45,6 +47,22 @@ public class UserController {
             model.addAttribute("user", userService.createUser(user));
             return "redirect:/";
         }
+    }
+    @GetMapping("/login")
+    public String getLoginForm(Model model) {
+        model.addAttribute("user", new User());
+        return "login";
+    }
+
+    //localhost:8080/user/new
+    @PostMapping(value = "/login")
+    public String userLogin(@ModelAttribute("user") User user, Model model) {
+        Optional<User> userByName = userService.findByUserName(user.getUserName());
+        if (userByName.isEmpty() || !(userByName.get().getUserPassword()).equals(user.getUserPassword())) {
+            model.addAttribute("incorrectDetails", "Dane nie są poprawne");
+            return "login";
+        }
+        return "redirect:/";
     }
 
     @ModelAttribute("availableUserAdvancementLevel")
