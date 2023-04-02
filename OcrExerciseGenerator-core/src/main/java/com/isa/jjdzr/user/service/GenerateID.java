@@ -8,9 +8,9 @@ import java.util.List;
 @Component
 class GenerateID {
 
-    public static int generateUserID(List<User> usersList) {
+    public static Long generateUserID(List<User> usersList) {
         return usersList.stream().map(User::getUserID)
-                .reduce((first, second) -> second).orElse(0) + 1;
+                .reduce((first, second) -> second).orElse(0L) + 1;
     }
     private GenerateID() {
     }

@@ -18,7 +18,7 @@ public class TrainingHistory {
             menu.printActualLine("Musisz być zalogowany aby zobaczyć historie ćwiczeń");
             return;
         }
-        if (user.getUserAdvancementLevel() == 0) {
+        if (user.getUserAdvancementLevel() == null) {
             menu.printActualLine("Nie posiadasz histori treningu");
             return;
         }

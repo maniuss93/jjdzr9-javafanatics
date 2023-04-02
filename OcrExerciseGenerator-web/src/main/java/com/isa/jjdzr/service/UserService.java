@@ -3,6 +3,8 @@ package com.isa.jjdzr.service;
 import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.user.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,12 +21,33 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User editUser(User user) {
+        Optional<User> userById = userRepository.findById(user.getUserID());
+        if (userById.isPresent()) {
+            User userDB = userById.get();
+            userDB.setUserName(user.getUserName());
+            userDB.setUserEmail(user.getUserEmail());
+            userDB.setUserPassword(user.getUserPassword());
+            userDB.setUserID(user.getUserID());
+            userDB.setUserAdvancementLevel(userDB.getUserAdvancementLevel());
+            return userDB;
+        }
+        return null;
+    }
+
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
     public Optional<User> findByUserName(String userName) {
         return userRepository.findByUserName(userName);
+    }
+
+    public User findByUserId (Long id) {
+        return userRepository.findByUserID(id);
+    }
+    public Optional<User> findByUserEmail (String userEmail) {
+        return userRepository.findByUserEmail(userEmail);
     }
 
     public void deleteUser(Long id) {

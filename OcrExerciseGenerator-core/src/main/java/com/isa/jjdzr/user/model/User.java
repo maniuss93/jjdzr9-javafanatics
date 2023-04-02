@@ -1,27 +1,35 @@
 package com.isa.jjdzr.user.model;
 
+import com.isa.jjdzr.user.service.AdvancementLevelCategory;
 import jakarta.persistence.*;
-import lombok.NonNull;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userID;
-    @NonNull
-    private String userName;
-    @NonNull
-    private String userPassword;
-    @NonNull
-    private String userEmail;
-    private int userAdvancementLevel;
+    @Column(name = "userid", nullable = false)
+    private Long userID;
 
-    public int getUserID() {
+    @Column(name = "user_name", nullable = false)
+    private String userName;
+
+    @Column(name = "user_password", nullable = false)
+    private String userPassword;
+
+    @Column(name = "user_email", nullable = false)
+    private String userEmail;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_advancement_level", nullable = false)
+    private AdvancementLevelCategory userAdvancementLevel;
+
+    public Long getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Long userID) {
         this.userID = userID;
     }
 
@@ -49,11 +57,11 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public int getUserAdvancementLevel() {
+    public AdvancementLevelCategory getUserAdvancementLevel() {
         return userAdvancementLevel;
     }
 
-    public void setUserAdvancementLevel(int userAdvancementLevel) {
+    public void setUserAdvancementLevel(AdvancementLevelCategory userAdvancementLevel) {
         this.userAdvancementLevel = userAdvancementLevel;
     }
 

@@ -12,30 +12,52 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("api/user")
 public class UserRestController {
 
     private final UserService userService;
 
-    // http://localhost:8080/user/new
+    // http://localhost:8080/api/user/new
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity createUser(@RequestBody User user) {
         Optional<User> userFromDB = userService.findByUserName(user.getUserName());
         if (userFromDB.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         return ResponseEntity.ok(userService.createUser(user));
     }
 
-    // http://localhost:8080/user/all
+    // http://localhost:8080/api/user/all
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<User> getAll() {
         return userService.findAll();
     }
 
-    // http://localhost:8080/user/delete/id
+    // http://localhost:8080/api/user/all
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public User getById(@PathVariable Long id) {
+        return userService.findByUserId(id);
+    }
+
+    // http://localhost:8080/api/user/edit
+    @PutMapping("/edit")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity editUser(@RequestBody User user){
+        User updated = userService.editUser(user);
+
+        return updated != null ?
+                ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body(updated) :
+                ResponseEntity
+                        .badRequest()
+                        .build();
+    }
+
+    // http://localhost:8080/api/user/delete/id
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
