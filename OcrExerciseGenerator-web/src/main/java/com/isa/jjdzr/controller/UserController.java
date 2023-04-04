@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping("/new")
     public String getNewUserForm(Model model) {
         model.addAttribute("user", new User());
-        return "user-form";
+        return "registration-form";
     }
 
     //localhost:8080/user/new
@@ -39,10 +39,10 @@ public class UserController {
 
         if (userByName.isPresent()) {
             model.addAttribute("usernameAlreadyTaken", "Ta nazwa użytkownika jest zajęta");
-            return "user-form";
+            return "registration-form";
         } else if (userByEmail.isPresent()) {
             model.addAttribute("userEmailAlreadyTaken", "Ten address email jest zajęty");
-            return "user-form";
+            return "registration-form";
         } else {
             model.addAttribute("user", userService.createUser(user));
             return "redirect:/";
@@ -51,7 +51,7 @@ public class UserController {
     @GetMapping("/login")
     public String getLoginForm(Model model) {
         model.addAttribute("user", new User());
-        return "login";
+        return "user-login";
     }
 
     //localhost:8080/user/new
@@ -60,7 +60,7 @@ public class UserController {
         Optional<User> userByName = userService.findByUserName(user.getUserName());
         if (userByName.isEmpty() || !(userByName.get().getUserPassword()).equals(user.getUserPassword())) {
             model.addAttribute("incorrectDetails", "Dane nie są poprawne");
-            return "login";
+            return "user-login";
         }
         return "redirect:/";
     }
