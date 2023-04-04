@@ -10,7 +10,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userid", nullable = false)
-    private Long userID;
+    private Long userId;
 
     @Column(name = "user_name", nullable = false)
     private String userName;
@@ -25,12 +25,12 @@ public class User {
     @Column(name = "user_advancement_level", nullable = false)
     private AdvancementLevelCategory userAdvancementLevel;
 
-    public Long getUserID() {
-        return userID;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setUserId(Long userID) {
+        this.userId = userID;
     }
 
     public String getUserName() {

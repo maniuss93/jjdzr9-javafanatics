@@ -20,9 +20,9 @@ public class RandomExerciseGenerator {
         double stretchingPoints = userLevel * indicatorOfStretching;
         if (userLevel != 0) {
             exerciseList.addAll(fillExerciseList(ExerciseDataBase.
-                    findExerciseByCategory("warmUp"), warmUpPoints));
-            exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory("coreExercises"), coreExercisesPoints));
-            exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory("stretching"), stretchingPoints));
+                    findExerciseByCategory(ExerciseCategory.WARM_UP), warmUpPoints));
+            exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory(ExerciseCategory.CORE_EXERCISES), coreExercisesPoints));
+            exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory(ExerciseCategory.STRETCHING), stretchingPoints));
         } else {
             System.out.println("Proszę wykonać: Test poziomu zaawansowania");
         }

@@ -5,7 +5,7 @@ public enum AdvancementLevelCategory {
     ADVANCE("Zaawansowany"),
     PROFESSIONAL("Profesionalny");
 
-    private String description;
+    private final String description;
 
     AdvancementLevelCategory(String description) {
         this.description = description;

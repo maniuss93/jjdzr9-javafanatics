@@ -1,6 +1,7 @@
 package com.isa.jjdzr;
 
 import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.exercise.service.ExerciseCategory;
 import com.isa.jjdzr.user.service.AdvancementLevelCategory;
 import com.isa.jjdzr.user.service.UserDataBase;
 import com.isa.jjdzr.user.service.UserSignIn;
@@ -68,20 +69,16 @@ public class Menu implements Printable {
         System.out.println(line);
     }
 
-    @Override
-    public void printExerciseName(String line) {
-        System.out.println("Nowe ćwiczenie: " + line + ", zostało dodane :)");
-    }
 
     @Override
     public void printExerciseList(List<Exercise> exercises) {
         for (Exercise exercise : exercises) {
-            printExercise(exercise.getCategory(), exercise.getExerciseName(), exercise.getDescription());
+            printExercise(exercise.getExerciseCategory(), exercise.getExerciseName(), exercise.getDescription());
         }
     }
 
     @Override
-    public void printExercise(String line1, String line2, String line3) {
-        System.out.println("Kategoria: " + line1 + " \nNazwa ćwiczenia: " + line2 + "\nOpis:  " + line3 + "\n");
+    public void printExercise(ExerciseCategory exerciseCategory, String line1, String line2) {
+        System.out.println("Kategoria: " + exerciseCategory + " \nNazwa ćwiczenia: " + line1 + "\nOpis:  " + line2 + "\n");
     }
 }

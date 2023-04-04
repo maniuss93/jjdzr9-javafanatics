@@ -14,7 +14,7 @@ public class UserSignUp {
         user.setUserName(Validation.validateNewUserName(allUsers));
         user.setUserPassword(Validation.validateUserPassword());
         user.setUserEmail(Validation.validateEmailAddress(allUsers));
-        user.setUserID((long) GenerateID.generateUserID(allUsers));
+        user.setUserId((long) GenerateID.generateUserID(allUsers));
         return user;
     }
 
