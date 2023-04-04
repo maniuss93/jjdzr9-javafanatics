@@ -5,12 +5,22 @@
     <title>Rejestracja</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link th:href="@{/css/user-form-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
+<header>
+    <h1>Ocr Exercise Generator</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/user/login">Logowanie</a></li>
+        <li><a href="/info">O nas</a></li>
+    </ul>
+</nav>
 <div class="form-container">
-    <h2>Rejestracja użytkownika</h2>
     <form method="post" th:action="@{/user/new}" th:object="${user}">
+        <h2>Rejestracja użytkownika</h2>
         <div class="form-group">
             <label for="input-userName">Nazwa użytkownika</label>
             <input type="text" id="input-userName" name="userName" th:field="*{userName}" m required>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocr Exercise Generator</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <style>
         header {
     background-image: url('https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/landing_page/template_background/44380/a6e9ca3112fda15ca98cbba9f428660e.jpg');
@@ -25,11 +25,10 @@
     </header>
     <nav>
         <ul>
-            <li><a href="index.html">Strona główna</a></li>
-            <li><a href="create-user.html">Tworzenie użytkownika</a></li>
-            <li><a href="login.html">Logowanie</a></li>
-            <li><a href="without-login.html">Bez logowania</a></li>
-            <li><a href="info.html">O nas</a></li>
+            <li><a href="/user/login">Logowanie</a></li>
+            <li><a href="/user/new">Rejestracja użytkownika</a></li>
+            <li><a href="/info">O nas</a></li>
+        </ul>
     </nav>
     <main>
         <!-- Treść strony głównej -->

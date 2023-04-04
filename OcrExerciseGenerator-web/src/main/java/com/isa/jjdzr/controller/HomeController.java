@@ -11,6 +11,12 @@ public class HomeController {
     // http://localhost:8080
     @GetMapping
     public String getHome(){
-        return "home";
+        return "index";
+    }
+
+    // http://localhost:8080/info
+    @GetMapping("/info")
+    public String getInfo(){
+        return "info";
     }
 }

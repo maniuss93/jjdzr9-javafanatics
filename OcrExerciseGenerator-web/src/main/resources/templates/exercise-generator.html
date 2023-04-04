@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocr Exercise Generator - Generator Ćwiczeń</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
    
 </head>
 <body>
@@ -16,7 +16,7 @@
         <ul>
             <li><a href="index.html">Strona główna</a></li>
             <li><a href="create-user.html">Tworzenie użytkownika</a></li>
-            <li><a href="login.html">Logowanie</a></li>
+            <li><a href="user-login.html">Logowanie</a></li>
             <li><a href="without-login.html">Bez logowania</a></li>
             <li><a href="info.html">O nas</a></li>
         </ul>
@@ -29,43 +29,6 @@
         </ul>
     </main>
     <script>
-        function generateExercises() {
-            const level = new URLSearchParams(window.location.search).get('level');
-            const exerciseList = document.getElementById('exerciseList');
-            let exercises;
-
-            switch (level) {
-                case 'beginner':
-                    exercises = [
-                        'Ćwiczenie 1 dla początkujących',
-                        'Ćwiczenie 2 dla początkujących',
-                        'Ćwiczenie 3 dla początkujących'
-                    ];
-                    break;
-                case 'intermediate':
-                    exercises = [
-                        'Ćwiczenie 1 dla średnio zaawansowanych',
-                        'Ćwiczenie 2 dla średnio zaawansowanych',
-                        'Ćwiczenie 3 dla średnio zaawansowanych'
-                    ];
-                    break;
-                case 'advanced':
-                    exercises = [
-                        'Ćwiczenie 1 dla zaawansowanych',
-                        'Ćwiczenie 2 dla zaawansowanych',
-                        'Ćwiczenie 3 dla zaawansowanych'
-                    ];
-                    break;
-            }
-
-            for (const exercise of exercises) {
-                const li = document.createElement('li');
-                li.textContent = exercise;
-                exerciseList.appendChild(li);
-            }
-        }
-
-        generateExercises();
     </script>
 </body>
 </html>

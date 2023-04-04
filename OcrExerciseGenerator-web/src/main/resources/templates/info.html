@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Java-Fanatics - Informacje</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
     <header>
@@ -13,11 +13,10 @@
     </header>
     <nav>
         <ul>
-            <li><a href="index.html">Strona główna</a></li>
-            <li><a href="create-user.html">Tworzenie użytkownika</a></li>
-            <li><a href="login.html">Logowanie</a></li>
-            <li><a href="without-login.html">Bez logowania</a></li>
-            <li><a href="info.html">O nas</a></li>
+            <li><a href="/">Strona główna</a></li>
+            <li><a href="/user/new">Rejestracja użytkownika</a></li>
+            <li><a href="/user/login">Logowanie</a></li>
+            <li><a href="/info">O nas</a></li>
         </ul>
     </nav>
     <main>
