@@ -17,22 +17,20 @@ public class UserRestController {
 
     private final UserService userService;
 
-    // http://localhost:8080/api/user/new
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity createUser(@RequestBody User user) {
-        Optional<User> userFromDB = userService.findByUserName(user.getUserName());
-        if (userFromDB.isPresent()) {
+        Optional<User> userFromDb = userService.findByUserName(user.getUserName());
+        if (userFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         return ResponseEntity.ok(userService.createUser(user));
     }
 
-    // http://localhost:8080/api/user/all
-    @GetMapping("/all")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<User> getAll() {
-        return userService.findAll();
+        return userService.findAllUsers();
     }
 
     // http://localhost:8080/api/user/all
@@ -42,10 +40,9 @@ public class UserRestController {
         return userService.findByUserId(id);
     }
 
-    // http://localhost:8080/api/user/edit
-    @PutMapping("/edit")
+    @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity editUser(@RequestBody User user){
+    public ResponseEntity editUser(@RequestBody User user) {
         User updated = userService.editUser(user);
 
         return updated != null ?
@@ -57,8 +54,7 @@ public class UserRestController {
                         .build();
     }
 
-    // http://localhost:8080/api/user/delete/id
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);

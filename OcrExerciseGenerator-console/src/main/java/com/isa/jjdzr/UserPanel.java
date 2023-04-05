@@ -33,7 +33,6 @@ public class UserPanel {
     }
 
     static void showUserPanelMenu() {
-        menu.printActualLine("Witaj " + user.getUserName());
         menu.printActualLine("""
                 ****************************************
                 *            PANEL UŻYTKOWNIKA         *

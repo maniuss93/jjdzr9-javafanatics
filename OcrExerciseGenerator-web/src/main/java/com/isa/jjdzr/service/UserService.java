@@ -3,8 +3,6 @@ package com.isa.jjdzr.service;
 import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.user.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +11,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    // klasa zawierająca metody które coś robią z userem: GET, POST, DELETE - fasada
 
     private final UserRepository userRepository;
 
@@ -22,32 +19,37 @@ public class UserService {
     }
 
     public User editUser(User user) {
-        Optional<User> userById = userRepository.findById(user.getUserID());
+        Optional<User> userById = userRepository.findById(user.getUserId());
         if (userById.isPresent()) {
-            User userDB = userById.get();
-            userDB.setUserName(user.getUserName());
-            userDB.setUserEmail(user.getUserEmail());
-            userDB.setUserPassword(user.getUserPassword());
-            userDB.setUserID(user.getUserID());
-            userDB.setUserAdvancementLevel(userDB.getUserAdvancementLevel());
-            return userDB;
+            User userFromDb = userById.get();
+            userFromDb.setUserName(user.getUserName());
+            userFromDb.setUserEmail(user.getUserEmail());
+            userFromDb.setUserPassword(user.getUserPassword());
+            userFromDb.setUserId(user.getUserId());
+            userFromDb.setUserAdvancementLevel(user.getUserAdvancementLevel());
+            return userFromDb;
         }
         return null;
     }
 
-    public List<User> findAll() {
+    public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    public boolean existsByEmail(String userEmail) {
+        return userRepository.existsByUserEmail(userEmail);
+    }
+
+    public boolean existyByName(String userName) {
+        return userRepository.existsByUserName(userName);
     }
 
     public Optional<User> findByUserName(String userName) {
         return userRepository.findByUserName(userName);
     }
 
-    public User findByUserId (Long id) {
-        return userRepository.findByUserID(id);
-    }
-    public Optional<User> findByUserEmail (String userEmail) {
-        return userRepository.findByUserEmail(userEmail);
+    public User findByUserId(Long id) {
+        return userRepository.findByUserId(id);
     }
 
     public void deleteUser(Long id) {

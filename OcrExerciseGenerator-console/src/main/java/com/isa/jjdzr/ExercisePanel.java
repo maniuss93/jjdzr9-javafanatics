@@ -1,6 +1,7 @@
 package com.isa.jjdzr;
 
 import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.exercise.service.ExerciseCategory;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -25,9 +26,9 @@ public class ExercisePanel {
             try {
                 optionNumber = scanner.nextInt();
                 switch (optionNumber) {
-                    case 1 -> exercise.setCategory("warmUp");
-                    case 2 -> exercise.setCategory("coreExercises");
-                    case 3 -> exercise.setCategory("stretching");
+                    case 1 -> exercise.setExerciseCategory(ExerciseCategory.WARM_UP);
+                    case 2 -> exercise.setExerciseCategory(ExerciseCategory.CORE_EXERCISES);
+                    case 3 -> exercise.setExerciseCategory(ExerciseCategory.STRETCHING);
                     default -> menu.printActualLine(UserPanel.wrongInput);
                 }
             } catch (InputMismatchException e) {

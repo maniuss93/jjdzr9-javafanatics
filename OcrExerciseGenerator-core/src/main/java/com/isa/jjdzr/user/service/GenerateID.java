@@ -9,7 +9,7 @@ import java.util.List;
 class GenerateID {
 
     public static Long generateUserID(List<User> usersList) {
-        return usersList.stream().map(User::getUserID)
+        return usersList.stream().map(User::getUserId)
                 .reduce((first, second) -> second).orElse(0L) + 1;
     }
     private GenerateID() {
