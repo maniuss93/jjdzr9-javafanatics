@@ -21,13 +21,13 @@ public class UserService {
     public User editUser(User user) {
         Optional<User> userById = userRepository.findById(user.getUserId());
         if (userById.isPresent()) {
-            User userDB = userById.get();
-            userDB.setUserName(user.getUserName());
-            userDB.setUserEmail(user.getUserEmail());
-            userDB.setUserPassword(user.getUserPassword());
-            userDB.setUserId(user.getUserId());
-            userDB.setUserAdvancementLevel(userDB.getUserAdvancementLevel());
-            return userDB;
+            User userFromDb = userById.get();
+            userFromDb.setUserName(user.getUserName());
+            userFromDb.setUserEmail(user.getUserEmail());
+            userFromDb.setUserPassword(user.getUserPassword());
+            userFromDb.setUserId(user.getUserId());
+            userFromDb.setUserAdvancementLevel(user.getUserAdvancementLevel());
+            return userFromDb;
         }
         return null;
     }
@@ -36,15 +36,20 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public boolean existsByEmail(String userEmail) {
+        return userRepository.existsByUserEmail(userEmail);
+    }
+
+    public boolean existyByName(String userName) {
+        return userRepository.existsByUserName(userName);
+    }
+
     public Optional<User> findByUserName(String userName) {
         return userRepository.findByUserName(userName);
     }
 
-    public User findByUserId (Long id) {
+    public User findByUserId(Long id) {
         return userRepository.findByUserId(id);
-    }
-    public Optional<User> findByUserEmail (String userEmail) {
-        return userRepository.findByUserEmail(userEmail);
     }
 
     public void deleteUser(Long id) {

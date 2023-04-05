@@ -1,27 +1,27 @@
 [
   {
-    "userID": 1,
+    "userId": 1,
     "userName": "maniuss93",
     "userPassword": "12345",
     "userEmail": "maniuss93@wp.pl",
     "userAdvancementLevel": "BEGINNER"
   },
   {
-    "userID": 2,
+    "userId": 2,
     "userName": "jacek",
     "userPassword": "12345",
     "userEmail": "w@wp.pl",
     "userAdvancementLevel": "BEGINNER"
   },
   {
-    "userID": 3,
+    "userId": 3,
     "userName": "Zayl",
     "userPassword": "abc1",
     "userEmail": "zayl@zayl.com",
     "userAdvancementLevel": "BEGINNER"
   },
   {
-    "userID": 4,
+    "userId": 4,
     "userName": "Hella",
     "userPassword": "asd1",
     "userEmail": "asd@wp.pl",
