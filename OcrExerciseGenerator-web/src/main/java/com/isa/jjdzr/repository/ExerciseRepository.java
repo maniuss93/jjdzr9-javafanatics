@@ -8,6 +8,10 @@ import java.util.Optional;
 
 @Repository
 public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
+    boolean existsByExerciseName(String exerciseName);
+
+    boolean existsByUrl(String url);
+
     Optional<Exercise> findByExerciseName(String exerciseName);
 
     Exercise findByExerciseId(Long id);

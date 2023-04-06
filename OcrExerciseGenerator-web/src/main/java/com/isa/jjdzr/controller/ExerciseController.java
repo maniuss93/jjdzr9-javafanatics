@@ -7,23 +7,21 @@ import com.isa.jjdzr.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping
+@RequestMapping()
 public class ExerciseController {
 
     private final ExerciseService exerciseService;
     private final UserRepository userRepository;
 
     //localhost:8080/exercises/all
-    @GetMapping("/exercises/all")
-    public String getAllExercises(Model model) {
+    @GetMapping("/{id}/exercises/all")
+    public String getAllExercises(@PathVariable Long id, Model model) {
         List<Exercise> exercisesList = exerciseService.findAllExercises();
         model.addAttribute("exercises", exercisesList);
         return "all-exercises";
@@ -38,6 +36,26 @@ public class ExerciseController {
                         .getUserAdvancementLevel());
         model.addAttribute("randomExercises", randomExercises);
         return "random-exercises";
+    }
+
+    @GetMapping("/{id}/exercise/add")
+    public String getAddExerciseForm(@PathVariable Long id, Model model) {
+        model.addAttribute("exercise", new Exercise());
+        return "add-exercise-form";
+    }
+
+    @PostMapping(value = "/{id}/exercise/add")
+    public String createExercise(@PathVariable Long id, @ModelAttribute("exercise") Exercise exercise, Model model) {
+        if (exerciseService.existsByExerciseName(exercise.getExerciseName())) {
+            model.addAttribute("exerciseNameAlreadyTaken", "Ćwiczenie z taką nazwą już istnieje");
+            return "add-exercise-form";
+        } else if (exerciseService.existsByUrl(exercise.getUrl())) {
+            model.addAttribute("addressUrlAlreadyTaken", "Ćwiczenie z takim adresem url już istnieje");
+            return "add-exercise-form";
+        } else {
+            model.addAttribute("exercise", exerciseService.addExercise(exercise));
+        }
+        return "redirect:/userpanel/" + id;
     }
 }
 

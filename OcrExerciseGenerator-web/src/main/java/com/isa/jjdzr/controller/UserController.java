@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping("/new")
     public String getCreateUserForm(Model model) {
         model.addAttribute("user", new User());
-        return "registration-form";
+        return "user-create-form";
     }
 
     //localhost:8080/user/new
@@ -36,10 +36,10 @@ public class UserController {
     public String createUser(@ModelAttribute("user") User user, Model model) {
         if (userService.existyByName(user.getUserName())) {
             model.addAttribute("usernameAlreadyTaken", "Ta nazwa użytkownika jest zajęta");
-            return "registration-form";
+            return "user-create-form";
         } else if (userService.existsByEmail(user.getUserEmail())) {
             model.addAttribute("userEmailAlreadyTaken", "Ten address email jest zajęty");
-            return "registration-form";
+            return "user-create-form";
         } else {
             model.addAttribute("user", userService.createUser(user));
             return "redirect:/";
@@ -50,7 +50,7 @@ public class UserController {
     @GetMapping("/login")
     public String getLoginForm(Model model) {
         model.addAttribute("user", new User());
-        return "user-login";
+        return "user-login-form";
     }
 
     //localhost:8080/user/login
@@ -59,7 +59,7 @@ public class UserController {
         Optional<User> userByName = userService.findByUserName(user.getUserName());
         if (userByName.isEmpty() || !(userByName.get().getUserPassword()).equals(user.getUserPassword())) {
             model.addAttribute("incorrectDetails", "Dane nie są poprawne");
-            return "user-login";
+            return "user-login-form";
         }
         Long id = userByName.get().getUserId();
         return "redirect:/userpanel/" + id;

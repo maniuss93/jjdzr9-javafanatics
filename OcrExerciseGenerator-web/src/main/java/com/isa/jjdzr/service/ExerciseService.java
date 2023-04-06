@@ -29,6 +29,14 @@ public class ExerciseService {
         return exerciseRepository.findByExerciseName(exerciseName);
     }
 
+    public boolean existsByExerciseName(String exerciseName){
+        return exerciseRepository.existsByExerciseName(exerciseName);
+    }
+
+    public boolean existsByUrl(String url){
+        return exerciseRepository.existsByUrl(url);
+    }
+
     public Exercise editExercise(Exercise exercise) {
         Optional<Exercise> exerciseById = exerciseRepository.findById(exercise.getExerciseId());
         if (exerciseById.isPresent()) {
