@@ -1,7 +1,7 @@
 package com.isa.jjdzr;
 
 import com.isa.jjdzr.exercise.model.Exercise;
-import com.isa.jjdzr.exercise.service.AddExercise;
+import com.isa.jjdzr.exercise.service.CreateExercise;
 import com.isa.jjdzr.exercise.service.ExerciseDataBase;
 import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
 import com.isa.jjdzr.user.model.User;
@@ -84,15 +84,17 @@ public class UserPanel {
             menu.printActualLine("Musisz być zalogowany aby dodać ćwiczenie");
             return;
         }
-        ExerciseDataBase.saveNewExerciseToDataBase(AddExercise.createExercise(ExerciseDataBase.getExerciseList()));
+        ExerciseDataBase.saveNewExerciseToDataBase(CreateExercise.createExercise(ExercisePanel.setNewExerciseCategory(), ExerciseDataBase.getExerciseList()));
     }
+
 
     public static void showTrainingHistory() {
         TrainingHistory.showTrainingHistory(user, randomExerciseList);
     }
 
     public static List<Exercise> generateExerciseSet() {
-        return RandomExerciseGenerator.generateExercise(AdvancementLevelForm.convertAdvancementLevel(user.getUserAdvancementLevel()));
+        RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
+        return randomExerciseGenerator.generateRandomExercises(randomExerciseGenerator.convertAdvancementLevel(user.getUserAdvancementLevel()));
     }
 
     public static void takeAdvancementTest() {

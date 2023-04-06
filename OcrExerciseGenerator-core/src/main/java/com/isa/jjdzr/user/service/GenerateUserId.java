@@ -1,17 +1,16 @@
 package com.isa.jjdzr.user.service;
 
 import com.isa.jjdzr.user.model.User;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-class GenerateID {
+class GenerateUserId {
 
     public static Long generateUserID(List<User> usersList) {
         return usersList.stream().map(User::getUserId)
-                .reduce((first, second) -> second).orElse(0L) + 1;
+                       .reduce((first, second) -> second).orElse(0L) + 1;
     }
-    private GenerateID() {
+
+    private GenerateUserId() {
     }
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Losowy zestaw ćwiczeń</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <h1>Ocr Exercise Generator</h1>
+</header>
+<nav>
+    <ul>
+        <li><a th:href="@{/{id}/exercises/random(id=${id})}" th:text="'Wygeneruj losowy zestaw ćwiczeń'"></a></li>
+        <li><a th:href="@{/userpanel/{id}(id=${id})}" th:text="'Powrót'"></a></li>
+    </ul>
+</nav>
+<div th:each="exercise : ${randomExercises}">
+    <h3 th:text="${exercise.exerciseName}"></h3>
+    <p><strong>Kategoria:</strong> <span th:text="${exercise.exerciseCategory.getDescription()}"></span></p>
+    <p><strong>Opis:</strong> <span th:text="${exercise.description}"></span></p>
+    <p><strong>Adres strony:</strong> <a th:href="${exercise.url}" th:text="${exercise.url}"></a></p>
+</div>
+</body>
+</html>

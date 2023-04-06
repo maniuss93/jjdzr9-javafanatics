@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel użytkownika</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <h1>Ocr Exercise Generator</h1>
+</header>
+<nav>
+    <ul>
+        <li><a th:href="@{/{id}/exercises/random(id=${id})}" th:text="'Wygeneruj losowy zestaw ćwiczeń'"></a></li>
+        <li><a href="/exercises/all">Baza wszystkich ćwiczeń</a></li>
+        <li><a href="#">Dodaj ćwiczenie</a></li>
+        <li><a href="#">Edytuj profil</a></li>
+        <li><a href="/">Wyloguj</a></li>
+    </ul>
+</nav>
+</body>
+</html>

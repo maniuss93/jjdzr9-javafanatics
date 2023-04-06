@@ -26,7 +26,7 @@ public class UserController {
 
     //localhost:8080/user/new
     @GetMapping("/new")
-    public String getNewUserForm(Model model) {
+    public String getCreateUserForm(Model model) {
         model.addAttribute("user", new User());
         return "registration-form";
     }
@@ -46,13 +46,14 @@ public class UserController {
         }
     }
 
+    //localhost:8080/user/login
     @GetMapping("/login")
     public String getLoginForm(Model model) {
         model.addAttribute("user", new User());
         return "user-login";
     }
 
-    //localhost:8080/user/new
+    //localhost:8080/user/login
     @PostMapping(value = "/login")
     public String userLogin(@ModelAttribute("user") User user, Model model) {
         Optional<User> userByName = userService.findByUserName(user.getUserName());
@@ -60,7 +61,8 @@ public class UserController {
             model.addAttribute("incorrectDetails", "Dane nie są poprawne");
             return "user-login";
         }
-        return "redirect:/";
+        Long id = userByName.get().getUserId();
+        return "redirect:/userpanel/" + id;
     }
 
     @ModelAttribute("availableUserAdvancementLevel")
