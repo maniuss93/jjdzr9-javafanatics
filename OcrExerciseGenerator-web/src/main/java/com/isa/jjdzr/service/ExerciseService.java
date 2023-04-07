@@ -1,7 +1,9 @@
 package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
 import com.isa.jjdzr.repository.ExerciseRepository;
+import com.isa.jjdzr.user.service.AdvancementLevelCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.Optional;
 public class ExerciseService {
 
     private final ExerciseRepository exerciseRepository;
+    private final RandomExerciseGenerator randomExerciseGenerator;
 
     public Exercise addExercise(Exercise exercise) {
         return exerciseRepository.save(exercise);
@@ -24,6 +27,14 @@ public class ExerciseService {
 
     public Optional<Exercise> findExerciseByName(String exerciseName) {
         return exerciseRepository.findByExerciseName(exerciseName);
+    }
+
+    public boolean existsByExerciseName(String exerciseName){
+        return exerciseRepository.existsByExerciseName(exerciseName);
+    }
+
+    public boolean existsByUrl(String url){
+        return exerciseRepository.existsByUrl(url);
     }
 
     public Exercise editExercise(Exercise exercise) {
@@ -44,5 +55,9 @@ public class ExerciseService {
     public void deleteExercise(Long id) {
         Exercise exercise = exerciseRepository.findByExerciseId(id);
         exerciseRepository.delete(exercise);
+    }
+    public List<Exercise> generateRandomExercises(AdvancementLevelCategory userAdvancementLevel){
+        return randomExerciseGenerator.generateRandomExercises(randomExerciseGenerator
+                .convertAdvancementLevel(userAdvancementLevel));
     }
 }

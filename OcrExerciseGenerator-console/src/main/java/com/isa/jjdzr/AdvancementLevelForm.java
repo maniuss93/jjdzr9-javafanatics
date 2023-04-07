@@ -53,16 +53,4 @@ public class AdvancementLevelForm {
         return user.getUserAdvancementLevel();
     }
 
-    public static int convertAdvancementLevel(AdvancementLevelCategory category){
-        if(category == null) {
-            return 0;
-        }
-        else if(category.equals(AdvancementLevelCategory.BEGINNER)) {
-            return 50;
-        } else if (category.equals(AdvancementLevelCategory.ADVANCE)) {
-            return 100;
-        } else {
-            return 150;
-        }
-    }
 }

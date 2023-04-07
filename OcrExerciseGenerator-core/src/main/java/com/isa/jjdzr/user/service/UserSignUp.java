@@ -2,11 +2,9 @@ package com.isa.jjdzr.user.service;
 
 import com.isa.jjdzr.user.model.User;
 import com.isa.jjdzr.utils.Validation;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public class UserSignUp {
 
     public static User createUser(List<User> allUsers) {
@@ -14,7 +12,7 @@ public class UserSignUp {
         user.setUserName(Validation.validateNewUserName(allUsers));
         user.setUserPassword(Validation.validateUserPassword());
         user.setUserEmail(Validation.validateEmailAddress(allUsers));
-        user.setUserId((long) GenerateID.generateUserID(allUsers));
+        user.setUserId(GenerateUserId.generateUserID(allUsers));
         return user;
     }
 

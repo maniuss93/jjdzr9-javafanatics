@@ -26,9 +26,9 @@ public class UserController {
 
     //localhost:8080/user/new
     @GetMapping("/new")
-    public String getNewUserForm(Model model) {
+    public String getCreateUserForm(Model model) {
         model.addAttribute("user", new User());
-        return "registration-form";
+        return "user-create-form";
     }
 
     //localhost:8080/user/new
@@ -36,31 +36,33 @@ public class UserController {
     public String createUser(@ModelAttribute("user") User user, Model model) {
         if (userService.existyByName(user.getUserName())) {
             model.addAttribute("usernameAlreadyTaken", "Ta nazwa użytkownika jest zajęta");
-            return "registration-form";
+            return "user-create-form";
         } else if (userService.existsByEmail(user.getUserEmail())) {
             model.addAttribute("userEmailAlreadyTaken", "Ten address email jest zajęty");
-            return "registration-form";
+            return "user-create-form";
         } else {
             model.addAttribute("user", userService.createUser(user));
             return "redirect:/";
         }
     }
 
+    //localhost:8080/user/login
     @GetMapping("/login")
     public String getLoginForm(Model model) {
         model.addAttribute("user", new User());
-        return "user-login";
+        return "user-login-form";
     }
 
-    //localhost:8080/user/new
+    //localhost:8080/user/login
     @PostMapping(value = "/login")
     public String userLogin(@ModelAttribute("user") User user, Model model) {
         Optional<User> userByName = userService.findByUserName(user.getUserName());
         if (userByName.isEmpty() || !(userByName.get().getUserPassword()).equals(user.getUserPassword())) {
             model.addAttribute("incorrectDetails", "Dane nie są poprawne");
-            return "user-login";
+            return "user-login-form";
         }
-        return "redirect:/";
+        Long id = userByName.get().getUserId();
+        return "redirect:/userpanel/" + id;
     }
 
     @ModelAttribute("availableUserAdvancementLevel")
