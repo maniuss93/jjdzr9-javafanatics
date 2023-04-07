@@ -1,6 +1,7 @@
 package com.isa.jjdzr.controller;
 
 import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.exercise.service.ExerciseCategory;
 import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.service.ExerciseService;
 import com.isa.jjdzr.user.model.User;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -56,6 +58,11 @@ public class ExerciseController {
             model.addAttribute("exercise", exerciseService.addExercise(exercise));
         }
         return "redirect:/userpanel/" + id;
+    }
+
+    @ModelAttribute("availableExerciseCategory")
+    List<ExerciseCategory> getDescription() {
+        return Arrays.asList(ExerciseCategory.values());
     }
 }
 
