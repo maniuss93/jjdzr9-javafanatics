@@ -18,13 +18,14 @@
         <li><a href="/info">O nas</a></li>
     </ul>
 </nav>
+<div id="space"></div>
 <div class="form-container">
     <form method="post" th:action="@{/user/login}" th:object="${user}">
         <h3>Logowanie użytkownika</h3>
-        <div id="error-message" th:text="${incorrectDetails}"></div>
+        <div id="error" th:text="${incorrectDetails}"></div>
         <div class="form-group">
             <label for="input-userName">Nazwa użytkownika</label>
-            <input type="text" id="input-userName" name="userName" th:field="*{userName}" m required>
+            <input type="text" id="input-userName" name="userName" th:field="*{userName}" required>
         </div>
         <div class="form-group">
             <label for="input-password">Hasło</label>

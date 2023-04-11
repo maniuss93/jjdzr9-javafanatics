@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Baza ćwiczeń</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
 </head>
 <body>
 <header>
@@ -16,11 +17,15 @@
         <li><a th:href="@{/userpanel/{id}(id=${id})}" th:text="'Powrót'"></a></li>
     </ul>
 </nav>
-<div class="exercise" th:each="exercise : ${exercises}">
-    <h3 class="title" th:text="${exercise.exerciseName}"></h3>
-    <p><strong>Kategoria:</strong> <span th:text="${exercise.exerciseCategory.getDescription()}"></span></p>
-    <p><strong>Opis:</strong> <span th:text="${exercise.description}"></span></p>
-    <p><strong>Adres strony:</strong> <a th:href="${exercise.url}" th:text="${exercise.url}"></a></p>
-</div>
+<div id="space"></div>
+<form method="get" th:object="${user}" th:action="@{/{id}/profile(id=${id})}">
+    <div class="card-body text-center">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+             class="rounded-circle img-fluid" style="width: 150px;">
+        <h5 class="my-3" th:text="*{userName}"></h5>
+        <p class="text-muted mb-1" th:text="*{userEmail}"></p>
+        <p class="text-muted mb-1" th:text="*{userAdvancementLevel}"> </p>
+    </div>
+</form>
 </body>
 </html>

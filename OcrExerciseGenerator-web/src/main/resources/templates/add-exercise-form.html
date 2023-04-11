@@ -16,6 +16,7 @@
         <li><a th:href="@{/userpanel/{id}(id=${id})}" th:text="'Powrót'"></a></li>
     </ul>
 </nav>
+<div id="space"></div>
 <div class="form-container">
     <form method="post" th:action="@{/{id}/exercise/add(id=${id})}" th:object="${exercise}">
         <h3>Dodawanie ćwiczenia</h3>

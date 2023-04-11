@@ -16,7 +16,7 @@
         <li><a th:href="@{/{id}/exercises/random(id=${id})}" th:text="'Wygeneruj losowy zestaw ćwiczeń'"></a></li>
         <li><a th:href="@{/{id}/exercises/all(id=${id})}" th:text="'Baza wszystkich ćwiczeń'"></a></li>
         <li><a th:href="@{/{id}/exercise/add(id=${id})}" th:text="'Dodaj ćwiczenie'"></a></li>
-        <li><a href="#">Edytuj profil</a></li>
+        <li><a th:href="@{/user/{id}/edit(id=${id})}" th:text="'Edytuj profil'"></a></li>
         <li><a href="/">Wyloguj</a></li>
     </ul>
 </nav>

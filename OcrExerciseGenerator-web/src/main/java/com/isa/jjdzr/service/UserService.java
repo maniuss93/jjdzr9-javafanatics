@@ -40,7 +40,7 @@ public class UserService {
         return userRepository.existsByUserEmail(userEmail);
     }
 
-    public boolean existyByName(String userName) {
+    public boolean existsByName(String userName) {
         return userRepository.existsByUserName(userName);
     }
 
