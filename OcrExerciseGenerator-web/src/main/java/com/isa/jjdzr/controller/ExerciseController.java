@@ -6,12 +6,15 @@ import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.service.ExerciseService;
 import com.isa.jjdzr.user.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,15 +40,22 @@ public class ExerciseController {
                 .generateRandomExercises(userFromDb
                         .getUserAdvancementLevel());
         model.addAttribute("randomExercises", randomExercises);
+        String exerciseIds = randomExercises.stream()
+                .map(exercise -> String.valueOf(exercise.getExerciseId()))
+                .collect(Collectors.joining(","));
+        String generatePdfUrl = "/generate-pdf?exerciseIds=" + exerciseIds;
+        model.addAttribute("generatePdfUrl", generatePdfUrl);
+
         return "random-exercises";
     }
 
-    @PostMapping("/generate-pdf")
-    public ResponseEntity<byte[]> generatePdf() throws Exception {
-        return exerciseService.generatePdf();
+    @GetMapping("/generate-pdf")
+    public ResponseEntity<byte[]> generatePdf(@RequestParam List<Long> exerciseIds) throws Exception {
+        List<Optional<Exercise>> exercises = exerciseService.getExercisesByIds(exerciseIds);
+        return exerciseService.generatePdf(exercises);
     }
 
-}
+
     @GetMapping("/{id}/exercise/add")
     public String getAddExerciseForm(@PathVariable Long id, Model model) {
         model.addAttribute("exercise", new Exercise());
