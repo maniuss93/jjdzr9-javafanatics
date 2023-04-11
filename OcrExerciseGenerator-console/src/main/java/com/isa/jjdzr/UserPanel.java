@@ -1,10 +1,11 @@
 package com.isa.jjdzr;
 
 import com.isa.jjdzr.exercise.model.Exercise;
-import com.isa.jjdzr.exercise.service.AddExercise;
+import com.isa.jjdzr.exercise.service.CreateExercise;
 import com.isa.jjdzr.exercise.service.ExerciseDataBase;
 import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
 import com.isa.jjdzr.user.model.User;
+import com.isa.jjdzr.user.service.AdvancementLevelCategory;
 import com.isa.jjdzr.user.service.UserDataBase;
 import com.isa.jjdzr.utils.Validation;
 
@@ -13,18 +14,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserPanel {
-    public static Printable menu = new Menu();
+    public static final Printable menu = new Menu();
     static User user = new User();
     public static final String wrongInput = "Niepoprawna opcja";
     private static List<Exercise> randomExerciseList;
 
 
     static void printAdvancementLevel() {
-        if (user.getUserAdvancementLevel() == 50) {
+        if (user.getUserAdvancementLevel() == AdvancementLevelCategory.BEGINNER) {
             menu.printActualLine("POCZĄTKUJĄCY");
-        } else if (user.getUserAdvancementLevel() == 100) {
+        } else if (user.getUserAdvancementLevel() == AdvancementLevelCategory.ADVANCE) {
             menu.printActualLine("ZAAWANSOWANY");
-        } else if (user.getUserAdvancementLevel() == 150) {
+        } else if (user.getUserAdvancementLevel() == AdvancementLevelCategory.PROFESSIONAL) {
             menu.printActualLine("PROFESJONALNY");
         } else {
             menu.printActualLine("BRAK");
@@ -32,7 +33,6 @@ public class UserPanel {
     }
 
     static void showUserPanelMenu() {
-        menu.printActualLine("Witaj " + user.getUserName());
         menu.printActualLine("""
                 ****************************************
                 *            PANEL UŻYTKOWNIKA         *
@@ -61,7 +61,7 @@ public class UserPanel {
                     case 2 -> {
                         randomExerciseList = generateExerciseSet();
                         menu.printExerciseList(randomExerciseList);
-                        if ((Validation.isUserSignedUp(user)) && user.getUserAdvancementLevel() != 0) {
+                        if ((Validation.isUserSignedUp(user)) && user.getUserAdvancementLevel() != null) {
                             TrainingHistory.saveNewTrainingHistory(user, randomExerciseList);
                         }
                     }
@@ -84,15 +84,17 @@ public class UserPanel {
             menu.printActualLine("Musisz być zalogowany aby dodać ćwiczenie");
             return;
         }
-        ExerciseDataBase.saveNewExerciseToDataBase(AddExercise.createExercise(ExerciseDataBase.getExerciseList()));
+        ExerciseDataBase.saveNewExerciseToDataBase(CreateExercise.createExercise(ExercisePanel.setNewExerciseCategory(), ExerciseDataBase.getExerciseList()));
     }
+
 
     public static void showTrainingHistory() {
         TrainingHistory.showTrainingHistory(user, randomExerciseList);
     }
 
     public static List<Exercise> generateExerciseSet() {
-        return RandomExerciseGenerator.generateExercise(user.getUserAdvancementLevel());
+        RandomExerciseGenerator randomExerciseGenerator = new RandomExerciseGenerator();
+        return randomExerciseGenerator.generateRandomExercises(randomExerciseGenerator.convertAdvancementLevel(user.getUserAdvancementLevel()));
     }
 
     public static void takeAdvancementTest() {

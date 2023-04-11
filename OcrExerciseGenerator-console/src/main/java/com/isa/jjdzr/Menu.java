@@ -1,6 +1,7 @@
 package com.isa.jjdzr;
 
 import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.user.service.AdvancementLevelCategory;
 import com.isa.jjdzr.user.service.UserDataBase;
 import com.isa.jjdzr.user.service.UserSignIn;
 import com.isa.jjdzr.user.service.UserSignUp;
@@ -23,7 +24,7 @@ public class Menu implements Printable {
 
     static void withNoLogin() {
         UserPanel.user.setUserName("");
-        UserPanel.user.setUserAdvancementLevel(0);
+        UserPanel.user.setUserAdvancementLevel(AdvancementLevelCategory.ADVANCE);
         UserPanel.userPanelMenu();
     }
 
@@ -67,20 +68,16 @@ public class Menu implements Printable {
         System.out.println(line);
     }
 
-    @Override
-    public void printExerciseName(String line) {
-        System.out.println("Nowe ćwiczenie: " + line + ", zostało dodane :)");
-    }
 
     @Override
     public void printExerciseList(List<Exercise> exercises) {
         for (Exercise exercise : exercises) {
-            printExercise(exercise.getCategory(), exercise.getExerciseName(), exercise.getDescription());
+            printExercise(exercise.getExerciseCategory().getDescription(), exercise.getExerciseName(), exercise.getDescription());
         }
     }
 
     @Override
-    public void printExercise(String line1, String line2, String line3) {
-        System.out.println("Kategoria: " + line1 + " \nNazwa ćwiczenia: " + line2 + "\nOpis:  " + line3 + "\n");
+    public void printExercise(String category, String exerciseName, String exerciseDescription) {
+        System.out.println("Kategoria: " + category + " \nNazwa ćwiczenia: " + exerciseName + "\nOpis:  " + exerciseDescription + "\n");
     }
 }

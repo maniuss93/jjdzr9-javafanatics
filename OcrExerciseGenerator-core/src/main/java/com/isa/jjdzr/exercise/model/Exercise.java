@@ -1,20 +1,40 @@
 package com.isa.jjdzr.exercise.model;
 
+import com.isa.jjdzr.exercise.service.ExerciseCategory;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "exercises")
+@Table(name = "exercises")
 public class Exercise {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "exerciseId", nullable = false)
     private Long exerciseId;
 
+    @Column(name = "exercise_points", nullable = false)
     private int exercisePoints;
-    private String exerciseName;
-    private String description;
-    private String url;
-    private String category;
 
+    @Column(name = "exercise_name", nullable = false)
+    private String exerciseName;
+
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @Column(name = "url")
+    private String url;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "exercise_category", nullable = false)
+    private ExerciseCategory exerciseCategory;
+
+    public ExerciseCategory getExerciseCategory() {
+        return exerciseCategory;
+    }
+
+    public void setExerciseCategory(ExerciseCategory exerciseCategory) {
+        this.exerciseCategory = exerciseCategory;
+    }
 
     public Exercise() {
     }
@@ -55,14 +75,6 @@ public class Exercise {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public void setExerciseId(Long exerciseId) {

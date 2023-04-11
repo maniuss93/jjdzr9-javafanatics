@@ -12,31 +12,49 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("api/user")
 public class UserRestController {
 
     private final UserService userService;
 
-    // http://localhost:8080/user/new
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity createUser(@RequestBody User user) {
-        Optional<User> userFromDB = userService.findByUserName(user.getUserName());
-        if (userFromDB.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+        Optional<User> userFromDb = userService.findByUserName(user.getUserName());
+        if (userFromDb.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         return ResponseEntity.ok(userService.createUser(user));
     }
 
-    // http://localhost:8080/user/all
-    @GetMapping("/all")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<User> getAll() {
-        return userService.findAll();
+        return userService.findAllUsers();
     }
 
-    // http://localhost:8080/user/delete/id
-    @DeleteMapping("/delete/{id}")
+    // http://localhost:8080/api/user/all
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public User getById(@PathVariable Long id) {
+        return userService.findByUserId(id);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity editUser(@RequestBody User user) {
+        User updated = userService.editUser(user);
+
+        return updated != null ?
+                ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body(updated) :
+                ResponseEntity
+                        .badRequest()
+                        .build();
+    }
+
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);

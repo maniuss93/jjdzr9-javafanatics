@@ -6,14 +6,14 @@ import com.isa.jjdzr.utils.Validation;
 
 import java.util.List;
 
-public class AddExercise {
+public class CreateExercise {
 
-    public static Exercise createExercise(List<Exercise> exerciseList) {
-        Exercise exercise = new Exercise();
+    public static Exercise createExercise(Exercise exercise, List<Exercise> exerciseList) {
         exercise.setExerciseName(Validation.validateNewExerciseName(exerciseList));
         exercise.setDescription(Validation.validateCorrectExerciseDescription());
         exercise.setUrl(Validation.validateAddressUrl());
         exercise.setExercisePoints(Validation.validateCorrectEffortPointsFormat());
+        exercise.setExerciseId(GenerateExerciseId.generateUserID(exerciseList));
         return exercise;
     }
 }

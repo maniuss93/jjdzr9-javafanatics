@@ -11,7 +11,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    // klasa zawierająca metody które coś robią z userem: GET, POST, DELETE - fasada
 
     private final UserRepository userRepository;
 
@@ -19,12 +18,38 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<User> findAll() {
+    public User editUser(User user) {
+        Optional<User> userById = userRepository.findById(user.getUserId());
+        if (userById.isPresent()) {
+            User userFromDb = userById.get();
+            userFromDb.setUserName(user.getUserName());
+            userFromDb.setUserEmail(user.getUserEmail());
+            userFromDb.setUserPassword(user.getUserPassword());
+            userFromDb.setUserId(user.getUserId());
+            userFromDb.setUserAdvancementLevel(user.getUserAdvancementLevel());
+            return userFromDb;
+        }
+        return null;
+    }
+
+    public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    public boolean existsByEmail(String userEmail) {
+        return userRepository.existsByUserEmail(userEmail);
+    }
+
+    public boolean existyByName(String userName) {
+        return userRepository.existsByUserName(userName);
     }
 
     public Optional<User> findByUserName(String userName) {
         return userRepository.findByUserName(userName);
+    }
+
+    public User findByUserId(Long id) {
+        return userRepository.findByUserId(id);
     }
 
     public void deleteUser(Long id) {

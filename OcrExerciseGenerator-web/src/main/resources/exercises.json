@@ -1,195 +1,202 @@
 [
   {
-    "exerciseId": 1,
+    "exerciseId" : 1,
     "exercisePoints": 10,
-    "exerciseName": "Push-up",
-    "description": "A full push-up with a hold-up tightens the muscles of the buttocks and abdomen. If you have a problem with maintaining a good position or doing the whole set, you will do a push-up on your knees or on a platform",
-    "url": null,
-    "category": "coreExercises"
-  },
-  {
-    "exerciseId": 2,
-    "exercisePoints": 10,
-    "exerciseName": "Front dumbbell raises",
-    "description": "Light dumbbells, tighten your glutes and raise the dumbbells in front of you",
-    "url": null,
-    "category": "coreExercises"
-  },
-  {
-    "exerciseId": 3,
-    "exercisePoints": 10,
-    "exerciseName": "Side raises with dumbbells",
-    "description": "Light dumbbells, tighten your buttocks and raise the dumbbells to the side",
-    "url": null,
-    "category": "coreExercises"
-  },
-  {
-    "exerciseId": 4,
-    "exercisePoints": 10,
-    "exerciseName": "Hanging",
-    "description": "Hanging on a straight bar. You hang with both hands for 20 seconds with a 20 second break. Active hang, shoulders tense, legs in front of you. If you are unable to hang for 20 seconds without a break, put a box under the legs of the chair or support yourself, but you must not let go of the bar for 20 seconds.",
-    "url": "youtube.com",
-    "category": "coreExercises"
-  },
-  {
-    "exercisePoints": 10,
-    "exerciseName": "Crunches",
-    "description": "Ten different exercises for abs, 1 pull-up, 2 russian twist, 3 touching hands and legs, 4 leg raises; 5board; 6slant alternating; 7 hollow body; 8 side board; 9 side board; 10 bikes. You exercise 20 seconds, rest 40 seconds. You do it with your mobile watch. Download the tabata application and set the time you will work.",
-    "url": "ffff",
-    "category": "coreExercises"
-  },
-  {
-    "exercisePoints": 10,
-    "exerciseName": "Lowering from straight bar",
-    "description": "Setting up in the upper position on the bar from, for example, a chair. Then hang, and as slowly as possible lower down to outstretched arms.",
-    "url": "ffff",
-    "category": "coreExercises"
-  },
-  {
-    "exercisePoints": 10,
-    "exerciseName": "Angle pull-up on a rope",
-    "description": "Pull-ups in the leg-forward position on the rope, holding both ends evenly.",
+    "exerciseName": "Pompki",
+    "description": "Pełna pompka z podciąganiem napina mięśnie pośladków i brzucha. Jeśli masz problem z utrzymaniem dobrej pozycji lub zrobieniem całego zestawu, pompkę zrobisz na kolanach lub na platformie",
     "url": "brak",
-    "category": "coreExercises"
+    "exerciseCategory": "CORE_EXERCISES"
   },
   {
+    "exerciseId" : 2,
     "exercisePoints": 10,
-    "exerciseName": "3km run",
-    "description": "Calm, continuous running at an even pace. You start calmly and run at an even pace for about 18-20 minutes.",
+    "exerciseName": "Unoszenie hantli z przodu",
+    "description": "Lekkie hantle, napnij pośladki i podnieś hantle przed siebie",
     "url": "brak",
-    "category": "warmUp"
+    "exerciseCategory": "CORE_EXERCISES"
   },
   {
+    "exerciseId" : 3,
     "exercisePoints": 10,
-    "exerciseName": "Walking with your hands on the bars",
-    "description": "After the run, transition on straight arms (swing) sticks (every 2 sticks) you start once from the right hand once from the left hand.",
+    "exerciseName": "Wznosy boczne z hantlami",
+    "description": "Lekkie hantle, napnij pośladki i unieś hantle na bok",
     "url": "brak",
-    "category": "coreExercises"
+    "exerciseCategory": "CORE_EXERCISES"
   },
   {
+    "exerciseId" : 4,
     "exercisePoints": 10,
-    "exerciseName": "Side rompers",
-    "description": "Side rompers performed for 1 min",
+    "exerciseName": "Zwis",
+    "description": "Wiszące na prostym pasku. Wisisz obiema rękami przez 20 sekund z 20-sekundową przerwą. Aktywny zwis, ramiona napięte, nogi przed sobą. Jeśli nie możesz wisieć przez 20 sekund bez przerwy, podłóż pudełko pod nogi krzesła lub podeprzyj się, ale nie możesz puścić drążka przez 20 sekund.",
+    "url": "youtube.com",
+    "exerciseCategory": "CORE_EXERCISES"
+  },
+  {
+    "exerciseId" : 5,
+    "exercisePoints": 10,
+    "exerciseName": "Brzuszki",
+    "description": "Dziesięć różnych ćwiczeń na mięśnie brzucha, 1 podciąganie, 2 russian twist, 3 dotykanie rąk i nóg, 4 unoszenie nóg; 5tablica; 6 skośne naprzemiennie; 7 wydrążonych korpusów; 8 tablic bocznych; 9 planszy bocznej; 10 rowerów. Ćwiczysz 20 sekund, odpoczywasz 40 sekund. Robisz to za pomocą swojego mobilnego zegarka. Pobierz aplikację tabata i ustal godzinę, w której będziesz pracować.",
     "url": "brak",
-    "category": "warmUp"
+    "exerciseCategory": "CORE_EXERCISES"
   },
   {
+    "exerciseId" : 6,
     "exercisePoints": 10,
-    "exerciseName": "Front rompers",
-    "description": "Front rompers performed for 1 min",
-    "url": "youtube.com",
-    "category": "warmUp"
+    "exerciseName": "Opuszczanie z prostej belki",
+    "description": "Ustawienie w pozycji górnej na drążku np. z krzesła. Następnie zawiśnij i jak najwolniej opuść się do wyciągniętych ramion.",
+    "url": "brak",
+    "exerciseCategory": "CORE_EXERCISES"
   },
   {
+    "exerciseId" : 7,
     "exercisePoints": 10,
-    "exerciseName": "Boxing run",
-    "description": "Boxing run for 1 min",
-    "url": "youtube.com",
-    "category": "coreExercises"
+    "exerciseName": "Podciąganie kątowe na linie",
+    "description": "Podciąganie na linie w pozycji nogi do przodu, trzymając równomiernie oba końce.",
+    "url": "brak",
+    "exerciseCategory": "CORE_EXERCISES"
   },
   {
+    "exerciseId" : 8,
     "exercisePoints": 10,
-    "exerciseName": "Turning circles with your hands",
-    "description": "Rotate the circles with your arms forward, then backward, and finally alternately. Total 2 minutes.",
-    "url": "youtube.com",
-    "category": "warmUp"
+    "exerciseName": "Bieg 3km",
+    "description": "Spokojny, ciągły bieg w równym tempie. Zaczynasz spokojnie i biegniesz równym tempem przez około 18-20 minut.",
+    "url": "brak",
+    "exerciseCategory": "WARM_UP"
   },
   {
+    "exerciseId" : 9,
     "exercisePoints": 10,
-    "exerciseName": "Rotating circles with your hips",
-    "description": "Rotate the hips in circles with the legs and head still.",
-    "url": "youtube.com",
-    "category": "warmUp"
+    "exerciseName": "Chodzenie z rękami na drążkach",
+    "description": "Po biegu przejście na prostych ramionach (wymach) kije (co 2 kije) zaczynasz raz z prawej raz z lewej ręki.",
+    "url": "brak",
+    "exerciseCategory": "CORE_EXERCISES"
   },
   {
+    "exerciseId" : 10,
     "exercisePoints": 10,
-    "exerciseName": "Bends with swing",
-    "description": "Bends with alternately touching the feet and swinging the hand up, we try to look after the hand going up. Total 1-2 minutes.",
-    "url": "youtube.com",
-    "category": "warmUp"
+    "exerciseName": "Pajacyki boczne",
+    "description": "Pajacyki boczne wykonywane przez 1 min",
+    "url": "brak",
+    "exerciseCategory": "WARM_UP"
   },
   {
+    "exerciseId" : 11,
     "exercisePoints": 10,
-    "exerciseName": "Shoulder twists",
-    "description": "Alternately twisting the arms at the shoulders, straight torso, palms up and down 180 degrees. Deep muscle activation.",
+    "exerciseName": "Pajacyki z przodu",
+    "description": "Przednie pajacyki wykonywane przez 1 min",
     "url": "youtube.com",
-    "category": "warmUp"
+    "exerciseCategory": "WARM_UP"
   },
   {
+    "exerciseId" : 12,
     "exercisePoints": 10,
-    "exerciseName": "Burpees",
-    "description": "Feet shoulder-width apart, 10-30 degrees open, flat. 2) Body weight transferred to the heels (they do not leave the ground even for a moment). 3) Back straight, torso tense, head in a natural position, eyes directed forward.",
+    "exerciseName": "Bieg bokserski",
+    "description": "Bieg bokserski przez 1 min",
     "url": "youtube.com",
-    "category": "coreExercises"
+    "exerciseCategory": "CORE_EXERCISES"
   },
   {
+    "exerciseId" : 13,
     "exercisePoints": 10,
-    "exerciseName": "Back stretching",
-    "description": "After the workout, kneel down and lower your body down. Rest your buttocks on your legs and your chest on your thighs. In this pose, known as the \"Japanese bow\", the back is arched, which helps relieve the tension of the night. You can stretch your back by resting your hands on the edge of a table or armchair while bending over. Remember not to slouch or hunch your shoulders.",
+    "exerciseName": "Kręcenie rękoma w kółko",
+    "description": "Obracaj koła rękami do przodu, potem do tyłu, a na końcu na przemian. Razem 2 minuty.",
     "url": "youtube.com",
-    "category": "stretching"
+    "exerciseCategory": "WARM_UP"
   },
   {
+    "exerciseId" : 14,
     "exercisePoints": 10,
-    "exerciseName": "Full body stretching",
-    "description": "Lie on your stomach with your arms and legs stretched out. Raise your head and chest slightly and carefully raise one arm, along with the opposite leg. Repeat on both sides of your body to lengthen and straighten your spine and limbs.",
+    "exerciseName": "Obracanie kół z biodrami",
+    "description": "Obracaj biodrami w kółko z nogami i głową nieruchomo.",
     "url": "youtube.com",
-    "category": "stretching"
+    "exerciseCategory": "WARM_UP"
   },
   {
+    "exerciseId" : 15,
     "exercisePoints": 10,
-    "exerciseName": "Stretching the back and abdomen",
-    "description": "Lie on your back, bend your knees, place your feet flat and place your arms along your body. Lift your butt and hips slowly upward, resting your weight on your feet and shoulders. In this position, all muscles work, even the deep ones. If you have a soft mattress, this exercise can be challenging. In this case, you can move to the floor using an exercise mat.",
+    "exerciseName": "Wygięcia z huśtawką",
+    "description": "Przysiady z naprzemiennym dotykaniem stóp i wymachiwaniem ręki w górę, staramy się pilnować, aby ręka unosiła się do góry. Razem 1-2 minuty.",
     "url": "youtube.com",
-    "category": "stretching"
+    "exerciseCategory": "WARM_UP"
   },
   {
+    "exerciseId" : 16,
+    "exercisePoints": 10,
+    "exerciseName": "Skręty ramion",
+    "description": "Naprzemiennie skręcając ręce w ramionach, prosty tułów, dłonie w górę iw dół o 180 stopni. Aktywacja mięśni głębokich.",
+    "url": "youtube.com",
+    "exerciseCategory": "WARM_UP"
+  },
+  {
+    "exerciseId" : 17,
+    "exercisePoints": 10,
+    "exerciseName": "Krokodylki",
+    "description": "Feet shoulder-width apart, 10-30 degrees open, flat. 2) Body weight transferred to the heels (they do not leave the ground even for a moment). 3) Back straight, torso tense, head in a natural position, eyes directed forward.Stopy rozstawione na szerokość barków, otwarte pod kątem 10-30 stopni, płaskie. 2) Ciężar ciała przeniesiony na pięty (nie odrywają się od podłoża ani na chwilę). 3) Plecy proste, tułów napięty, głowa w naturalnej pozycji, oczy skierowane do przodu.",
+    "url": "youtube.com",
+    "exerciseCategory": "CORE_EXERCISES"
+  },
+  {
+    "exerciseId" : 18,
+    "exercisePoints": 10,
+    "exerciseName": "Rozciąganie pleców",
+    "description": "Po treningu uklęknij i opuść ciało. Oprzyj pośladki na nogach, a klatkę piersiową na udach. W tej pozie, zwanej \"japońskim ukłonem\", plecy są wygięte w łuk, co pomaga złagodzić nocne napięcie. Możesz rozciągnąć plecy, opierając dłonie na krawędzi stołu lub fotela podczas pochylania się. Pamiętaj, aby nie garbić się ani nie garbić ramion.",
+    "url": "youtube.com",
+    "exerciseCategory": "STRETCHING"
+  },
+  {
+    "exerciseId" : 19,
+    "exercisePoints": 10,
+    "exerciseName": "Rozciąganie całego ciała",
+    "description": "Połóż się na brzuchu z wyciągniętymi rękami i nogami. Podnieś lekko głowę i klatkę piersiową i ostrożnie podnieś jedno ramię wraz z przeciwną nogą. Powtórz po obu stronach ciała, aby wydłużyć i wyprostować kręgosłup i kończyny.",
+    "url": "youtube.com",
+    "exerciseCategory": "STRETCHING"
+  },
+  {
+    "exerciseId" : 20,
+    "exercisePoints": 10,
+    "exerciseName": "Rozciąganie pleców i brzucha",
+    "description": "Połóż się na plecach, zegnij kolana, połóż stopy płasko i połóż ręce wzdłuż ciała. Powoli unieś pośladki i biodra do góry, opierając ciężar ciała na stopach i ramionach. W tej pozycji pracują wszystkie mięśnie, nawet te głębokie. Jeśli masz miękki materac, to ćwiczenie może być trudne. W takim przypadku możesz przenieść się na podłogę za pomocą maty do ćwiczeń.",
+    "url": "youtube.com",
+    "exerciseCategory": "STRETCHING"
+  },
+  {
+    "exerciseId" : 21,
     "exercisePoints": 5,
-    "exerciseName": "Stretching the neck",
-    "description": "Tilt your head slightly to the side or slightly forward and press your head gently with your hand. Repeat on the other side. This exercise should be performed with particular care, as the neck muscles are quite delicate.",
+    "exerciseName": "Rozciąganie szyi",
+    "description": "Przechyl głowę lekko na bok lub lekko do przodu i delikatnie naciśnij głowę dłonią. Powtórz po drugiej stronie. To ćwiczenie należy wykonywać ze szczególną ostrożnością, ponieważ mięśnie karku są dość delikatne.",
     "url": "youtube.com",
-    "category": "stretching"
+    "exerciseCategory": "STRETCHING"
   },
   {
+    "exerciseId" : 22,
     "exercisePoints": 10,
-    "exerciseName": "Shoulder stretching",
-    "description": "Extend your arm to the side, then bend at the elbow with your palm up (like a student hesitantly submitting to answer). Now rest your forearm against the door frame or bookshelf and, gently twisting at the hips, slowly stretch your shoulder. Do the same exercise with the other hand.",
+    "exerciseName": "Rozciąganie ramion",
+    "description": "Wyciągnij ramię na bok, a następnie zegnij w łokciu dłońmi do góry (jak uczeń z wahaniem poddający się odpowiedzi). Teraz oprzyj przedramię o framugę drzwi lub półkę z książkami i delikatnie wykręcając biodra, powoli rozciągnij ramię. Wykonaj to samo ćwiczenie drugą ręką.",
     "url": "youtube.com",
-    "category": "stretching"
+    "exerciseCategory": "STRETCHING"
   },
   {
+    "exerciseId" : 23,
     "exercisePoints": 5,
-    "exerciseName": "Forearm stretch",
-    "description": "Reach your arm out in front of you and let your hand drop loosely. With the other hand, press on the palm.",
+    "exerciseName": "Rozciąganie przedramienia",
+    "description": "Wyciągnij rękę przed siebie i opuść ją luźno. Drugą ręką naciśnij dłoń.",
     "url": "youtube.com",
-    "category": "stretching"
+    "exerciseCategory": "STRETCHING"
   },
   {
+    "exerciseId" : 24,
     "exercisePoints": 5,
-    "exerciseName": "Leg stretching",
-    "description": "To begin with, try to stand with your feet wider and bend to the right leg, forward and left. Sit with your feet together and try to bring your heels in as close as possible without lifting your knees. You can also put your straight leg on a chair and bend towards it.",
+    "exerciseName": "Rozciąganie nóg",
+    "description": "Na początek spróbuj stanąć z szerszymi stopami i zegnij prawą nogę, do przodu i do lewej. Usiądź ze złączonymi stopami i spróbuj zbliżyć pięty tak blisko, jak to możliwe, nie unosząc kolan. Możesz także położyć prostą nogę na krześle i pochylić się w jej kierunku.",
     "url": "youtube.com",
-    "category": "stretching"
+    "exerciseCategory": "STRETCHING"
   },
   {
+    "exerciseId" : 25,
     "exercisePoints": 10,
-    "exerciseName": "Plank",
-    "description": "The plank is a bodyweight exercise which involves holding the trunk part of your body in a straight line off the ground. The static exercise engages multiple muscle groups at the same time which makes it extremely effective at strengthening your core, whilst also working the shoulders, arms and glutes. ",
+    "exerciseName": "Deska",
+    "description": "Deska to ćwiczenie z masą własnego ciała, które polega na trzymaniu tułowia w linii prostej nad ziemią. Ćwiczenie statyczne angażuje jednocześnie wiele grup mięśniowych, co czyni je niezwykle skutecznym we wzmacnianiu rdzenia, jednocześnie angażując barki, ramiona i pośladki.",
     "url": "youtube.com",
-    "category": "coreExercises"
-  },
-  {
-    "exercisePoints": 5,
-    "exerciseName": "roz",
-    "description": "rozgrzewka najwazniejsza na swiecie",
-    "url": "youtube.com",
-    "category": "warmUp"
-  },
-  {
-    "exercisePoints": 5,
-    "exerciseName": "cwiczenie",
-    "description": "jakis opis",
-    "url": "youtube.com",
-    "category": "warmUp"
+    "exerciseCategory": "CORE_EXERCISES"
   }
 ]
