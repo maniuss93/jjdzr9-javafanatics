@@ -1,9 +1,11 @@
 package com.isa.jjdzr.exercise.service;
 
 import com.isa.jjdzr.exercise.model.Exercise;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,7 +22,6 @@ import java.util.List;
 
 @Service
 public class PdfExerciseGenerator {
-
     public ResponseEntity<byte[]> generatePdf(List<Exercise> exercises) throws Exception {
         Document document = new Document();
 
@@ -30,8 +31,9 @@ public class PdfExerciseGenerator {
         String id = formatter.format(new Date());
 
         document.open();
-        Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
-        Paragraph title = new Paragraph("This document PDF was created thanks to Jack's hard work :)", titleFont);
+        BaseFont baseFont = BaseFont.createFont("fonts/times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        Font titleFont = new Font(baseFont, 18, Font.ITALIC);
+        Paragraph title = new Paragraph("Ten właściwy dokument PDF został stworzony dzięki ciężkiej pracy Jacka :)", titleFont);
         title.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(title);
         Paragraph emptyLine = new Paragraph(" ");
@@ -43,26 +45,40 @@ public class PdfExerciseGenerator {
             }
         });
 
-        Font subtitleFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+
+        Font subtitleFont = new Font(baseFont, 12, Font.BOLD);
+        Font headerFont = new Font(baseFont, 12, Font.BOLD);
+        Font contentFont = new Font(baseFont, 12);
+
         for (Exercise exercise : exercises) {
             Paragraph exerciseName = new Paragraph(exercise.getExerciseName(), subtitleFont);
             exerciseName.setAlignment(Paragraph.ALIGN_LEFT);
             document.add(exerciseName);
 
-            Paragraph category = new Paragraph("Kategoria: " + exercise.getExerciseCategory().getDescription());
+            Chunk categoryHeader = new Chunk("Kategoria: ", headerFont);
+            Paragraph category = new Paragraph();
+            category.add(categoryHeader);
+            category.add(new Chunk(exercise.getExerciseCategory().getDescription(), contentFont));
             category.setAlignment(Paragraph.ALIGN_LEFT);
             document.add(category);
 
-            Paragraph description = new Paragraph("Opis: " + exercise.getDescription());
+            Chunk descriptionHeader = new Chunk("Opis: ", headerFont);
+            Paragraph description = new Paragraph();
+            description.add(descriptionHeader);
+            description.add(new Chunk(exercise.getDescription(), contentFont));
             description.setAlignment(Paragraph.ALIGN_LEFT);
             document.add(description);
 
-            Paragraph url = new Paragraph("URL: " + exercise.getUrl());
+            Chunk urlHeader = new Chunk("URL: ", headerFont);
+            Paragraph url = new Paragraph();
+            url.add(urlHeader);
+            url.add(new Chunk(exercise.getUrl(), contentFont));
             url.setAlignment(Paragraph.ALIGN_LEFT);
             document.add(url);
 
             document.add(emptyLine);
         }
+
 
         document.close();
 
@@ -72,6 +88,5 @@ public class PdfExerciseGenerator {
 
         return new ResponseEntity<>(outputStream.toByteArray(), headers, HttpStatus.OK);
     }
-
 }
 
