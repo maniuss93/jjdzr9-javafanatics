@@ -6,6 +6,7 @@ import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
 import com.isa.jjdzr.repository.ExerciseRepository;
 import com.isa.jjdzr.user.service.AdvancementLevelCategory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class ExerciseService {
     private final ExerciseRepository exerciseRepository;
 
     private final PdfExerciseGenerator pdfExerciseGenerator;
-    public ResponseEntity<byte[]> generatePdf(List<Optional<Exercise>> exercises) throws Exception {
+    public ResponseEntity<byte[]> generatePdf(List<Exercise> exercises) throws Exception {
         return pdfExerciseGenerator.generatePdf(exercises);
     }
     private final RandomExerciseGenerator randomExerciseGenerator;
@@ -68,12 +69,10 @@ public class ExerciseService {
         return randomExerciseGenerator.generateRandomExercises(randomExerciseGenerator
                 .convertAdvancementLevel(userAdvancementLevel));
     }
-    public List<Optional<Exercise>> getExercisesByIds(List<Long> exerciseIds) {
-        List<Optional<Exercise>> exercises = new ArrayList<>();
-        for (Long id : exerciseIds) {
-            Optional<Exercise> exercise = exerciseRepository.findById(id);
-            exercises.add(exercise);
-        }
-        return exercises;
+
+    public List<Exercise> getExercisesByIds(List<Long> ids) {
+        return exerciseRepository.findAllById(ids);
     }
+
+
 }

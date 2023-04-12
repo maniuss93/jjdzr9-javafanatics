@@ -1,5 +1,6 @@
 package com.isa.jjdzr.exercise.service;
 
+import com.isa.jjdzr.exercise.model.Exercise;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
@@ -15,12 +16,11 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PdfExerciseGenerator {
-
-    public ResponseEntity<byte[]> generatePdf() throws Exception {
-
+    public ResponseEntity<byte[]> generatePdf(List<Exercise> exercises) throws Exception {
         Document document = new Document();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -39,17 +39,17 @@ public class PdfExerciseGenerator {
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100);
 
-        PdfPCell header1 = new PdfPCell(new Paragraph("Column 1"));
-        PdfPCell header2 = new PdfPCell(new Paragraph("Column 2"));
-        PdfPCell header3 = new PdfPCell(new Paragraph("Column 3"));
+        PdfPCell header1 = new PdfPCell(new Paragraph("Exercise Name"));
+        PdfPCell header2 = new PdfPCell(new Paragraph("Category"));
+        PdfPCell header3 = new PdfPCell(new Paragraph("Description"));
         table.addCell(header1);
         table.addCell(header2);
         table.addCell(header3);
 
-        for (int i = 1; i <= 6; i++) {
-            PdfPCell cell1 = new PdfPCell(new Paragraph("Row " + i + ", Column 1"));
-            PdfPCell cell2 = new PdfPCell(new Paragraph("Row " + i + ", Column 2"));
-            PdfPCell cell3 = new PdfPCell(new Paragraph("Row " + i + ", Column 3"));
+        for (Exercise exercise : exercises) {
+            PdfPCell cell1 = new PdfPCell(new Paragraph(exercise.getExerciseName()));
+            PdfPCell cell2 = new PdfPCell(new Paragraph(exercise.getExerciseCategory().getDescription()));
+            PdfPCell cell3 = new PdfPCell(new Paragraph(exercise.getDescription()));
             table.addCell(cell1);
             table.addCell(cell2);
             table.addCell(cell3);
@@ -64,4 +64,5 @@ public class PdfExerciseGenerator {
 
         return new ResponseEntity<>(outputStream.toByteArray(), headers, HttpStatus.OK);
     }
+
 }
