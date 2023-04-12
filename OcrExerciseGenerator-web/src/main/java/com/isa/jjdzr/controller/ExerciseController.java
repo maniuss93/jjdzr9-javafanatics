@@ -57,7 +57,7 @@ public class ExerciseController {
         } else {
             model.addAttribute("exercise", exerciseService.addExercise(exercise));
         }
-        return "redirect:/userpanel/" + id;
+        return "redirect:/user/" + id + "/userpanel";
     }
 
     @ModelAttribute("availableExerciseCategory")
@@ -65,4 +65,3 @@ public class ExerciseController {
         return Arrays.asList(ExerciseCategory.values());
     }
 }
-

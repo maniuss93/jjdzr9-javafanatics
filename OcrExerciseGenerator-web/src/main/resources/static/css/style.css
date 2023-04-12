@@ -36,12 +36,17 @@ nav {
     justify-content: center;
     padding: 10px 0;
 }
+#navbar-other {
+    margin-top: -3px;
+    margin-bottom: -3px;
+}
 
 nav ul {
     list-style-type: none;
     padding: 0;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
-
 nav li {
     display: inline;
     margin-right: 10px;
@@ -78,13 +83,8 @@ button:hover {
     background-color: #555;
 }
 
-ul {
-    padding: 0;
-}
-
 li {
     list-style-type: none;
-    margin-bottom: 10px;
 }
 
 .centered {

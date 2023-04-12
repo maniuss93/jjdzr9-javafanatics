@@ -13,7 +13,7 @@
 </header>
 <nav>
     <ul>
-        <li><a th:href="@{/userpanel/{id}(id=${id})}" th:text="'Powrót'"></a></li>
+        <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a></li>
     </ul>
 </nav>
 <div class="exercise" th:each="exercise : ${exercises}">

@@ -14,18 +14,36 @@
 </header>
 <nav>
     <ul>
-        <li><a th:href="@{/userpanel/{id}(id=${id})}" th:text="'Powrót'"></a></li>
+        <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a></li>
     </ul>
 </nav>
 <div id="space"></div>
-<form method="get" th:object="${user}" th:action="@{/{id}/profile(id=${id})}">
-    <div class="card-body text-center">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-             class="rounded-circle img-fluid" style="width: 150px;">
-        <h5 class="my-3" th:text="*{userName}"></h5>
-        <p class="text-muted mb-1" th:text="*{userEmail}"></p>
-        <p class="text-muted mb-1" th:text="*{userAdvancementLevel}"> </p>
-    </div>
-</form>
+<div class="form-container">
+    <form method="post" th:action="@{/user/{id}/edit(id=${id})}" th:object="${user}">
+        <input type="hidden" name="_method" value="put"/>
+        <h2>Zmień dane</h2>
+        <div class="form-group">
+            <label for="input-userName">Nazwa użytkownika</label>
+            <input type="text" id="input-userName" name="userName" th:field="*{userName}" th:value="${user.userName}" required>
+        </div>
+        <div id="error" th:text="${usernameAlreadyTaken}"></div>
+        <div class="form-group">
+            <label for="input-email">Adres email</label>
+            <input type="email" id="input-email" name="email" th:field="*{userEmail}" th:value="${user.userEmail}" PATTERN="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
+        </div>
+        <div id="error2" th:text="${userEmailAlreadyTaken}"></div>
+        <div class="form-group">
+            <label for="input-userAdvancementLevel">Twój poziom zaawansowania: </label>
+            <select id="input-userAdvancementLevel" name="userAdvancementLevel" th:value="${user.userAdvancementLevel}" th:field="*{userAdvancementLevel}" required>
+                <option th:each="level: ${availableUserAdvancementLevel}"
+                        th:text="${level.description}"
+                        th:value="${level.name()}"/>
+            </select>
+        </div>
+        <input type="number" hidden="true" th:value="${user.userId}" th:field="*{userId}">
+        <input type="number" hidden="true" th:value="${user.userPassword}" th:field="*{userPassword}">
+        <button type="submit" class="btn btn-primary">Zapisz</button>
+    </form>
+</div>
 </body>
 </html>

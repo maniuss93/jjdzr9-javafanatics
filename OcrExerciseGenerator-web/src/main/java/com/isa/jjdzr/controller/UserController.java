@@ -59,20 +59,26 @@ public class UserController {
             return "user-login-form";
         }
         Long id = userByName.get().getUserId();
-        return "redirect:/userpanel/" + id;
+        return "redirect:/user/" + id + "/userpanel";
+    }
+    @GetMapping("/{id}/edit")
+    public String getUserProfileEditForm(@PathVariable Long id, Model model){
+        User user = userService.findByUserId(id);
+        model.addAttribute("user", user);
+        return "user-profile";
     }
 
-//    @GetMapping("/{id}/edit")
-//    public String userProfileEdit(Model model){
-//        model.addAttribute("user", new User());
-//        return "user-profile";
-//    }
+    @PutMapping(value = "/{id}/edit")
+    public String userProfileEdit(@ModelAttribute ("user") User user, @PathVariable Long id) {
+            userService.editUser(user);
+            return "redirect:/user/" + id + "/userpanel";
+    }
 
-    @GetMapping("/{id}/profile")
+    @GetMapping("/{id}/userpanel")
     public String showUserProfile(@PathVariable Long id, Model model){
        User user = userService.findByUserId(id);
        model.addAttribute("user", user);
-       return "user-profile";
+       return "user-panel";
     }
 
     @ModelAttribute("availableUserAdvancementLevel")
