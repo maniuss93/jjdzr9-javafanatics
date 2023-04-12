@@ -84,4 +84,6 @@ public class Exercise {
     public Long getExerciseId() {
         return exerciseId;
     }
+
+
 }

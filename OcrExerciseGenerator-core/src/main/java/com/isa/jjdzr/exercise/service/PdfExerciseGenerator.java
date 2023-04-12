@@ -4,8 +4,6 @@ import com.isa.jjdzr.exercise.model.Exercise;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,11 +13,14 @@ import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class PdfExerciseGenerator {
+
     public ResponseEntity<byte[]> generatePdf(List<Exercise> exercises) throws Exception {
         Document document = new Document();
 
@@ -35,27 +36,34 @@ public class PdfExerciseGenerator {
         document.add(title);
         Paragraph emptyLine = new Paragraph(" ");
         document.add(emptyLine);
+        Collections.sort(exercises, new Comparator<Exercise>() {
+            @Override
+            public int compare(Exercise o1, Exercise o2) {
+                return o1.getExerciseCategory().compareTo(o2.getExerciseCategory());
+            }
+        });
 
-        PdfPTable table = new PdfPTable(3);
-        table.setWidthPercentage(100);
-
-        PdfPCell header1 = new PdfPCell(new Paragraph("Exercise Name"));
-        PdfPCell header2 = new PdfPCell(new Paragraph("Category"));
-        PdfPCell header3 = new PdfPCell(new Paragraph("Description"));
-        table.addCell(header1);
-        table.addCell(header2);
-        table.addCell(header3);
-
+        Font subtitleFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
         for (Exercise exercise : exercises) {
-            PdfPCell cell1 = new PdfPCell(new Paragraph(exercise.getExerciseName()));
-            PdfPCell cell2 = new PdfPCell(new Paragraph(exercise.getExerciseCategory().getDescription()));
-            PdfPCell cell3 = new PdfPCell(new Paragraph(exercise.getDescription()));
-            table.addCell(cell1);
-            table.addCell(cell2);
-            table.addCell(cell3);
+            Paragraph exerciseName = new Paragraph(exercise.getExerciseName(), subtitleFont);
+            exerciseName.setAlignment(Paragraph.ALIGN_LEFT);
+            document.add(exerciseName);
+
+            Paragraph category = new Paragraph("Kategoria: " + exercise.getExerciseCategory().getDescription());
+            category.setAlignment(Paragraph.ALIGN_LEFT);
+            document.add(category);
+
+            Paragraph description = new Paragraph("Opis: " + exercise.getDescription());
+            description.setAlignment(Paragraph.ALIGN_LEFT);
+            document.add(description);
+
+            Paragraph url = new Paragraph("URL: " + exercise.getUrl());
+            url.setAlignment(Paragraph.ALIGN_LEFT);
+            document.add(url);
+
+            document.add(emptyLine);
         }
 
-        document.add(table);
         document.close();
 
         HttpHeaders headers = new HttpHeaders();
@@ -66,3 +74,4 @@ public class PdfExerciseGenerator {
     }
 
 }
+
