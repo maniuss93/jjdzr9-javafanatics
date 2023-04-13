@@ -26,6 +26,10 @@ public class HomeController {
     public String getInfo() {
         return "info";
     }
+    @GetMapping("/demo")
+    public String getDemo() {
+        return "demo-exercises";
+    }
 
     // http://localhost:8080/userpanel/{id}
     @GetMapping("/userpanel/{id}")
