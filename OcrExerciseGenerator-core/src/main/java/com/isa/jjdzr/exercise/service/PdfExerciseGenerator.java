@@ -33,7 +33,7 @@ public class PdfExerciseGenerator {
         document.open();
         BaseFont baseFont = BaseFont.createFont("fonts/times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         Font titleFont = new Font(baseFont, 18, Font.ITALIC);
-        Paragraph title = new Paragraph("Ten właściwy dokument PDF został stworzony dzięki ciężkiej pracy Jacka :)", titleFont);
+        Paragraph title = new Paragraph("Ten dokument PDF został stworzony dzięki ciężkiej pracy Jacka :)", titleFont);
         title.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(title);
         Paragraph emptyLine = new Paragraph(" ");
