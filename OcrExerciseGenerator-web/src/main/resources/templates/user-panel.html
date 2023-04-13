@@ -18,8 +18,8 @@
         <li><a th:href="@{/{id}/exercise/add(id=${id})}" th:text="'Dodaj ćwiczenie'"></a></li>
         <li style="display: inline-block" id="block"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edytuj profil</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" th:href="@{/user/{id}/edit(id=${id})}">Zmień dane</a>
-                <a class="dropdown-item" href="#">Zmień hasło</a>
+                <a class="dropdown-item" th:href="@{/user/{id}/editdetails(id=${id})}">Zmień dane</a>
+                <a class="dropdown-item" th:href="@{/user/{id}/editpassword(id=${id})}">Zmień hasło</a>
                 <a class="dropdown-item" href="#">Usuń profil</a>
             </div>
         </li>

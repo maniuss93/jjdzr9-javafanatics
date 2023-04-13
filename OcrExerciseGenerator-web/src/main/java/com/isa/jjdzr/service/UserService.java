@@ -25,8 +25,8 @@ public class UserService {
             userFromDb.setUserName(user.getUserName());
             userFromDb.setUserEmail(user.getUserEmail());
             userFromDb.setUserPassword(user.getUserPassword());
-            userFromDb.setUserId(user.getUserId());
             userFromDb.setUserAdvancementLevel(user.getUserAdvancementLevel());
+            userRepository.save(userFromDb);
             return userFromDb;
         }
         return null;

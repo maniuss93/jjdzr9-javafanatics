@@ -3,6 +3,7 @@ package com.isa.jjdzr.controller;
 import com.isa.jjdzr.service.UserService;
 import com.isa.jjdzr.user.model.User;
 import com.isa.jjdzr.user.service.AdvancementLevelCategory;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -61,24 +62,42 @@ public class UserController {
         Long id = userByName.get().getUserId();
         return "redirect:/user/" + id + "/userpanel";
     }
-    @GetMapping("/{id}/edit")
-    public String getUserProfileEditForm(@PathVariable Long id, Model model){
+
+    @GetMapping("/{id}/editdetails")
+    public String getUserProfileEditForm(@PathVariable Long id, Model model) {
         User user = userService.findByUserId(id);
         model.addAttribute("user", user);
-        return "user-profile";
+        return "user-edit-details";
+    }
+    @GetMapping("/{id}/editpassword")
+    public String getUserPasswordEditForm(@PathVariable Long id, Model model){
+        User user = userService.findByUserId(id);
+        model.addAttribute("user", user);
+        return "user-edit-password";
     }
 
-    @PutMapping(value = "/{id}/edit")
-    public String userProfileEdit(@ModelAttribute ("user") User user, @PathVariable Long id) {
+    @PostMapping(value = "/{id}/edit")
+    public String userProfileEdit(@Valid @ModelAttribute("user") User user, @PathVariable Long id, Model model) {
+        User byUserId = userService.findByUserId(id);
+        List <User> allUsers = userService.findAllUsers();
+        allUsers.remove(byUserId);
+        if (allUsers.stream().map(User::getUserName).toList().contains(user.getUserName())) {
+            model.addAttribute("usernameAlreadyTaken", "Ta nazwa użytkownika jest zajęta");
+            return "user-edit-details";
+        } else if (allUsers.stream().map(User::getUserEmail).toList().contains(user.getUserEmail())) {
+            model.addAttribute("userEmailAlreadyTaken", "Ten address email jest zajęty");
+            return "user-edit-details";
+        } else {
             userService.editUser(user);
             return "redirect:/user/" + id + "/userpanel";
+        }
     }
 
     @GetMapping("/{id}/userpanel")
-    public String showUserProfile(@PathVariable Long id, Model model){
-       User user = userService.findByUserId(id);
-       model.addAttribute("user", user);
-       return "user-panel";
+    public String showUserProfile(@PathVariable Long id, Model model) {
+        User user = userService.findByUserId(id);
+        model.addAttribute("user", user);
+        return "user-panel";
     }
 
     @ModelAttribute("availableUserAdvancementLevel")
