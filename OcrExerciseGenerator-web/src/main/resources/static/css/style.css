@@ -36,6 +36,7 @@ nav {
     justify-content: center;
     padding: 10px 0;
 }
+
 #navbar-other {
     margin-top: -3px;
     margin-bottom: -3px;
@@ -47,6 +48,7 @@ nav ul {
     margin-bottom: 5px;
     margin-top: 5px;
 }
+
 nav li {
     display: inline;
     margin-right: 10px;
@@ -123,10 +125,21 @@ img.team-photo {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-#error, #error2 {
+
+#error, #error2, #error3, #delete {
     color: red;
 }
-#space{
+
+#space {
     margin-top: 50px;
+}
+
+#confirmdelete {
+    padding: 20px;
+    width: 550px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 

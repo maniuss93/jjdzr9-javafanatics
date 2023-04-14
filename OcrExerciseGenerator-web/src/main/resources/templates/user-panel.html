@@ -20,7 +20,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" th:href="@{/user/{id}/editdetails(id=${id})}">Zmień dane</a>
                 <a class="dropdown-item" th:href="@{/user/{id}/editpassword(id=${id})}">Zmień hasło</a>
-                <a class="dropdown-item" href="#">Usuń profil</a>
+                <a class="dropdown-item" id="delete" th:href="@{/user/{id}/confirmdelete(id=${id})}">Usuń profil</a>
             </div>
         </li>
         <li><a href="/">Wyloguj</a></li>
