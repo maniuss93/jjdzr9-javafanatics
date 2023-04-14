@@ -20,7 +20,7 @@
 <div class="form-container">
     <form method="post" th:action="@{/{id}/exercise/add(id=${id})}" th:object="${exercise}">
         <h3>Dodawanie ćwiczenia</h3>
-        <div id="error-message" th:text="${exerciseNameAlreadyTaken}"></div>
+        <div id="error" th:text="${exerciseNameAlreadyTaken}"></div>
         <div class="form-group">
             <label for="input-exerciseName">Nazwa ćwiczenia</label>
             <input type="text" id="input-exerciseName" name="exerciseName" th:field="*{exerciseName}" required>
@@ -29,7 +29,7 @@
             <label for="input-description">Opis</label>
             <input type="text" id="input-description" name="description" th:field="*{description}" required>
         </div>
-        <div id="error-message2" th:text="${addressUrlAlreadyTaken}"></div>
+        <div id="error2" th:text="${addressUrlAlreadyTaken}"></div>
         <div class="form-group">
             <label for="input-url">Link do filmu</label>
             <input type="text" id="input-url" name="exerciseName" th:field="*{url}">

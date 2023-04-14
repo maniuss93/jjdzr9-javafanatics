@@ -138,11 +138,6 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/{id}/confirmdelete")
-    public String confirmDeleteUser(@PathVariable Long id){
-        return "user-confirm-delete";
-    }
-
     @ModelAttribute("availableUserAdvancementLevel")
     List<AdvancementLevelCategory> getAdvancementLevel() {
         return Arrays.asList(AdvancementLevelCategory.values());
