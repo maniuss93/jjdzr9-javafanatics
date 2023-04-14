@@ -21,9 +21,21 @@ public class HomeController {
         return "info";
     }
 
+    // http://localhost:8080/demo
+    @GetMapping("/demo")
+    public String getDemo() {
+        return "demo-exercises";
+    }
+
     // http://localhost:8080/userpanel/{id}
     @GetMapping("/userpanel/{id}")
     public String getUserPanel(@PathVariable Long id) {
         return "user-panel";
     }
+
+    @GetMapping("/user/{id}/confirmdelete")
+    public String confirmDeleteUser(@PathVariable Long id) {
+        return "user-confirm-delete";
+    }
+
 }

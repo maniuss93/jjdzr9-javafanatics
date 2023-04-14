@@ -6,7 +6,6 @@ import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.service.ExerciseService;
 import com.isa.jjdzr.user.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +45,6 @@ public class ExerciseController {
         List<Exercise> exercises = exerciseService.getExercisesByIds(exerciseIds);
         return exerciseService.generatePdf(exercises);
     }
-
 
     @GetMapping("/{id}/exercise/add")
     public String getAddExerciseForm(@PathVariable Long id, Model model) {
