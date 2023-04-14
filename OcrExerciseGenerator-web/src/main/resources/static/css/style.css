@@ -4,6 +4,7 @@ body {
     color: #333;
     line-height: 1.6;
 }
+
 header {
     background-size: cover;
     background-position: center;
@@ -11,14 +12,16 @@ header {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 20px; 
+    padding-top: 20px;
 }
+
 header h1 {
     color: #fff;
     font-size: 36px;
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
 header h2 {
     color: #fff;
     justify-content: center;
@@ -26,42 +29,48 @@ header h2 {
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
 nav {
     background-color: #333;
     display: flex;
     justify-content: center;
     padding: 10px 0;
 }
+
+#navbar-other {
+    margin-top: -3px;
+    margin-bottom: -3px;
+}
+
 nav ul {
     list-style-type: none;
     padding: 0;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
+
 nav li {
     display: inline;
     margin-right: 10px;
 }
+
 nav a {
     text-decoration: none;
     color: #fff;
     font-weight: 700;
     padding: 5px;
 }
+
 nav a:hover {
     background-color: #555;
     border-radius: 5px;
 }
-form {
-    width: 350px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+
 label, input {
     display: block;
     margin-bottom: 10px;
 }
+
 button {
     background-color: #333;
     color: #fff;
@@ -71,21 +80,19 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+
 button:hover {
     background-color: #555;
-}
-ul {
-    padding: 0;
 }
 
 li {
     list-style-type: none;
-    margin-bottom: 10px;
 }
 
 .centered {
     text-align: center;
 }
+
 img.team-photo {
     display: block;
     max-width: 100%;
@@ -93,7 +100,46 @@ img.team-photo {
     margin: 20px auto;
     border-radius: 5px;
 }
+
 .centered-text {
     text-align: left;
     margin: 50px;
 }
+
+.title {
+    text-align: left;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.exercise {
+    padding: 30px;
+    margin-left: 30px;
+}
+
+.form-container {
+    padding: 20px;
+    width: 350px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#error, #error2, #error3, #delete {
+    color: red;
+}
+
+#space {
+    margin-top: 50px;
+}
+
+#confirmdelete {
+    padding: 20px;
+    width: 550px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+

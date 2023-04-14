@@ -13,9 +13,10 @@
 </header>
 <nav>
     <ul>
-        <li><a th:href="@{/userpanel/{id}(id=${id})}" th:text="'Powrót'"></a></li>
+        <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a></li>
     </ul>
 </nav>
+<div id="space"></div>
 <div class="form-container">
     <form method="post" th:action="@{/{id}/exercise/add(id=${id})}" th:object="${exercise}">
         <h3>Dodawanie ćwiczenia</h3>
@@ -31,7 +32,7 @@
         <div id="error-message2" th:text="${addressUrlAlreadyTaken}"></div>
         <div class="form-group">
             <label for="input-url">Link do filmu</label>
-            <input type="text" id="input-url" name="exerciseName" th:field="*{url}" required>
+            <input type="text" id="input-url" name="exerciseName" th:field="*{url}">
         </div>
         <div class="form-group">
             <label for="input-exerciseCategory">Kategoria: </label>
@@ -42,11 +43,11 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="input-exercisePoints">Wartość punktowa: </label>
+            <label for="input-exercisePoints">Poziom trudności: </label>
             <select id="input-exercisePoints" name="exercisePoints" th:field="*{exercisePoints}" required>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
+                <option value="5">Łatwy</option>
+                <option value="10">Umiarkowany</option>
+                <option value="15">Trudny</option>
             </select>
         </div>
         <input type="number" hidden="true" th:field="*{exerciseId}">

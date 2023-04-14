@@ -13,15 +13,14 @@
 </header>
 <nav>
     <ul>
-        <li><a th:href="@{/userpanel/{id}(id=${id})}" th:text="'Powrót'"></a></li>
+        <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a></li>
     </ul>
 </nav>
-<div th:each="exercise : ${exercises}">
-    <h3 th:text="${exercise.exerciseName}"></h3>
+<div class="exercise" th:each="exercise : ${exercises}">
+    <h3 class="title" th:text="${exercise.exerciseName}"></h3>
     <p><strong>Kategoria:</strong> <span th:text="${exercise.exerciseCategory.getDescription()}"></span></p>
     <p><strong>Opis:</strong> <span th:text="${exercise.description}"></span></p>
     <p><strong>Adres strony:</strong> <a th:href="${exercise.url}" th:text="${exercise.url}"></a></p>
 </div>
-</body>
 </body>
 </html>
