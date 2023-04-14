@@ -23,5 +23,11 @@
     <p><strong>Opis:</strong> <span th:text="${exercise.description}"></span></p>
     <p><strong>Adres strony:</strong> <a th:href="${exercise.url}" th:text="${exercise.url}"></a></p>
 </div>
+
+<form method="get" th:action="@{/generate-pdf}">
+    <input type="hidden" th:each="exercise : ${randomExercises}"
+           th:name="exerciseIds" th:value="${exercise.exerciseId}">
+    <button type="submit" class="btn btn-primary">Pobierz zestaw ćwiczeń w formacie PDF</button>
+</form>
 </body>
 </html>
