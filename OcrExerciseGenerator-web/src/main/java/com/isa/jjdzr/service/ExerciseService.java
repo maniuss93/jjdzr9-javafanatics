@@ -56,6 +56,7 @@ public class ExerciseService {
             exerciseFromDb.setDescription(exercise.getDescription());
             exerciseFromDb.setUrl(exercise.getUrl());
             exerciseFromDb.setExerciseId(exercise.getExerciseId());
+            exerciseRepository.save(exerciseFromDb);
             return exerciseFromDb;
         }
         return null;
