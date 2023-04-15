@@ -21,6 +21,12 @@ public class HomeController {
         return "info";
     }
 
+    // http://localhost:8080/info
+    @GetMapping("/calendar")
+    public String getCalendar() {
+        return "calendar";
+    }
+
     // http://localhost:8080/demo
     @GetMapping("/demo")
     public String getDemo() {
