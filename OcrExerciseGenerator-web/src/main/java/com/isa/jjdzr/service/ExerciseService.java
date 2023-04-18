@@ -1,16 +1,15 @@
 package com.isa.jjdzr.service;
 
+import com.isa.jjdzr.dto.ExerciseDto;
 import com.isa.jjdzr.exercise.model.Exercise;
 import com.isa.jjdzr.exercise.service.PdfExerciseGenerator;
 import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
 import com.isa.jjdzr.repository.ExerciseRepository;
 import com.isa.jjdzr.user.service.AdvancementLevelCategory;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,45 +18,45 @@ import java.util.Optional;
 public class ExerciseService {
 
     private final ExerciseRepository exerciseRepository;
-
+    private final ExerciseMapper exerciseMapper;
     private final PdfExerciseGenerator pdfExerciseGenerator;
+    private final RandomExerciseGenerator randomExerciseGenerator;
+
+
     public ResponseEntity<byte[]> generatePdf(List<Exercise> exercises) throws Exception {
         return pdfExerciseGenerator.generatePdf(exercises);
     }
-    private final RandomExerciseGenerator randomExerciseGenerator;
 
-    public Exercise addExercise(Exercise exercise) {
-        return exerciseRepository.save(exercise);
+    public ExerciseDto addExercise(ExerciseDto exerciseDto) {
+        Exercise exercise = exerciseMapper.exerciseDtoToEntity(exerciseDto);
+        Exercise saved = exerciseRepository.save(exercise);
+        return exerciseMapper.exerciseEntityToDto(saved);
     }
 
-    public List<Exercise> findAllExercises() {
-        return exerciseRepository.findAll();
+    public List<ExerciseDto> findAllExercises() {
+        List<Exercise> findAll = exerciseRepository.findAll();
+        return exerciseMapper.allExercisesToDto(findAll);
     }
 
     public Optional<Exercise> findExerciseByName(String exerciseName) {
         return exerciseRepository.findByExerciseName(exerciseName);
     }
 
-    public boolean existsByExerciseName(String exerciseName){
+    public boolean existsByExerciseName(String exerciseName) {
         return exerciseRepository.existsByExerciseName(exerciseName);
     }
 
-    public boolean existsByUrl(String url){
+    public boolean existsByUrl(String url) {
         return exerciseRepository.existsByUrl(url);
     }
 
-    public Exercise editExercise(Exercise exercise) {
+    public ExerciseDto editExercise(ExerciseDto exercise) {
         Optional<Exercise> exerciseById = exerciseRepository.findById(exercise.getExerciseId());
         if (exerciseById.isPresent()) {
             Exercise exerciseFromDb = exerciseById.get();
-            exerciseFromDb.setExerciseName(exercise.getExerciseName());
-            exerciseFromDb.setExerciseCategory(exercise.getExerciseCategory());
-            exerciseFromDb.setExercisePoints(exercise.getExercisePoints());
-            exerciseFromDb.setDescription(exercise.getDescription());
-            exerciseFromDb.setUrl(exercise.getUrl());
-            exerciseFromDb.setExerciseId(exercise.getExerciseId());
-            exerciseRepository.save(exerciseFromDb);
-            return exerciseFromDb;
+            Exercise updated = exerciseMapper.updateEntity(exerciseFromDb, exercise);
+            exerciseRepository.save(updated);
+            return exerciseMapper.exerciseEntityToDto(updated);
         }
         return null;
     }
@@ -66,7 +65,8 @@ public class ExerciseService {
         Exercise exercise = exerciseRepository.findByExerciseId(id);
         exerciseRepository.delete(exercise);
     }
-    public List<Exercise> generateRandomExercises(AdvancementLevelCategory userAdvancementLevel){
+
+    public List<Exercise> generateRandomExercises(AdvancementLevelCategory userAdvancementLevel) {
         return randomExerciseGenerator.generateRandomExercises(randomExerciseGenerator
                 .convertAdvancementLevel(userAdvancementLevel));
     }

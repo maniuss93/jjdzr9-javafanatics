@@ -1,5 +1,6 @@
 package com.isa.jjdzr.rest;
 
+import com.isa.jjdzr.dto.UserDto;
 import com.isa.jjdzr.service.UserService;
 import com.isa.jjdzr.user.model.User;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class UserRestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity createUser(@RequestBody User user) {
+    public ResponseEntity createUser(@RequestBody UserDto user) {
         Optional<User> userFromDb = userService.findByUserName(user.getUserName());
         if (userFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -29,21 +30,21 @@ public class UserRestController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<User> getAll() {
+    public List<UserDto> getAll() {
         return userService.findAllUsers();
     }
 
     // http://localhost:8080/api/user/all
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public User getById(@PathVariable Long id) {
+    public UserDto getById(@PathVariable Long id) {
         return userService.findByUserId(id);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity editUser(@RequestBody User user) {
-        User updated = userService.editUser(user);
+    public ResponseEntity editUser(@RequestBody UserDto user) {
+        UserDto updated = userService.editUser(user);
 
         return updated != null ?
                 ResponseEntity
