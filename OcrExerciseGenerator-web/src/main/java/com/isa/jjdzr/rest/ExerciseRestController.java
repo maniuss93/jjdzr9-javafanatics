@@ -1,5 +1,6 @@
 package com.isa.jjdzr.rest;
 
+import com.isa.jjdzr.dto.ExerciseDto;
 import com.isa.jjdzr.exercise.model.Exercise;
 import com.isa.jjdzr.service.ExerciseService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class ExerciseRestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity addExercise(@RequestBody Exercise exercise) {
+    public ResponseEntity addExercise(@RequestBody ExerciseDto exercise) {
         Optional<Exercise> exerciseFromDb = exerciseService.
                 findExerciseByName(exercise.getExerciseName());
         if (exerciseFromDb.isPresent()) {
@@ -30,14 +31,14 @@ public class ExerciseRestController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Exercise> getAllExercises() {
+    public List<ExerciseDto> getAllExercises() {
         return exerciseService.findAllExercises();
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity editExercise(@RequestBody Exercise exercise) {
-        Exercise updated = exerciseService.editExercise(exercise);
+    public ResponseEntity editExercise(@RequestBody ExerciseDto exercise) {
+        ExerciseDto updated = exerciseService.editExercise(exercise);
         return updated != null ?
                 ResponseEntity
                         .status(HttpStatus.CREATED)

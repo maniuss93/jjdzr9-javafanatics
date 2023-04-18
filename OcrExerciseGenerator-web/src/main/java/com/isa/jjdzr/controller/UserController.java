@@ -1,5 +1,6 @@
 package com.isa.jjdzr.controller;
 
+import com.isa.jjdzr.dto.UserDto;
 import com.isa.jjdzr.service.UserService;
 import com.isa.jjdzr.user.model.User;
 import com.isa.jjdzr.user.service.AdvancementLevelCategory;
@@ -34,7 +35,7 @@ public class UserController {
 
     //localhost:8080/user/new
     @PostMapping(value = "/new")
-    public String createUser(@ModelAttribute("user") User user,
+    public String createUser(@ModelAttribute("user") UserDto user,
                              @RequestParam("userPassword") String userPassword,
                              @RequestParam("confirmPassword") String confirmPassword,
                              Model model) {
@@ -62,7 +63,7 @@ public class UserController {
 
     //localhost:8080/user/login
     @PostMapping(value = "/login")
-    public String userLogin(@ModelAttribute("user") User user, Model model) {
+    public String userLogin(@ModelAttribute("user") UserDto user, Model model) {
         Optional<User> userByName = userService.findByUserName(user.getUserName());
         if (userByName.isEmpty() || !(userByName.get().getUserPassword()).equals(user.getUserPassword())) {
             model.addAttribute("incorrectDetails", "Dane nie są poprawne");
@@ -74,29 +75,29 @@ public class UserController {
 
     @GetMapping("/{id}/userpanel")
     public String showUserProfile(@PathVariable Long id, Model model) {
-        User user = userService.findByUserId(id);
+        UserDto user = userService.findByUserId(id);
         model.addAttribute("user", user);
         return "user-panel";
     }
 
     @GetMapping("/{id}/editdetails")
     public String getUserProfileEditForm(@PathVariable Long id, Model model) {
-        User user = userService.findByUserId(id);
+        UserDto user = userService.findByUserId(id);
         model.addAttribute("user", user);
         return userEditDetails;
     }
 
     @PostMapping(value = "/{id}/edit")
-    public String userProfileEdit(@Valid @ModelAttribute("user") User user,
+    public String userProfileEdit(@Valid @ModelAttribute("user") UserDto user,
                                   @PathVariable Long id,
                                   Model model) {
-        User userFromDb = userService.findByUserId(id);
-        List<User> allUsers = userService.findAllUsers();
+        UserDto userFromDb = userService.findByUserId(id);
+        List<UserDto> allUsers = userService.findAllUsers();
         allUsers.remove(userFromDb);
-        if (allUsers.stream().map(User::getUserName).toList().contains(user.getUserName())) {
+        if (allUsers.stream().map(UserDto::getUserName).toList().contains(user.getUserName())) {
             model.addAttribute("usernameAlreadyTaken", "Ta nazwa użytkownika jest zajęta");
             return userEditDetails;
-        } else if (allUsers.stream().map(User::getUserEmail).toList().contains(user.getUserEmail())) {
+        } else if (allUsers.stream().map(UserDto::getUserEmail).toList().contains(user.getUserEmail())) {
             model.addAttribute("userEmailAlreadyTaken", "Ten address email jest zajęty");
             return userEditDetails;
         } else {
@@ -107,19 +108,19 @@ public class UserController {
 
     @GetMapping("/{id}/editpassword")
     public String getUserPasswordEditForm(@PathVariable Long id, Model model) {
-        User user = userService.findByUserId(id);
+        UserDto user = userService.findByUserId(id);
         model.addAttribute("user", user);
         return userEditPassword;
     }
 
     @PostMapping(value = "/{id}/editpassword")
-    public String userPasswordEdit(@Valid @ModelAttribute("user") User user,
+    public String userPasswordEdit(@Valid @ModelAttribute("user") UserDto user,
                                    @PathVariable Long id,
                                    @RequestParam("userCurrentPassword") String userCurrentPassword,
                                    @RequestParam("userPassword") String userPassword,
                                    @RequestParam("confirmPassword") String confirmPassword,
                                    Model model) {
-        User userFromDb = userService.findByUserId(id);
+        UserDto userFromDb = userService.findByUserId(id);
         if (!userCurrentPassword.equals(userFromDb.getUserPassword())) {
             model.addAttribute("wrongPassword", "Twoje aktualne hasło jest nie poprawne");
             return userEditPassword;

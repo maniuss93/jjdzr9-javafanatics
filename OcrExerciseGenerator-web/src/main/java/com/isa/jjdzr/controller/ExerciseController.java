@@ -1,5 +1,6 @@
 package com.isa.jjdzr.controller;
 
+import com.isa.jjdzr.dto.ExerciseDto;
 import com.isa.jjdzr.exercise.model.Exercise;
 import com.isa.jjdzr.exercise.service.ExerciseCategory;
 import com.isa.jjdzr.repository.UserRepository;
@@ -25,7 +26,7 @@ public class ExerciseController {
     //localhost:8080/exercises/all
     @GetMapping("/{id}/exercises/all")
     public String getAllExercises(@PathVariable Long id, Model model) {
-        List<Exercise> exercisesList = exerciseService.findAllExercises();
+        List<ExerciseDto> exercisesList = exerciseService.findAllExercises();
         model.addAttribute("exercises", exercisesList);
         return "all-exercises";
     }
@@ -53,7 +54,7 @@ public class ExerciseController {
     }
 
     @PostMapping(value = "/{id}/exercise/add")
-    public String createExercise(@PathVariable Long id, @ModelAttribute("exercise") Exercise exercise, Model model) {
+    public String createExercise(@PathVariable Long id, @ModelAttribute("exercise") ExerciseDto exercise, Model model) {
         if (exerciseService.existsByExerciseName(exercise.getExerciseName())) {
             model.addAttribute("exerciseNameAlreadyTaken", "Ćwiczenie z taką nazwą już istnieje");
             return "add-exercise-form";
