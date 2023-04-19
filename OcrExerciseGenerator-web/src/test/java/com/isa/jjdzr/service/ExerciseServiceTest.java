@@ -31,6 +31,9 @@ class ExerciseServiceTest {
 
     @Test
     void testGeneratePdf() throws Exception{
+        new Exercise("Exercise 1", 50).setExerciseId(22L);
+        new Exercise("Exercise 1", 100).setExerciseId(23L);
+        new Exercise("Exercise 1", 100).setExerciseId(2L);
 
         List<Exercise> mockExercises = new ArrayList<>();
         List<Long> mockExercisesIds = new ArrayList<>();
