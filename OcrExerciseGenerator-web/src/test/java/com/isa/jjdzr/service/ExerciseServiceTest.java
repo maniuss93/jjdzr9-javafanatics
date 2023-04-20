@@ -5,7 +5,6 @@ import com.isa.jjdzr.exercise.model.Exercise;
 import com.isa.jjdzr.exercise.service.PdfExerciseGenerator;
 import com.isa.jjdzr.repository.ExerciseRepository;
 import com.isa.jjdzr.repository.UserRepository;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -40,28 +39,20 @@ class ExerciseServiceTest {
 
     @Test
     void testGeneratePdf() throws Exception {
-        Exercise exercise1 = new Exercise("Exercise 1", 50);
-        Exercise exercise2 = new Exercise("Exercise 2", 100);
-        Exercise exercise3 = new Exercise("Exercise 3", 150);
-        exercise1.setExerciseId(1L);
-        exercise2.setExerciseId(2L);
-        exercise3.setExerciseId(3L);
+        List<Exercise> mockExercises = Arrays.asList(new Exercise("Exercise 1", 50), new Exercise("Exercise 2", 100), new Exercise("Exercise 3", 150));
 
-        List<Exercise> mockExercises = Arrays.asList(exercise1, exercise2, exercise3);
+        mockExercises.forEach(exercise -> exercise.setExerciseId((long) mockExercises.indexOf(exercise) + 1));
+
         List<Long> mockExercisesIds = Arrays.asList(1L, 2L, 3L);
-
 
         byte[] mockPdf = new byte[]{0x25, 0x50, 0x44, 0x46};
         when(pdfExerciseGenerator.generatePdf(mockExercises)).thenReturn(ResponseEntity.ok().body(mockPdf));
-        Mockito.when(exerciseRepository.findAllById(Arrays.asList(1L, 2L, 3L))).thenReturn(Arrays.asList(exercise1, exercise2, exercise3));
+        Mockito.when(exerciseRepository.findAllById(Arrays.asList(1L, 2L, 3L))).thenReturn(mockExercises);
 
         ResponseEntity<byte[]> response = exerciseController.generatePdf(mockExercisesIds);
 
-        System.out.println(mockExercises);
-        System.out.println(mockExercisesIds);
-        System.out.println(exerciseController.generatePdf(mockExercisesIds));
         assertNotNull(response);
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(200, response.getStatusCode().value());
         assertArrayEquals(mockPdf, response.getBody());
 
     }
@@ -102,22 +93,18 @@ class ExerciseServiceTest {
     @Test
     void getExercisesByIds() {
 
-        Exercise exercise1 = new Exercise();
-        exercise1.setExerciseId(1L);
-        exercise1.setExerciseName("Exercise 1");
+        List<Exercise> mockExercises = Arrays.asList(new Exercise("Exercise 1", 50), new Exercise("Exercise 2", 100), new Exercise("Exercise 3", 150));
+        mockExercises.forEach(exercise -> exercise.setExerciseId((long) mockExercises.indexOf(exercise) + 1));
+        List<Long> mockExerciseIds = Arrays.asList(1L, 2L, 3L);
 
-        Exercise exercise2 = new Exercise();
-        exercise2.setExerciseId(2L);
-        exercise2.setExerciseName("Exercise 2");
+        Mockito.when(exerciseRepository.findAllById(mockExerciseIds)).thenReturn(mockExercises);
 
-        Mockito.when(exerciseRepository.findAllById(Arrays.asList(1L, 2L))).thenReturn(Arrays.asList(exercise1, exercise2));
+        List<Exercise> exercises = exerciseService.getExercisesByIds(mockExerciseIds);
 
-        List<Exercise> exercises = exerciseService.getExercisesByIds(Arrays.asList(1L, 2L));
-        List<Long> mockExercisesIds = Arrays.asList(1L, 2L);
-        System.out.println(exerciseService.getExercisesByIds(mockExercisesIds));
+        assertEquals(3, exercises.size());
+        assertEquals("Exercise 1", exercises.get(0).getExerciseName());
+        assertEquals("Exercise 2", exercises.get(1).getExerciseName());
+        assertEquals("Exercise 3", exercises.get(2).getExerciseName());
 
-        Assert.assertEquals(2, exercises.size());
-        Assert.assertEquals(exercise1, exercises.get(0));
-        Assert.assertEquals(exercise2, exercises.get(1));
     }
 }
