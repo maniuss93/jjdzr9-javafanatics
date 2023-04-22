@@ -1,6 +1,7 @@
 package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.controller.ExerciseController;
+import com.isa.jjdzr.dto.ExerciseDto;
 import com.isa.jjdzr.exercise.model.Exercise;
 import com.isa.jjdzr.exercise.service.PdfExerciseGenerator;
 import com.isa.jjdzr.repository.ExerciseRepository;
@@ -17,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class ExerciseServiceTest {
@@ -26,6 +28,8 @@ class ExerciseServiceTest {
     private ExerciseRepository exerciseRepository;
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private ExerciseMapper exerciseMapper;
     @InjectMocks
     private ExerciseService exerciseService;
 
@@ -59,8 +63,37 @@ class ExerciseServiceTest {
 
 
     @Test
-    void addExercise() {
+    void testAddExercise() {
+        ExerciseDto exerciseDto = new ExerciseDto();
+        exerciseDto.setExerciseName("Test Exercise");
+        exerciseDto.setDescription("This is a test exercise");
+        exerciseDto.setExerciseId(1L);
+
+        Exercise exercise = new Exercise();
+        exercise.setExerciseName("Test Exercise2");
+        exercise.setDescription("This is a test exercise2");
+        exercise.setExerciseId(1L);
+
+        Exercise saved = new Exercise();
+        saved.setExerciseName("Test Exercise3");
+        saved.setDescription("This is a test exercise3");
+        saved.setExerciseId(1L);
+
+
+        when(exerciseMapper.exerciseDtoToEntity(any(ExerciseDto.class))).thenReturn(exercise);
+        when(exerciseRepository.save(any(Exercise.class))).thenReturn(saved);
+        when(exerciseMapper.exerciseEntityToDto(any(Exercise.class))).thenReturn(exerciseDto);
+
+
+        ExerciseDto result = exerciseService.addExercise(exerciseDto);
+
+
+        assertNotNull(result);
+        assertEquals(1L, result.getExerciseId());
+        assertEquals("Test Exercise", result.getExerciseName());
+        assertEquals("This is a test exercise", result.getDescription());
     }
+
 
     @Test
     void findAllExercises() {
