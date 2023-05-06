@@ -11,6 +11,8 @@
 <header>
     <h1>Ocr Exercise Generator</h1>
 </header>
+<div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
+
 <nav>
     <ul id="navbar-other">
         <li><a th:href="@{/{id}/exercises/random(id=${id})}" th:text="'Wygeneruj losowy zestaw ćwiczeń'"></a></li>

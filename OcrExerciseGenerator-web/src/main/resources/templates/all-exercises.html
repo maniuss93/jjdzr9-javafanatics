@@ -11,6 +11,7 @@
 <header>
     <h1>Ocr Exercise Generator</h1>
 </header>
+<div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
 <nav>
     <ul>
         <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a></li>
