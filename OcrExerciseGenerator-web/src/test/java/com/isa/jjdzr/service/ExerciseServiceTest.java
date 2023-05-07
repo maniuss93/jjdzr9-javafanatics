@@ -12,14 +12,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.stubbing.Answer;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ExerciseServiceTest {
     @Mock
@@ -30,7 +32,7 @@ class ExerciseServiceTest {
     private UserRepository userRepository;
     @Mock
     private ExerciseMapper exerciseMapper;
-    @InjectMocks
+   @InjectMocks
     private ExerciseService exerciseService;
 
     private ExerciseController exerciseController;
@@ -96,16 +98,55 @@ class ExerciseServiceTest {
 
 
     @Test
-    void findAllExercises() {
+    void testFindAllExercises() {
+        List<Exercise> mockExercises = Arrays.asList(
+                new Exercise("Exercise 1", 50),
+                new Exercise("Exercise 2", 100),
+                new Exercise("Exercise 3", 150)
+        );
+
+        mockExercises.forEach(exercise -> exercise.setExerciseId((long) mockExercises.indexOf(exercise) + 1));
+
+        when(exerciseRepository.findAll()).thenReturn(mockExercises);
+        when(exerciseMapper.exerciseEntityToDto(any(Exercise.class))).thenReturn(new ExerciseDto());
+        List<Exercise> result = exerciseRepository.findAll();
+        assertNotNull(result);
+        assertEquals(3,result.size());
+
     }
 
-    @Test
-    void findExerciseByName() {
-    }
 
     @Test
-    void existsByExerciseName() {
+    void testFindExerciseByName() {
+        // given
+        Exercise exercise = new Exercise("Exercise 1", 50);
+        when(exerciseRepository.findByExerciseName("Exercise 1")).thenReturn(Optional.of(exercise));
+        when(exerciseMapper.exerciseEntityToDto(any(Exercise.class))).thenReturn(new ExerciseDto());
+
+        // when
+        Optional<Exercise> result = exerciseService.findExerciseByName("Exercise 1");
+
+        // then
+        assertTrue(result.isPresent());
+        assertEquals("Exercise 1", result.get().getExerciseName());
+        assertEquals(50, result.get().getExercisePoints());
     }
+
+
+    @Test
+    void testExistsByExerciseName() {
+        // given
+        String exerciseName = "Exercise 1";
+        when(exerciseRepository.existsByExerciseName(exerciseName)).thenReturn(true);
+
+        // when
+        boolean result = exerciseService.existsByExerciseName(exerciseName);
+
+        // then
+        assertTrue(result);
+        verify(exerciseRepository, times(1)).existsByExerciseName(exerciseName);
+    }
+
 
     @Test
     void existsByUrl() {
