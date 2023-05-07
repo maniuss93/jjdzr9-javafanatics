@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.stubbing.Answer;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Arrays;
@@ -45,6 +44,7 @@ class ExerciseServiceTest {
 
     @Test
     void testGeneratePdf() throws Exception {
+        // given
         List<Exercise> mockExercises = Arrays.asList(new Exercise("Exercise 1", 50), new Exercise("Exercise 2", 100), new Exercise("Exercise 3", 150));
 
         mockExercises.forEach(exercise -> exercise.setExerciseId((long) mockExercises.indexOf(exercise) + 1));
@@ -54,9 +54,9 @@ class ExerciseServiceTest {
         byte[] mockPdf = new byte[]{0x25, 0x50, 0x44, 0x46};
         when(pdfExerciseGenerator.generatePdf(mockExercises)).thenReturn(ResponseEntity.ok().body(mockPdf));
         Mockito.when(exerciseRepository.findAllById(Arrays.asList(1L, 2L, 3L))).thenReturn(mockExercises);
-
+        // when
         ResponseEntity<byte[]> response = exerciseController.generatePdf(mockExercisesIds);
-
+        // then
         assertNotNull(response);
         assertEquals(200, response.getStatusCode().value());
         assertArrayEquals(mockPdf, response.getBody());
@@ -66,6 +66,7 @@ class ExerciseServiceTest {
 
     @Test
     void testAddExercise() {
+        // given
         ExerciseDto exerciseDto = new ExerciseDto();
         exerciseDto.setExerciseName("Test Exercise");
         exerciseDto.setDescription("This is a test exercise");
@@ -85,11 +86,11 @@ class ExerciseServiceTest {
         when(exerciseMapper.exerciseDtoToEntity(any(ExerciseDto.class))).thenReturn(exercise);
         when(exerciseRepository.save(any(Exercise.class))).thenReturn(saved);
         when(exerciseMapper.exerciseEntityToDto(any(Exercise.class))).thenReturn(exerciseDto);
-
+        // when
 
         ExerciseDto result = exerciseService.addExercise(exerciseDto);
 
-
+        // then
         assertNotNull(result);
         assertEquals(1L, result.getExerciseId());
         assertEquals("Test Exercise", result.getExerciseName());
@@ -99,6 +100,7 @@ class ExerciseServiceTest {
 
     @Test
     void testFindAllExercises() {
+        // given
         List<Exercise> mockExercises = Arrays.asList(
                 new Exercise("Exercise 1", 50),
                 new Exercise("Exercise 2", 100),
@@ -109,7 +111,9 @@ class ExerciseServiceTest {
 
         when(exerciseRepository.findAll()).thenReturn(mockExercises);
         when(exerciseMapper.exerciseEntityToDto(any(Exercise.class))).thenReturn(new ExerciseDto());
+        // when
         List<Exercise> result = exerciseRepository.findAll();
+        // then
         assertNotNull(result);
         assertEquals(3,result.size());
 
@@ -166,15 +170,15 @@ class ExerciseServiceTest {
 
     @Test
     void getExercisesByIds() {
-
+        // given
         List<Exercise> mockExercises = Arrays.asList(new Exercise("Exercise 1", 50), new Exercise("Exercise 2", 100), new Exercise("Exercise 3", 150));
         mockExercises.forEach(exercise -> exercise.setExerciseId((long) mockExercises.indexOf(exercise) + 1));
         List<Long> mockExerciseIds = Arrays.asList(1L, 2L, 3L);
 
         Mockito.when(exerciseRepository.findAllById(mockExerciseIds)).thenReturn(mockExercises);
-
+        // when
         List<Exercise> exercises = exerciseService.getExercisesByIds(mockExerciseIds);
-
+        // then
         assertEquals(3, exercises.size());
         assertEquals("Exercise 1", exercises.get(0).getExerciseName());
         assertEquals("Exercise 2", exercises.get(1).getExerciseName());
