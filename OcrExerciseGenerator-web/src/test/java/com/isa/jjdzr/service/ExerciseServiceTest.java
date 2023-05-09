@@ -4,9 +4,12 @@ import com.isa.jjdzr.controller.ExerciseController;
 import com.isa.jjdzr.dto.ExerciseDto;
 import com.isa.jjdzr.exercise.model.Exercise;
 import com.isa.jjdzr.exercise.service.PdfExerciseGenerator;
+import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
 import com.isa.jjdzr.repository.ExerciseRepository;
 import com.isa.jjdzr.repository.UserRepository;
+import jdk.jfr.Enabled;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,6 +18,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +35,8 @@ class ExerciseServiceTest {
     private UserRepository userRepository;
     @Mock
     private ExerciseMapper exerciseMapper;
+    @Mock
+    private RandomExerciseGenerator randomExerciseGenerator;
    @InjectMocks
     private ExerciseService exerciseService;
 
@@ -167,6 +173,98 @@ class ExerciseServiceTest {
     @Test
     void generateRandomExercises() {
     }
+    @Test
+    void testFindAllExercisesReturnsEmptyList() {
+        // given
+        when(exerciseRepository.findAll()).thenReturn(Collections.emptyList());
+        when(exerciseMapper.exerciseEntityToDto(any(Exercise.class))).thenReturn(new ExerciseDto());
+
+        // when
+        List<ExerciseDto> result = exerciseService.findAllExercises();
+
+        // then
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testFindExerciseByNameReturnsEmptyOptional() {
+        // given
+        when(exerciseRepository.findByExerciseName("Exercise 1")).thenReturn(Optional.empty());
+        when(exerciseMapper.exerciseEntityToDto(any(Exercise.class))).thenReturn(new ExerciseDto());
+
+        // when
+        Optional<Exercise> result = exerciseService.findExerciseByName("Exercise 1");
+
+        // then
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testExistsByUrlReturnsFalse() {
+        // given
+        String url = "https://example.com";
+        when(exerciseRepository.existsByUrl(url)).thenReturn(false);
+
+        // when
+        boolean result = exerciseService.existsByUrl(url);
+
+        // then
+        assertFalse(result);
+        verify(exerciseRepository, times(1)).existsByUrl(url);
+    }
+//    @Disabled
+@Test
+void testEditExercise() {
+    // given
+    Long id = 1L;
+    ExerciseDto exerciseDto = new ExerciseDto();
+    exerciseDto.setExerciseName("Test Exercise");
+    exerciseDto.setDescription("This is a test exercise");
+    exerciseDto.setExerciseId(id);
+
+    Exercise exercise = new Exercise();
+    exercise.setExerciseName("Test Exercise");
+    exercise.setDescription("This is a test exercise");
+    exercise.setExerciseId(id);
+
+    Exercise updatedExercise = new Exercise();
+    updatedExercise.setExerciseName("Test Exercise 2");
+    updatedExercise.setDescription("This is an updated test exercise");
+    updatedExercise.setExerciseId(id);
+
+    when(exerciseRepository.findById(id)).thenReturn(Optional.of(exercise));
+    when(exerciseRepository.save(updatedExercise)).thenReturn(updatedExercise);
+    when(exerciseMapper.exerciseEntityToDto(updatedExercise)).thenReturn(exerciseDto);
+
+    ExerciseService exerciseService = new ExerciseService(exerciseRepository, exerciseMapper, pdfExerciseGenerator, randomExerciseGenerator);
+
+    // when
+    ExerciseDto result = exerciseService.editExercise(exerciseMapper.exerciseEntityToDto(exercise));
+
+    // then
+    assertNotNull(result);
+    assertEquals(id, result.getExerciseId());
+    assertEquals("Test Exercise 2", result.getExerciseName());
+    assertEquals("This is an updated test exercise", result.getDescription());
+}
+
+    @Test
+    public void testDeleteExercise() {
+        // given
+        Exercise exercise = new Exercise();
+        exercise.setExerciseId(1L);
+        when(exerciseRepository.findByExerciseId(exercise.getExerciseId())).thenReturn(exercise);
+        doNothing().when(exerciseRepository).delete(exercise);
+        // when
+        exerciseService.deleteExercise(exercise.getExerciseId());
+        // then
+        verify(exerciseRepository, times(1)).findByExerciseId(exercise.getExerciseId());
+        verify(exerciseRepository, times(1)).delete(exercise);
+    }
+
+
 
     @Test
     void getExercisesByIds() {
