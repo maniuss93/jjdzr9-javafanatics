@@ -7,9 +7,7 @@ import com.isa.jjdzr.exercise.service.PdfExerciseGenerator;
 import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
 import com.isa.jjdzr.repository.ExerciseRepository;
 import com.isa.jjdzr.repository.UserRepository;
-import jdk.jfr.Enabled;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -37,7 +35,9 @@ class ExerciseServiceTest {
     private ExerciseMapper exerciseMapper;
     @Mock
     private RandomExerciseGenerator randomExerciseGenerator;
-   @InjectMocks
+    @Mock
+    private ExerciseDto exerciseDto;
+    @InjectMocks
     private ExerciseService exerciseService;
 
     private ExerciseController exerciseController;
@@ -121,7 +121,7 @@ class ExerciseServiceTest {
         List<Exercise> result = exerciseRepository.findAll();
         // then
         assertNotNull(result);
-        assertEquals(3,result.size());
+        assertEquals(3, result.size());
 
     }
 
@@ -173,6 +173,7 @@ class ExerciseServiceTest {
     @Test
     void generateRandomExercises() {
     }
+
     @Test
     void testFindAllExercisesReturnsEmptyList() {
         // given
@@ -214,41 +215,43 @@ class ExerciseServiceTest {
         assertFalse(result);
         verify(exerciseRepository, times(1)).existsByUrl(url);
     }
-//    @Disabled
-@Test
-void testEditExercise() {
-    // given
-    Long id = 1L;
-    ExerciseDto exerciseDto = new ExerciseDto();
-    exerciseDto.setExerciseName("Test Exercise");
-    exerciseDto.setDescription("This is a test exercise");
-    exerciseDto.setExerciseId(id);
 
-    Exercise exercise = new Exercise();
-    exercise.setExerciseName("Test Exercise");
-    exercise.setDescription("This is a test exercise");
-    exercise.setExerciseId(id);
+    //    @Disabled
+    @Test
+    void testEditExercise() {
+        // given
+        Long id = 1L;
+        ExerciseDto exerciseDto = new ExerciseDto();
+        exerciseDto.setExerciseName("Test Exercise DTO");
+        exerciseDto.setDescription("This is a test exercise");
+        exerciseDto.setExerciseId(id);
 
-    Exercise updatedExercise = new Exercise();
-    updatedExercise.setExerciseName("Test Exercise 2");
-    updatedExercise.setDescription("This is an updated test exercise");
-    updatedExercise.setExerciseId(id);
+        Exercise exercise = new Exercise();
+        exercise.setExerciseName("Test Exercise");
+        exercise.setDescription("This is a test exercise");
+        exercise.setExerciseId(id);
 
-    when(exerciseRepository.findById(id)).thenReturn(Optional.of(exercise));
-    when(exerciseRepository.save(updatedExercise)).thenReturn(updatedExercise);
-    when(exerciseMapper.exerciseEntityToDto(updatedExercise)).thenReturn(exerciseDto);
+        Exercise updatedExercise = new Exercise();
+        updatedExercise.setExerciseName("Test Exercise 2");
+        updatedExercise.setDescription("This is an updated test exercise");
+        updatedExercise.setExerciseId(id);
 
-    ExerciseService exerciseService = new ExerciseService(exerciseRepository, exerciseMapper, pdfExerciseGenerator, randomExerciseGenerator);
+        when(exerciseRepository.findById(id)).thenReturn(Optional.of(exercise));
+        when(exerciseRepository.save(updatedExercise)).thenReturn(updatedExercise);
+        when(exerciseMapper.exerciseEntityToDto(updatedExercise)).thenReturn(exerciseDto);
 
-    // when
-    ExerciseDto result = exerciseService.editExercise(exerciseMapper.exerciseEntityToDto(exercise));
+        // when
+        ExerciseDto result = exerciseService.editExercise(exerciseDto);
 
-    // then
-    assertNotNull(result);
-    assertEquals(id, result.getExerciseId());
-    assertEquals("Test Exercise 2", result.getExerciseName());
-    assertEquals("This is an updated test exercise", result.getDescription());
-}
+        // then
+        System.out.println(exerciseDto);
+        System.out.println(result);
+        assertNotNull(result);
+        assertEquals(id, result.getExerciseId());
+        assertEquals("Test Exercise 2", result.getExerciseName());
+        assertEquals("This is an updated test exercise", result.getDescription());
+    }
+
 
     @Test
     public void testDeleteExercise() {
@@ -263,7 +266,6 @@ void testEditExercise() {
         verify(exerciseRepository, times(1)).findByExerciseId(exercise.getExerciseId());
         verify(exerciseRepository, times(1)).delete(exercise);
     }
-
 
 
     @Test
