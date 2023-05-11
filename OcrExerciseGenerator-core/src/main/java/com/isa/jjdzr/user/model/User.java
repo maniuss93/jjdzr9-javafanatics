@@ -1,6 +1,7 @@
 package com.isa.jjdzr.user.model;
 
 import com.isa.jjdzr.user.service.AdvancementLevelCategory;
+import com.isa.jjdzr.user.service.UserRole;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,6 +21,10 @@ public class User {
 
     @Column(name = "user_email", nullable = false)
     private String userEmail;
+
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_advancement_level", nullable = false)
@@ -56,6 +61,10 @@ public class User {
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }
+
+    public UserRole getRole() {return role;}
+
+    public void setRole(UserRole role) {this.role = role;}
 
     public AdvancementLevelCategory getUserAdvancementLevel() {
         return userAdvancementLevel;
