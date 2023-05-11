@@ -23,6 +23,9 @@ public class Exercise {
 
     @Column(name = "url")
     private String url;
+    @Column(name = "is_approved", nullable = false)
+    private boolean isApproved;
+
 
     @Enumerated(EnumType.STRING)
     @Column(name = "exercise_category", nullable = false)
