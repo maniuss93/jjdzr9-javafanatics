@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,6 +48,7 @@ public class ExerciseController {
         return exerciseService.generatePdf(exercises);
     }
 
+
     @GetMapping("/{id}/exercise/add")
     public String getAddExerciseForm(@PathVariable Long id, Model model) {
         model.addAttribute("exercise", new Exercise());
@@ -54,7 +56,7 @@ public class ExerciseController {
     }
 
     @PostMapping(value = "/{id}/exercise/add")
-    public String createExercise(@PathVariable Long id, @ModelAttribute("exercise") ExerciseDto exercise, Model model) {
+    public String createExercise(@PathVariable Long id, @ModelAttribute("exercise") ExerciseDto exercise, Model model, RedirectAttributes redirectAttributes) {
         if (exerciseService.existsByExerciseName(exercise.getExerciseName())) {
             model.addAttribute("exerciseNameAlreadyTaken", "Ćwiczenie z taką nazwą już istnieje");
             return "add-exercise-form";
@@ -63,6 +65,8 @@ public class ExerciseController {
             return "add-exercise-form";
         } else {
             model.addAttribute("exercise", exerciseService.addExercise(exercise));
+            redirectAttributes.addAttribute("successMessage", "Ćwiczenie zostało dodane pomyślnie!");
+
         }
         return "redirect:/user/" + id + "/userpanel";
     }

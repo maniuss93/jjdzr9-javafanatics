@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +39,7 @@ public class UserController {
     public String createUser(@ModelAttribute("user") UserDto user,
                              @RequestParam("userPassword") String userPassword,
                              @RequestParam("confirmPassword") String confirmPassword,
-                             Model model) {
+                             Model model, RedirectAttributes redirectAttributes) {
         if (userService.existsByName(user.getUserName())) {
             model.addAttribute("usernameAlreadyTaken", "Ta nazwa użytkownika jest zajęta");
             return userCreateForm;
@@ -50,6 +51,7 @@ public class UserController {
             return userCreateForm;
         } else {
             model.addAttribute("user", userService.createUser(user));
+            redirectAttributes.addAttribute("successMessage", "Użytkownik został dodany pomyślnie!");
             return "redirect:/";
         }
     }
@@ -90,7 +92,7 @@ public class UserController {
     @PostMapping(value = "/{id}/edit")
     public String userProfileEdit(@Valid @ModelAttribute("user") UserDto user,
                                   @PathVariable Long id,
-                                  Model model) {
+                                  Model model, RedirectAttributes redirectAttributes) {
         UserDto userFromDb = userService.findByUserId(id);
         List<UserDto> allUsers = userService.findAllUsers();
         allUsers.remove(userFromDb);
@@ -103,6 +105,7 @@ public class UserController {
         } else {
             userService.editUser(user);
         }
+        redirectAttributes.addAttribute("successMessage", "Aktualizacja użytkownika przebiegła pomyślnie!");
         return "redirect:/user/" + id + "/userpanel";
     }
 
@@ -119,7 +122,7 @@ public class UserController {
                                    @RequestParam("userCurrentPassword") String userCurrentPassword,
                                    @RequestParam("userPassword") String userPassword,
                                    @RequestParam("confirmPassword") String confirmPassword,
-                                   Model model) {
+                                   Model model, RedirectAttributes redirectAttributes) {
         UserDto userFromDb = userService.findByUserId(id);
         if (!userCurrentPassword.equals(userFromDb.getUserPassword())) {
             model.addAttribute("wrongPassword", "Twoje aktualne hasło jest nie poprawne");
@@ -130,13 +133,14 @@ public class UserController {
         } else {
             userService.editUser(user);
         }
+        redirectAttributes.addAttribute("successMessage", "Aktualizacja hasła użytkownika przebiegła pomyślnie!");
         return "redirect:/user/" + id + "/userpanel";
     }
 
     @GetMapping("/{id}/delete")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return "redirect:/";
+        return "redirect:/?successMessage=Uzytkownik+zostal+usuniety+pomyslnie";
     }
 
     @ModelAttribute("availableUserAdvancementLevel")

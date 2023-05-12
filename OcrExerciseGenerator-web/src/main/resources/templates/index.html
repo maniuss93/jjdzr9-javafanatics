@@ -23,6 +23,7 @@
     <header>
         <h1>Ocr Exercise Generator</h1>
     </header>
+    <div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
     <nav>
         <ul>
             <li><a href="/demo">Demo</a></li>
@@ -33,7 +34,7 @@
         </ul>
     </nav>
     <main>
-        <!-- Treść strony głównej -->
+
     </main>
 </body>
 </html>
