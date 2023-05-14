@@ -23,8 +23,8 @@ public class Exercise {
 
     @Column(name = "url")
     private String url;
-    @Column(name = "is_approved", nullable = false)
-    private boolean isApproved;
+    @Column(name = "is_approved")
+    private boolean isApproved=false;
 
 
     @Enumerated(EnumType.STRING)

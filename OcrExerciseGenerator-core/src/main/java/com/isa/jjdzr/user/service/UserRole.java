@@ -1,7 +1,7 @@
 package com.isa.jjdzr.user.service;
 
 public enum UserRole {
-    ADMIN("administartor"),
+    ADMIN("admin"),
     USER("user");
     private final String description;
 

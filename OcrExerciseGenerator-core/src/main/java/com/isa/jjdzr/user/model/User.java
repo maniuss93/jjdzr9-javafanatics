@@ -22,9 +22,9 @@ public class User {
     @Column(name = "user_email", nullable = false)
     private String userEmail;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private UserRole role = UserRole.USER;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_advancement_level", nullable = false)
@@ -62,9 +62,13 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public UserRole getRole() {return role;}
+    public UserRole getRole() {
+        return role;
+    }
 
-    public void setRole(UserRole role) {this.role = role;}
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 
     public AdvancementLevelCategory getUserAdvancementLevel() {
         return userAdvancementLevel;
