@@ -75,5 +75,10 @@ public class ExerciseService {
         return exerciseRepository.findAllById(ids);
     }
 
+    public List<Exercise> getApprovedExercises() {
+        return exerciseRepository.findByIsApprovedTrue();
+    }
+
+
 
 }

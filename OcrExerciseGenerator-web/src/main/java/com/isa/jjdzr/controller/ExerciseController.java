@@ -52,6 +52,10 @@ public class ExerciseController {
         model.addAttribute("exercise", new Exercise());
         return "add-exercise-form";
     }
+    @GetMapping("/approved")
+    public List<Exercise> getApprovedExercises() {
+        return exerciseService.getApprovedExercises();
+    }
 
     @PostMapping(value = "/{id}/exercise/add")
     public String createExercise(@PathVariable Long id, @ModelAttribute("exercise") ExerciseDto exercise, Model model) {
