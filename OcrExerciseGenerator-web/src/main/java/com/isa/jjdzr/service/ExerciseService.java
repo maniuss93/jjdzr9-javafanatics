@@ -82,6 +82,14 @@ public class ExerciseService {
         return exerciseRepository.findByIsApprovedFalse();
     }
 
+    public void acceptExercise(Long exerciseId) {
+        Exercise exercise = exerciseRepository.findByExerciseId(exerciseId);
+        if (exercise != null) {
+            exercise.setApproved(true);
+            exerciseRepository.save(exercise);
+        }
+    }
+
 
 
 }

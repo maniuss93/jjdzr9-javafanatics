@@ -88,5 +88,11 @@ public class Exercise {
         return exerciseId;
     }
 
+    public boolean isApproved() {
+        return isApproved;
+    }
 
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
 }

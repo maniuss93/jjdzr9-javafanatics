@@ -6,7 +6,9 @@ import com.isa.jjdzr.exercise.service.ExerciseCategory;
 import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.service.ExerciseService;
 import com.isa.jjdzr.user.model.User;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +31,7 @@ public class ExerciseController {
     public String getApprovedExercises(@PathVariable Long id, Model model) {
         List<Exercise> exercisesListNotApproved = exerciseService.getNotApprovedExercises();
         model.addAttribute("exercises", exercisesListNotApproved);
-        return "all-exercises";
+        return "not-approved-exercises";
     }
     //localhost:8080/exercises/approved
 
@@ -81,6 +83,20 @@ public class ExerciseController {
             model.addAttribute("exercise", exerciseService.addExercise(exercise));
         }
         return "redirect:/user/" + id + "/userpanel";
+    }
+
+
+    @PostMapping("/exercises/accept/{exerciseId}")
+    public String acceptExercise(@PathVariable Long exerciseId) {
+        exerciseService.acceptExercise(exerciseId);
+        return "redirect:/{id}/exercises/not-approved";
+    }
+
+
+    @PostMapping("/exercises/delete/{exerciseId}")
+    public String deleteExercise(@PathVariable Long exerciseId) {
+        exerciseService.deleteExercise(exerciseId);
+        return "redirect:/{id}/exercises/not-approved";
     }
 
     @ModelAttribute("availableExerciseCategory")
