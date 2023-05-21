@@ -23,10 +23,18 @@ public class ExerciseController {
     private final ExerciseService exerciseService;
     private final UserRepository userRepository;
 
+    //localhost:8080/exercises/not-approved
+
+    @GetMapping("/{id}/exercises/not-approved")
+    public String getApprovedExercises(@PathVariable Long id, Model model) {
+        List<Exercise> exercisesListNotApproved = exerciseService.getNotApprovedExercises();
+        model.addAttribute("exercises", exercisesListNotApproved);
+        return "all-exercises";
+    }
     //localhost:8080/exercises/approved
 
     @GetMapping("/{id}/exercises/approved")
-    public String getApprovedExercises(@PathVariable Long id, Model model) {
+    public String getNoApprovedExercises(@PathVariable Long id, Model model) {
         List<Exercise> exercisesListApproved = exerciseService.getApprovedExercises();
         model.addAttribute("exercises", exercisesListApproved);
         return "all-exercises";

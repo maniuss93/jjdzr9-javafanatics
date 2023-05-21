@@ -78,6 +78,9 @@ public class ExerciseService {
     public List<Exercise> getApprovedExercises() {
         return exerciseRepository.findByIsApprovedTrue();
     }
+    public List<Exercise> getNotApprovedExercises() {
+        return exerciseRepository.findByIsApprovedFalse();
+    }
 
 
 

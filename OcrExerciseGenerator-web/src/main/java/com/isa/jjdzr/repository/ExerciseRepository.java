@@ -17,4 +17,5 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 
     Exercise findByExerciseId(Long id);
     List<Exercise> findByIsApprovedTrue();
+    List<Exercise> findByIsApprovedFalse();
 }
