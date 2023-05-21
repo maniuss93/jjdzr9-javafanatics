@@ -23,11 +23,12 @@ public class ExerciseController {
     private final ExerciseService exerciseService;
     private final UserRepository userRepository;
 
-    //localhost:8080/exercises/all
-    @GetMapping("/{id}/exercises/all")
-    public String getAllExercises(@PathVariable Long id, Model model) {
-        List<ExerciseDto> exercisesList = exerciseService.findAllExercises();
-        model.addAttribute("exercises", exercisesList);
+    //localhost:8080/exercises/approved
+
+    @GetMapping("/{id}/exercises/approved")
+    public String getApprovedExercises(@PathVariable Long id, Model model) {
+        List<Exercise> exercisesListApproved = exerciseService.getApprovedExercises();
+        model.addAttribute("exercises", exercisesListApproved);
         return "all-exercises";
     }
 
@@ -39,6 +40,12 @@ public class ExerciseController {
         model.addAttribute("randomExercises", randomExercises);
         model.addAttribute("userId", id);
         return "random-exercises";
+    }
+    @GetMapping("/{id}/exercises/all")
+    public String getAllExercises(@PathVariable Long id, Model model) {
+        List<ExerciseDto> exercisesList = exerciseService.findAllExercises();
+        model.addAttribute("exercises", exercisesList);
+        return "all-exercises";
     }
 
     @GetMapping("/generate-pdf")
@@ -52,10 +59,7 @@ public class ExerciseController {
         model.addAttribute("exercise", new Exercise());
         return "add-exercise-form";
     }
-    @GetMapping("/approved")
-    public List<Exercise> getApprovedExercises() {
-        return exerciseService.getApprovedExercises();
-    }
+
 
     @PostMapping(value = "/{id}/exercise/add")
     public String createExercise(@PathVariable Long id, @ModelAttribute("exercise") ExerciseDto exercise, Model model) {
