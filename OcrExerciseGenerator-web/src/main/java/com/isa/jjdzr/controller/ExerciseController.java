@@ -87,16 +87,17 @@ public class ExerciseController {
 
 
     @PostMapping("/exercises/accept/{exerciseId}")
-    public String acceptExercise(@PathVariable Long exerciseId) {
+    public String acceptExercise(@PathVariable Long exerciseId, @RequestParam Long id) {
         exerciseService.acceptExercise(exerciseId);
-        return "redirect:/{id}/exercises/not-approved";
+        return "redirect:/" + id + "/exercises/not-approved";
     }
 
 
+
     @PostMapping("/exercises/delete/{exerciseId}")
-    public String deleteExercise(@PathVariable Long exerciseId) {
+    public String deleteExercise(@PathVariable Long exerciseId, @RequestParam Long id) {
         exerciseService.deleteExercise(exerciseId);
-        return "redirect:/{id}/exercises/not-approved";
+        return "redirect:/" + id + "/exercises/not-approved";
     }
 
     @ModelAttribute("availableExerciseCategory")
