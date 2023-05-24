@@ -8,6 +8,7 @@ import com.isa.jjdzr.service.ExerciseService;
 import com.isa.jjdzr.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,8 @@ public class ExerciseController {
     //localhost:8080/exercises/not-approved
 
     @GetMapping("/{id}/exercises/not-approved")
-   //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
+
     public String getApprovedExercises(@PathVariable Long id, Model model) {
         List<Exercise> exercisesListNotApproved = exerciseService.getNotApprovedExercises();
         model.addAttribute("exercises", exercisesListNotApproved);
@@ -86,6 +88,7 @@ public class ExerciseController {
 
 
     @PostMapping("/exercises/accept/{exerciseId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String acceptExercise(@PathVariable Long exerciseId, @RequestParam Long id) {
         exerciseService.acceptExercise(exerciseId);
         return "redirect:/" + id + "/exercises/not-approved";
@@ -94,6 +97,7 @@ public class ExerciseController {
 
 
     @PostMapping("/exercises/delete/{exerciseId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteExercise(@PathVariable Long exerciseId, @RequestParam Long id) {
         exerciseService.deleteExercise(exerciseId);
         return "redirect:/" + id + "/exercises/not-approved";
