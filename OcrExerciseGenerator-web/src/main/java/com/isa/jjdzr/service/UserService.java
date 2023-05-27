@@ -16,7 +16,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
-
+    
     public UserDto createUser(UserDto userDto) {
         User user = userMapper.userDtoToEntity(userDto);
         User saved = userRepository.save(user);
@@ -52,9 +52,8 @@ public class UserService {
         return userRepository.findByUserName(userName);
     }
 
-    public UserDto findByUserId(Long id) {
-        User findById = userRepository.findByUserId(id);
-        return userMapper.userEntityToDto(findById);
+    public Optional<User> findByUserId(Long id) {
+        return userRepository.findByUserId(id);
     }
 
     @Transactional

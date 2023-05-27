@@ -14,6 +14,17 @@ public class UserDto {
 
     private String userEmail;
 
+    public UserDto(Long userId, String userName, String userPassword, String userEmail, AdvancementLevelCategory userAdvancementLevel) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.userAdvancementLevel = userAdvancementLevel;
+    }
+
+    public UserDto() {
+    }
+
     private AdvancementLevelCategory userAdvancementLevel;
 
     public Long getUserId() {

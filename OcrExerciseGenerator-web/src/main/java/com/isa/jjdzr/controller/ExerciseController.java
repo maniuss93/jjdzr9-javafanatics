@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,8 +36,8 @@ public class ExerciseController {
     //localhost:8080/{id}/exercises/random
     @GetMapping("/{id}/exercises/random")
     public String generateRandomExercises(@PathVariable Long id, Model model) {
-        User userFromDb = userRepository.findByUserId(id);
-        List<Exercise> randomExercises = exerciseService.generateRandomExercises(userFromDb.getUserAdvancementLevel());
+        Optional<User> userFromDb = userRepository.findByUserId(id);
+        List<Exercise> randomExercises = exerciseService.generateRandomExercises(userFromDb.get().getUserAdvancementLevel());
         model.addAttribute("randomExercises", randomExercises);
         model.addAttribute("userId", id);
         return "random-exercises";
