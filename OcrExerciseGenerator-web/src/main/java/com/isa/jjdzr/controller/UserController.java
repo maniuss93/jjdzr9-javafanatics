@@ -78,14 +78,14 @@ public class UserController {
     @GetMapping("/{id}/userpanel")
     public String showUserProfile(@PathVariable Long id, Model model) {
         Optional<User> user = userService.findByUserId(id);
-        model.addAttribute("user", user);
+        model.addAttribute("user", user.get());
         return "user-panel";
     }
 
     @GetMapping("/{id}/editdetails")
     public String getUserProfileEditForm(@PathVariable Long id, Model model) {
         Optional<User> user = userService.findByUserId(id);
-        model.addAttribute("user", user);
+        model.addAttribute("user", user.get());
         return userEditDetails;
     }
 
@@ -95,7 +95,7 @@ public class UserController {
                                   Model model, RedirectAttributes redirectAttributes) {
         Optional<User> userFromDb = userService.findByUserId(id);
         List<UserDto> allUsers = userService.findAllUsers();
-        allUsers.remove(userFromDb);
+        allUsers.remove(userFromDb.get());
         if (allUsers.stream().map(UserDto::getUserName).toList().contains(user.getUserName())) {
             model.addAttribute("usernameAlreadyTaken", "Ta nazwa użytkownika jest zajęta");
             return userEditDetails;
@@ -112,7 +112,7 @@ public class UserController {
     @GetMapping("/{id}/editpassword")
     public String getUserPasswordEditForm(@PathVariable Long id, Model model) {
         Optional<User> user = userService.findByUserId(id);
-        model.addAttribute("user", user);
+        model.addAttribute("user", user.get());
         return userEditPassword;
     }
 

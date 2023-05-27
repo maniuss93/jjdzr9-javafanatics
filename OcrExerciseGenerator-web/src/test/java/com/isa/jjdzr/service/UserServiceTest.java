@@ -61,7 +61,7 @@ class UserServiceTest {
     void shouldReturnTrueIfUserExistByEmail() {
         //GIVEN
         String email = mockUsers.get(0).getUserEmail();
-        when(userRepositoryMock.existsByUserName(email)).thenReturn(true);
+        when(userRepositoryMock.existsByUserEmail(email)).thenReturn(true);
         //WHEN
         boolean existsByEmail = userService.existsByEmail(email);
         boolean doesNotExistsByEmail = userService.existsByEmail("joseph@gmail.com");
