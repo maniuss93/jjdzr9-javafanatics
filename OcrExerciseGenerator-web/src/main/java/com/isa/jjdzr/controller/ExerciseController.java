@@ -6,9 +6,15 @@ import com.isa.jjdzr.exercise.service.ExerciseCategory;
 import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.service.ExerciseService;
 import com.isa.jjdzr.user.model.User;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -102,6 +108,15 @@ public class ExerciseController {
         exerciseService.deleteExercise(exerciseId);
         return "redirect:/" + id + "/exercises/not-approved";
     }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/";
+    }
+
 
     @ModelAttribute("availableExerciseCategory")
     List<ExerciseCategory> getDescription() {

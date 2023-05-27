@@ -45,7 +45,7 @@ public class SecurityConfig {
                                 .requestMatchers("/{id}/exercises/not-approved/**","/exercises/accept/**", "/exercises/delete/**").hasRole("ADMIN")
                                 //.anyRequest().authenticated()
                                 .and()
-                                .formLogin()
+                                .oauth2Login()
                                 .and()
                                 .logout()
                                 .logoutSuccessUrl("/")
