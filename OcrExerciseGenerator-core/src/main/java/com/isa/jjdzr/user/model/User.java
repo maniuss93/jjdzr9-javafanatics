@@ -25,6 +25,16 @@ public class User {
     @Column(name = "user_advancement_level", nullable = false)
     private AdvancementLevelCategory userAdvancementLevel;
 
+    public User(String userName, String userPassword, String userEmail, AdvancementLevelCategory userAdvancementLevel) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.userAdvancementLevel = userAdvancementLevel;
+    }
+
+    public User() {
+    }
+
     public Long getUserId() {
         return userId;
     }

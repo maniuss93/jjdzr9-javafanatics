@@ -77,14 +77,14 @@ public class UserController {
 
     @GetMapping("/{id}/userpanel")
     public String showUserProfile(@PathVariable Long id, Model model) {
-        UserDto user = userService.findByUserId(id);
+        Optional<User> user = userService.findByUserId(id);
         model.addAttribute("user", user);
         return "user-panel";
     }
 
     @GetMapping("/{id}/editdetails")
     public String getUserProfileEditForm(@PathVariable Long id, Model model) {
-        UserDto user = userService.findByUserId(id);
+        Optional<User> user = userService.findByUserId(id);
         model.addAttribute("user", user);
         return userEditDetails;
     }
@@ -93,7 +93,7 @@ public class UserController {
     public String userProfileEdit(@Valid @ModelAttribute("user") UserDto user,
                                   @PathVariable Long id,
                                   Model model, RedirectAttributes redirectAttributes) {
-        UserDto userFromDb = userService.findByUserId(id);
+        Optional<User> userFromDb = userService.findByUserId(id);
         List<UserDto> allUsers = userService.findAllUsers();
         allUsers.remove(userFromDb);
         if (allUsers.stream().map(UserDto::getUserName).toList().contains(user.getUserName())) {
@@ -111,7 +111,7 @@ public class UserController {
 
     @GetMapping("/{id}/editpassword")
     public String getUserPasswordEditForm(@PathVariable Long id, Model model) {
-        UserDto user = userService.findByUserId(id);
+        Optional<User> user = userService.findByUserId(id);
         model.addAttribute("user", user);
         return userEditPassword;
     }
@@ -123,8 +123,8 @@ public class UserController {
                                    @RequestParam("userPassword") String userPassword,
                                    @RequestParam("confirmPassword") String confirmPassword,
                                    Model model, RedirectAttributes redirectAttributes) {
-        UserDto userFromDb = userService.findByUserId(id);
-        if (!userCurrentPassword.equals(userFromDb.getUserPassword())) {
+        Optional<User> userFromDb = userService.findByUserId(id);
+        if (userFromDb.isPresent() && !userCurrentPassword.equals(userFromDb.get().getUserPassword())) {
             model.addAttribute("wrongPassword", "Twoje aktualne hasło jest nie poprawne");
             return userEditPassword;
         } else if (!userPassword.equals(confirmPassword)) {

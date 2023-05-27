@@ -37,7 +37,7 @@ public class UserRestController {
     // http://localhost:8080/api/user/all
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto getById(@PathVariable Long id) {
+    public Optional<User> getById(@PathVariable Long id) {
         return userService.findByUserId(id);
     }
 
