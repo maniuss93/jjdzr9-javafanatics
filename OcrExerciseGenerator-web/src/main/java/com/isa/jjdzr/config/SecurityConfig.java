@@ -43,12 +43,15 @@ public class SecurityConfig {
                         autz
                                 .requestMatchers("/","/demo","/user/new","/calendar","/info").permitAll()
                                 .requestMatchers("/{id}/exercises/not-approved/**","/exercises/accept/**", "/exercises/delete/**").hasRole("ADMIN")
+                                .requestMatchers("/{id}/exercises/approved/**").authenticated()
                                 //.anyRequest().authenticated()
                                 .and()
                                 .oauth2Login()
                                 .and()
+                                .formLogin()
+                                .and()
                                 .logout()
-                                .logoutSuccessUrl("/")
+                                .logoutSuccessUrl("/demo")
                                 .and()
                                 .csrf().disable();
                     } catch (Exception e) {
