@@ -51,7 +51,7 @@ public class SecurityConfig {
                                 .formLogin()
                                 .and()
                                 .logout()
-                                .logoutSuccessUrl("/demo")
+                                .logoutSuccessUrl("/?logout=true")
                                 .and()
                                 .csrf().disable();
                     } catch (Exception e) {
