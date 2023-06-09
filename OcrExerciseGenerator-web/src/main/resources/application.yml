@@ -1,17 +1,14 @@
 spring:
   datasource:
     username: fanatics
-    password:
-    url: jdbc:h2:file:./src/main/resources/import
-    driver-class-name: org.h2.Driver
-  h2:
-     console:
-      enabled: true
-  sql:
-    init:
-      platform: h2
-      mode: always
+    password: fanatics
+    url: jdbc:mysql://mysql:3306/exercisegenerator
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
