@@ -17,4 +17,3 @@ services:
       MYSQL_ROOT_PASSWORD: fanatics
     ports:
       - "3306:3306"
-
