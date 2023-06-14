@@ -51,6 +51,10 @@ public class UserService {
     public Optional<User> findByUserName(String userName) {
         return userRepository.findByUserName(userName);
     }
+    public UserDto getUserDtoById(Long id){
+        Optional<User> userFromDb = findByUserId(id);
+        return userMapper.userEntityToDto(userFromDb.orElseThrow());
+    }
 
     public Optional<User> findByUserId(Long id) {
         return userRepository.findByUserId(id);

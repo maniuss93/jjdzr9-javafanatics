@@ -9,7 +9,7 @@ public class Exercise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exerciseId", nullable = false)
+    @Column(name = "exercise_id", nullable = false)
     private Long exerciseId;
 
     @Column(name = "exercise_points", nullable = false)
