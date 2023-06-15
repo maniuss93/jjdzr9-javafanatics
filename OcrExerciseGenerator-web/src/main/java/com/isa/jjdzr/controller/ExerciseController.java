@@ -37,7 +37,7 @@ public class ExerciseController {
     @GetMapping("/{id}/exercises/random")
     public String generateRandomExercises(@PathVariable Long id, Model model) {
         Optional<User> userFromDb = userRepository.findByUserId(id);
-        List<Exercise> randomExercises = exerciseService.generateRandomExercises(userFromDb.get().getUserAdvancementLevel());
+        List<Exercise> randomExercises = exerciseService.generateRandomExercises(userFromDb.orElseThrow().getUserAdvancementLevel());
         model.addAttribute("randomExercises", randomExercises);
         model.addAttribute("userId", id);
         return "random-exercises";

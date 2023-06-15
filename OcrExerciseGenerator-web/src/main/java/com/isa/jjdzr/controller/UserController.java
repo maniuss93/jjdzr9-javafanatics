@@ -78,41 +78,42 @@ public class UserController {
     @GetMapping("/{id}/userpanel")
     public String showUserProfile(@PathVariable Long id, Model model) {
         Optional<User> user = userService.findByUserId(id);
-        model.addAttribute("user", user.get());
+        model.addAttribute("user", user.orElseThrow());
         return "user-panel";
     }
 
     @GetMapping("/{id}/editdetails")
     public String getUserProfileEditForm(@PathVariable Long id, Model model) {
         Optional<User> user = userService.findByUserId(id);
-        model.addAttribute("user", user.get());
+        model.addAttribute("user", user.orElseThrow());
         return userEditDetails;
     }
 
     @PostMapping(value = "/{id}/edit")
     public String userProfileEdit(@Valid @ModelAttribute("user") UserDto user,
                                   @PathVariable Long id,
-                                  Model model, RedirectAttributes redirectAttributes) {
-        Optional<User> userFromDb = userService.findByUserId(id);
+                                  Model model,
+                                  RedirectAttributes redirectAttributes) {
         List<UserDto> allUsers = userService.findAllUsers();
-        allUsers.remove(userFromDb.get());
-        if (allUsers.stream().map(UserDto::getUserName).toList().contains(user.getUserName())) {
+        if (allUsers.stream().anyMatch(u -> !u.getUserId().equals(id) && u.getUserName().equals(user.getUserName()))) {
             model.addAttribute("usernameAlreadyTaken", "Ta nazwa użytkownika jest zajęta");
             return userEditDetails;
-        } else if (allUsers.stream().map(UserDto::getUserEmail).toList().contains(user.getUserEmail())) {
-            model.addAttribute("userEmailAlreadyTaken", "Ten address email jest zajęty");
-            return userEditDetails;
-        } else {
-            userService.editUser(user);
         }
+        if (allUsers.stream().anyMatch(u -> !u.getUserId().equals(id) && u.getUserEmail().equals(user.getUserEmail()))) {
+            model.addAttribute("userEmailAlreadyTaken", "Ten adres email jest zajęty");
+            return userEditDetails;
+        }
+        userService.editUser(user);
         redirectAttributes.addAttribute("successMessage", "Aktualizacja użytkownika przebiegła pomyślnie!");
         return "redirect:/user/" + id + "/userpanel";
     }
 
+
+
     @GetMapping("/{id}/editpassword")
     public String getUserPasswordEditForm(@PathVariable Long id, Model model) {
         Optional<User> user = userService.findByUserId(id);
-        model.addAttribute("user", user.get());
+        model.addAttribute("user", user.orElseThrow());
         return userEditPassword;
     }
 

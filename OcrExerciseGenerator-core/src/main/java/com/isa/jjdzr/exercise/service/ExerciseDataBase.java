@@ -19,7 +19,7 @@ public class ExerciseDataBase {
         exerciseList.add(exercise);
         WriteAndReadFromFile.writeExercisesList(exerciseList);
     }
-    public static List<Exercise> findExerciseByCategory(ExerciseCategory category){
-        return exerciseList.stream().filter(c->c.getExerciseCategory().equals(category)).toList();
+    public static List<Exercise> findExerciseByCategory(ExerciseCategory category, List<Exercise> exercises){
+        return exercises.stream().filter(c->c.getExerciseCategory().equals(category)).toList();
     }
 }

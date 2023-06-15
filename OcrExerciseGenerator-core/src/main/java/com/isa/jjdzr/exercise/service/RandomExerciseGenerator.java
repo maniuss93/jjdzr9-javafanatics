@@ -15,23 +15,23 @@ public class RandomExerciseGenerator {
     private static final double indicatorOfStretching = 0.2;
 
 
-    public List<Exercise> generateRandomExercises(int userLevel) {
+    public List<Exercise> generateRandomExercises(int userLevel, List<Exercise> exercises) {
         List<Exercise> exerciseList = new ArrayList<>();
         double warmUpPoints = userLevel * indicatorOfWarmUp;
         double coreExercisesPoints = userLevel * indicatorOfCoreExercises;
         double stretchingPoints = userLevel * indicatorOfStretching;
         if (userLevel != 0) {
             exerciseList.addAll(fillExerciseList(ExerciseDataBase.
-                    findExerciseByCategory(ExerciseCategory.WARM_UP), warmUpPoints));
-            exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory(ExerciseCategory.CORE_EXERCISES), coreExercisesPoints));
-            exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory(ExerciseCategory.STRETCHING), stretchingPoints));
+                    findExerciseByCategory(ExerciseCategory.WARM_UP, exercises), warmUpPoints));
+            exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory(ExerciseCategory.CORE_EXERCISES, exercises), coreExercisesPoints));
+            exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory(ExerciseCategory.STRETCHING, exercises), stretchingPoints));
         } else {
             System.out.println("Proszę wykonać: Test poziomu zaawansowania");
         }
         return exerciseList;
     }
 
-    public List<Exercise> fillExerciseList(List<Exercise> exerciseByCategory, double exercisePoints) {
+    private List<Exercise> fillExerciseList(List<Exercise> exerciseByCategory, double exercisePoints) {
         List<Integer> drawnIndexes = new ArrayList<>();
         List<Exercise> exerciseList = new ArrayList<>();
         double counter = 0.0;

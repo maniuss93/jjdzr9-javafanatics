@@ -68,7 +68,7 @@ public class ExerciseService {
 
     public List<Exercise> generateRandomExercises(AdvancementLevelCategory userAdvancementLevel) {
         return randomExerciseGenerator.generateRandomExercises(randomExerciseGenerator
-                .convertAdvancementLevel(userAdvancementLevel));
+                .convertAdvancementLevel(userAdvancementLevel), exerciseRepository.findAll());
     }
 
     public List<Exercise> getExercisesByIds(List<Long> ids) {
