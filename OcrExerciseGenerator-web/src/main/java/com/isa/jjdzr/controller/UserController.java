@@ -92,22 +92,23 @@ public class UserController {
     @PostMapping(value = "/{id}/edit")
     public String userProfileEdit(@Valid @ModelAttribute("user") UserDto user,
                                   @PathVariable Long id,
-                                  Model model, RedirectAttributes redirectAttributes) {
-        UserDto userFromDb = userService.getUserDtoById(id);
+                                  Model model,
+                                  RedirectAttributes redirectAttributes) {
         List<UserDto> allUsers = userService.findAllUsers();
-        allUsers.remove(userFromDb);
-        if (allUsers.stream().map(UserDto::getUserName).toList().contains(user.getUserName())) {
+        if (allUsers.stream().anyMatch(u -> !u.getUserId().equals(id) && u.getUserName().equals(user.getUserName()))) {
             model.addAttribute("usernameAlreadyTaken", "Ta nazwa użytkownika jest zajęta");
             return userEditDetails;
-        } else if (allUsers.stream().map(UserDto::getUserEmail).toList().contains(user.getUserEmail())) {
-            model.addAttribute("userEmailAlreadyTaken", "Ten address email jest zajęty");
-            return userEditDetails;
-        } else {
-            userService.editUser(user);
         }
+        if (allUsers.stream().anyMatch(u -> !u.getUserId().equals(id) && u.getUserEmail().equals(user.getUserEmail()))) {
+            model.addAttribute("userEmailAlreadyTaken", "Ten adres email jest zajęty");
+            return userEditDetails;
+        }
+        userService.editUser(user);
         redirectAttributes.addAttribute("successMessage", "Aktualizacja użytkownika przebiegła pomyślnie!");
         return "redirect:/user/" + id + "/userpanel";
     }
+
+
 
     @GetMapping("/{id}/editpassword")
     public String getUserPasswordEditForm(@PathVariable Long id, Model model) {
