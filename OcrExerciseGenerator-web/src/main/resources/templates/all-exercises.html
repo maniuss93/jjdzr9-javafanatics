@@ -21,7 +21,9 @@
     <h3 class="title" th:text="${exercise.exerciseName}"></h3>
     <p><strong>Kategoria:</strong> <span th:text="${exercise.exerciseCategory.getDescription()}"></span></p>
     <p><strong>Opis:</strong> <span th:text="${exercise.description}"></span></p>
-    <p><strong>Adres strony:</strong> <a th:href="${exercise.url}" th:text="${exercise.url}"></a></p>
+    <p><iframe width="420" height="315" th:src="${exercise.url}" title="YouTube video player"
+               frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+               gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 </div>
 </body>
 </html>
