@@ -18,6 +18,7 @@ jobs:
       - name: Validate the compilation process
         run: mvn -B compile --file ./OcrExerciseGenerator-core/pom.xml
   build_and_compile_web:
+    needs: build_and_compile_core
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -31,7 +32,7 @@ jobs:
         run: mvn install --file ./OcrExerciseGenerator-core/pom.xml
              mvn -B compile --file ./OcrExerciseGenerator-web/pom.xml
   unit_tests:
-    needs: build_and_compile
+    needs: build_and_compile_web
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
