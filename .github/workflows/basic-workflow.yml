@@ -33,7 +33,7 @@ jobs:
       - name: Validate the compilation process
         run: docker-compose up
   unit_tests:
-    needs: build_and_compile_web
+    needs: build_and_compile_app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
