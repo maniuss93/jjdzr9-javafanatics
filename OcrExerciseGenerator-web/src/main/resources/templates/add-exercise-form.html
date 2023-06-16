@@ -35,8 +35,8 @@
         </div>
         <div id="error2" th:text="${addressUrlAlreadyTaken}"></div>
         <div class="form-group">
-            <label for="input-url">Link do filmu</label>
-            <input type="text" id="input-url" name="exerciseName" th:field="*{url}">
+            <label for="input-url">Link do youtube</label>
+            <input type="text" id="input-url" name="exerciseName" th:field="*{url}" pattern="^https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]+$" required>
         </div>
         <div class="form-group">
             <label for="input-exerciseCategory">Kategoria: </label>
