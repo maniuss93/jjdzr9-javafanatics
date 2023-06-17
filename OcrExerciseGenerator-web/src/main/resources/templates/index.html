@@ -19,49 +19,60 @@
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
             align-items: center;
             text-align: center;
         }
 
+        .description {
+            background-color: #f2f2f2;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+
         .row {
-            display: flex;
+            flex-direction: row;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .row .image-left {
+            flex-direction: column;
             margin-left: 10px;
+            float: left;
             width: 50%;
-        }
-
-        .row .image-right {
-            margin-right: 10px;
-            width: 50%;
-        }
-        .row .text-right {
-            text-align: right;
-        }
-        .row .text-left {
-            text-align: left;
-        }
-
-        .row .image,
-        .row .text {
-            width: 100%;
-        }
-
-        .row .image-left {
             order: 1;
             margin-right: 10px;
         }
 
+        .row .text-left {
+            flex-direction: column;
+            float: right;
+            text-align: left;
+        }
+
         .row .image-right {
+            flex-direction: column;
+            margin-right: 10px;
+            float: right;
+            width: 50%;
             order: 2;
             margin-left: 10px;
         }
+        .row .text-right {
+            flex-direction: column;
+            float: left;
+            text-align: right;
+        }
+        p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+
     </style>
 </head>
 <body>
@@ -79,19 +90,27 @@
 </nav>
 <main>
     <div class="container">
+        <div class="description" style="padding: 10px; width: 1000px; font-size: 30px">
+            <p>
+                Czy jesteś gotowy, aby stawić czoła najtrudniejszym wyzwaniom i przekroczyć swoje fizyczne granice?
+                Nasz generator ćwiczeń OCR został zaprojektowany, aby przygotować Cię do ekscytującego świata wyścigów
+                z przeszkodami. Niezależnie od tego, czy jesteś doświadczonym entuzjastą OCR, czy początkującym, który
+                chce wziąć udział w swoim pierwszym wyścigu, nasza aplikacja jest najlepszym towarzyszem treningu.
+            </p>
+        </div>
 
         <div class="row">
-            <div class="image-left">
-                <img src="../static/images/exercises.jpg" alt="Image 1">
-            </div>
-            <div class="text-right">
+            <article class="image-left">
+                <img src="/images/exercises.jpg" alt="Image 1">
+            </article>
+            <aside class="text-right">
                 <p>Text for Image 1</p>
-            </div>
+            </aside>
         </div>
 
         <div class="row">
             <div class="image-right">
-                <img src="../static/images/addexercise.jpg" alt="Image 2">
+                <img src="/images/addexercise.jpg" alt="Image 2">
             </div>
             <div class="text-left">
                 <p>Text for Image 2</p>
@@ -100,19 +119,19 @@
 
         <div class="row">
             <div class="image-left">
-                <img src="../static/images/changedetails.jpg" alt="Image 3">
+                <img src="/images/changedetails.jpg" alt="Image 3">
             </div>
             <div class="text-right">
                 <p>Text for Image 3</p>
             </div>
         </div>
 
-        <div class="row">
-            <div class="image">
-                <img src="../static/images/profil.jpg" alt="Image 5">
+        <div class="container">
+            <div class="container">
+                <img src="/images/profil.jpg" alt="Image 4">
             </div>
         </div>
-        <div class="row">
+        <div class="container">
             <div class="text">
                 <p>Text for Image 4</p>
             </div>
