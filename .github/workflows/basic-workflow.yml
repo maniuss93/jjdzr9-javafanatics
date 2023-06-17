@@ -22,7 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: docker:latest
-      options: --mount=type=cache,target=/root/.cache/docker
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -30,7 +29,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: maven
       - name: Validate the compilation process
         run: docker-compose up
   unit_tests:
