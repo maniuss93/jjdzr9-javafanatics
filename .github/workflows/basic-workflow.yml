@@ -31,6 +31,7 @@ jobs:
           distribution: 'temurin'
       - name: Validate the compilation process
         run: docker-compose up
+        if: ${{ success() }}
   unit_tests:
     needs: build_and_compile_app
     runs-on: ubuntu-latest
