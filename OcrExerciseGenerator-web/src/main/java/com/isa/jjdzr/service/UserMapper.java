@@ -32,7 +32,7 @@ public class UserMapper {
     public User updateEntity(User user, UserDto userDto) {
         user.setUserName(userDto.getUserName());
         user.setUserPassword(userDto.getUserPassword());
-        user.setUserEmail(user.getUserEmail());
+        user.setUserEmail(userDto.getUserEmail());
         user.setUserAdvancementLevel(userDto.getUserAdvancementLevel());
         return user;
     }
