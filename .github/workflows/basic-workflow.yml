@@ -30,7 +30,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Validate the compilation process
-        run: docker-compose up
+        run: docker-compose up -d
         if: ${{ success() }}
   unit_tests:
     needs: build_and_compile_app
