@@ -32,10 +32,8 @@ public class ExerciseController {
 
     //localhost:8080/exercises/not-approved
 
-    @GetMapping("/{id}/exercises/not-approved")
-    @PreAuthorize("hasRole('ADMIN')")
-
-    public String getApprovedExercises(@PathVariable Long id, Model model) {
+    @GetMapping("/exercises/not-approved")
+    public String getApprovedExercises(Model model) {
         List<Exercise> exercisesListNotApproved = exerciseService.getNotApprovedExercises();
         model.addAttribute("exercises", exercisesListNotApproved);
         return "not-approved-exercises";
@@ -58,11 +56,25 @@ public class ExerciseController {
         model.addAttribute("userId", id);
         return "random-exercises";
     }
+
     @GetMapping("/{id}/exercises/all")
     public String getAllExercises(@PathVariable Long id, Model model) {
         List<ExerciseDto> exercisesList = exerciseService.findAllExercises();
         model.addAttribute("exercises", exercisesList);
         return "all-exercises";
+    }
+
+    @GetMapping("/exercises/all")
+    public String getAllExercises(Model model) {
+        List<ExerciseDto> exercisesList = exerciseService.findAllExercises();
+        model.addAttribute("exercises", exercisesList);
+        return "admin-all-exercises";
+    }
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('USER')")
+    public String getAdmin() {
+        return "admin-panel";
     }
 
     @GetMapping("/generate-pdf")
@@ -94,20 +106,19 @@ public class ExerciseController {
 
 
     @PostMapping("/exercises/accept/{exerciseId}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String acceptExercise(@PathVariable Long exerciseId, @RequestParam Long id) {
-        exerciseService.acceptExercise(exerciseId);
-        return "redirect:/" + id + "/exercises/not-approved";
-    }
 
+    public String acceptExercise(@PathVariable Long exerciseId) {
+        exerciseService.acceptExercise(exerciseId);
+        return "redirect:/exercises/not-approved";
+    }
 
 
     @PostMapping("/exercises/delete/{exerciseId}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String deleteExercise(@PathVariable Long exerciseId, @RequestParam Long id) {
+    public String deleteExercise(@PathVariable Long exerciseId) {
         exerciseService.deleteExercise(exerciseId);
-        return "redirect:/" + id + "/exercises/not-approved";
+        return "redirect:/exercises/not-approved";
     }
+
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

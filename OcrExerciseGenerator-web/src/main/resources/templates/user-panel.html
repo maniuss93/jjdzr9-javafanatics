@@ -16,7 +16,6 @@
         <li><a th:href="@{/{id}/exercises/random(id=${id})}" th:text="'Wygeneruj losowy zestaw ćwiczeń'"></a></li>
         <li><a th:href="@{/{id}/exercises/all(id=${id})}" th:text="'Baza wszystkich ćwiczeń'"></a></li>
         <li><a th:href="@{/{id}/exercise/add(id=${id})}" th:text="'Zaproponuj ćwiczenie'"></a></li>
-        <li><a th:href="@{/{id}/exercises/not-approved(id=${id})}" th:text="'Proponowane ćwiczenia'"></a></li>
         <li style="display: inline-block" id="block"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edytuj profil</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" th:href="@{/user/{id}/editdetails(id=${id})}">Zmień dane</a>

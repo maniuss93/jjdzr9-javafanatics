@@ -42,8 +42,7 @@ public class SecurityConfig {
                     try {
                         autz
                                 .requestMatchers("/","/demo","/user/new","/calendar","/info").permitAll()
-                                .requestMatchers("/{id}/exercises/not-approved/**","/exercises/accept/**", "/exercises/delete/**").hasRole("ADMIN")
-                                .requestMatchers("/{id}/exercises/approved/**").authenticated()
+                                .requestMatchers("/admin","/{id}/exercises/not-approved/**","/exercises/accept/**", "/exercises/delete/**").authenticated()
                                 //.anyRequest().authenticated()
                                 .and()
                                 .oauth2Login()

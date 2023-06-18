@@ -22,18 +22,10 @@
     <p><strong>Opis:</strong> <span th:text="${exercise.description}"></span></p>
     <p><strong>Adres strony:</strong> <a th:href="${exercise.url}" th:text="${exercise.url}"></a></p>
 
-    <form th:if="${not exercise.isApproved}"
-          th:action="@{/exercises/accept/{exId}(exId=${exercise.exerciseId})}"
-          method="post" style="display: inline-block;">
-        <button type="submit">Akceptuj</button>
-    </form>
-
-
     <form th:action="@{/exercises/delete/{exId}(exId=${exercise.exerciseId})}" method="post"
           style="display: inline-block; margin-left: 10px;">
         <button type="submit">Usuń</button>
     </form>
-</div>
 </div>
 </body>
 </html>
