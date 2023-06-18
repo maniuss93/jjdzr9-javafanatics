@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Baza ćwiczeń</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <h1>Ocr Exercise Generator</h1>
+</header>
+<nav>
+    <ul>
+        <li><a th:href="@{/admin}" th:text="'Powrót'"></a></li>
+    </ul>
+</nav>
+<div class="exercise" th:each="exercise : ${exercises}">
+    <h3 class="title" th:text="${exercise.exerciseName}"></h3>
+    <p><strong>Kategoria:</strong> <span th:text="${exercise.exerciseCategory.getDescription()}"></span></p>
+    <p><strong>Opis:</strong> <span th:text="${exercise.description}"></span></p>
+    <p><strong>Adres strony:</strong> <a th:href="${exercise.url}" th:text="${exercise.url}"></a></p>
+
+    <form th:if="${not exercise.isApproved}"
+          th:action="@{/exercises/accept/{exId}(exId=${exercise.exerciseId})}"
+          method="post" style="display: inline-block;">
+        <button type="submit">Akceptuj</button>
+    </form>
+
+
+    <form th:action="@{/exercises/delete/{exId}(exId=${exercise.exerciseId})}" method="post"
+          style="display: inline-block; margin-left: 10px;">
+        <button type="submit">Usuń</button>
+    </form>
+</div>
+</div>
+</body>
+</html>

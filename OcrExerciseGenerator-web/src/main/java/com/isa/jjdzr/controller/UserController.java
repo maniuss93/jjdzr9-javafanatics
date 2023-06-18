@@ -143,6 +143,16 @@ public class UserController {
         userService.deleteUser(id);
         return "redirect:/?successMessage=Uzytkownik+zostal+usuniety+pomyslnie";
     }
+    // http://localhost:8080/userpanel/{id}
+    @GetMapping("/userpanel/{id}")
+    public String getUserPanel(@PathVariable Long id) {
+        return "user-panel";
+    }
+
+    @GetMapping("/user/{id}/confirmdelete")
+    public String confirmDeleteUser(@PathVariable Long id) {
+        return "user-confirm-delete";
+    }
 
     @ModelAttribute("availableUserAdvancementLevel")
     List<AdvancementLevelCategory> getAdvancementLevel() {

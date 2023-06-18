@@ -23,6 +23,9 @@ public class Exercise {
 
     @Column(name = "url")
     private String url;
+    @Column(name = "is_approved")
+    private boolean isApproved=false;
+
 
     @Enumerated(EnumType.STRING)
     @Column(name = "exercise_category", nullable = false)
@@ -85,5 +88,11 @@ public class Exercise {
         return exerciseId;
     }
 
+    public boolean isApproved() {
+        return isApproved;
+    }
 
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
 }

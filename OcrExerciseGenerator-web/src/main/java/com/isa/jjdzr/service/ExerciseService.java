@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +35,7 @@ public class ExerciseService {
     }
 
     public List<ExerciseDto> findAllExercises() {
-        List<Exercise> findAll = exerciseRepository.findAll();
+        List<Exercise> findAll = exerciseRepository.findByIsApprovedTrue();
         return exerciseMapper.allExercisesToDto(findAll);
     }
 
@@ -68,12 +69,27 @@ public class ExerciseService {
 
     public List<Exercise> generateRandomExercises(AdvancementLevelCategory userAdvancementLevel) {
         return randomExerciseGenerator.generateRandomExercises(randomExerciseGenerator
-                .convertAdvancementLevel(userAdvancementLevel), exerciseRepository.findAll());
+                .convertAdvancementLevel(userAdvancementLevel),
+                exerciseRepository.findByIsApprovedTrue());
     }
 
     public List<Exercise> getExercisesByIds(List<Long> ids) {
         return exerciseRepository.findAllById(ids);
     }
 
+    public List<Exercise> getApprovedExercises() {
+        return exerciseRepository.findByIsApprovedTrue();
+    }
+    public List<Exercise> getNotApprovedExercises() {
+        return exerciseRepository.findByIsApprovedFalse();
+    }
+
+    public void acceptExercise(Long exerciseId) {
+        Exercise exercise = exerciseRepository.findByExerciseId(exerciseId);
+        if (exercise != null) {
+            exercise.setApproved(true);
+            exerciseRepository.save(exercise);
+        }
+    }
 
 }
