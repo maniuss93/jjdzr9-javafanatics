@@ -1,34 +1,21 @@
-package com.isa.jjdzr.exercise.model;
+package com.isa.jjdzr.dto;
 
-import com.isa.jjdzr.exercise.service.ExerciseCategory;
-import jakarta.persistence.*;
+import com.isa.jjdzr.dictionary.ExerciseCategory;
+import org.springframework.stereotype.Service;
 
-@Entity
-@Table(name = "exercises")
-public class Exercise {
+@Service
+public class ExerciseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exercise_id", nullable = false)
     private Long exerciseId;
 
-    @Column(name = "exercise_points", nullable = false)
     private int exercisePoints;
 
-    @Column(name = "exercise_name", nullable = false)
     private String exerciseName;
 
-    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "url")
     private String url;
-    @Column(name = "is_approved")
-    private boolean isApproved=false;
 
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "exercise_category", nullable = false)
     private ExerciseCategory exerciseCategory;
 
     public ExerciseCategory getExerciseCategory() {
@@ -39,10 +26,10 @@ public class Exercise {
         this.exerciseCategory = exerciseCategory;
     }
 
-    public Exercise() {
+    public ExerciseDto() {
     }
 
-    public Exercise(String exerciseName, Integer exercisePoints) {
+    public ExerciseDto(String exerciseName, Integer exercisePoints) {
         this.exerciseName = exerciseName;
         this.exercisePoints = exercisePoints;
     }
@@ -88,11 +75,5 @@ public class Exercise {
         return exerciseId;
     }
 
-    public boolean isApproved() {
-        return isApproved;
-    }
 
-    public void setApproved(boolean approved) {
-        isApproved = approved;
-    }
 }

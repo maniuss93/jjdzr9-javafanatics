@@ -1,31 +1,39 @@
-package com.isa.jjdzr.dto;
+package com.isa.jjdzr.model;
 
-import com.isa.jjdzr.user.service.AdvancementLevelCategory;
-import org.springframework.stereotype.Service;
+import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
+import jakarta.persistence.*;
 
-@Service
-public class UserDto {
+@Entity
+@Table(name = "users")
+public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
+    @Column(name = "user_name", nullable = false)
     private String userName;
 
+    @Column(name = "user_password", nullable = false)
     private String userPassword;
 
+    @Column(name = "user_email", nullable = false)
     private String userEmail;
 
-    public UserDto(Long userId, String userName, String userPassword, String userEmail, AdvancementLevelCategory userAdvancementLevel) {
-        this.userId = userId;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_advancement_level", nullable = false)
+    private AdvancementLevelCategory userAdvancementLevel;
+
+    public User(String userName, String userPassword, String userEmail, AdvancementLevelCategory userAdvancementLevel) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
         this.userAdvancementLevel = userAdvancementLevel;
     }
 
-    public UserDto() {
+    public User() {
     }
-
-    private AdvancementLevelCategory userAdvancementLevel;
 
     public Long getUserId() {
         return userId;

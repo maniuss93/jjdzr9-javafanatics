@@ -7,11 +7,6 @@ WORKDIR /app
 ADD OcrExerciseGenerator-web/pom.xml web/pom.xml
 ADD OcrExerciseGenerator-web/src web/src/
 
-ADD OcrExerciseGenerator-core/pom.xml core/pom.xml
-ADD OcrExerciseGenerator-core/src core/src/
-
-# Build and install the core module
-RUN mvn clean install -f ./core/pom.xml
 
 # Build and install the web module
 RUN mvn clean install -f ./web/pom.xml

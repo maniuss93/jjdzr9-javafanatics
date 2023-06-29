@@ -1,7 +1,7 @@
 package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.dto.ExerciseDto;
-import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.model.Exercise;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

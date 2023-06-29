@@ -2,8 +2,8 @@ package com.isa.jjdzr.controller;
 
 import com.isa.jjdzr.dto.UserDto;
 import com.isa.jjdzr.service.UserService;
-import com.isa.jjdzr.user.model.User;
-import com.isa.jjdzr.user.service.AdvancementLevelCategory;
+import com.isa.jjdzr.model.User;
+import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

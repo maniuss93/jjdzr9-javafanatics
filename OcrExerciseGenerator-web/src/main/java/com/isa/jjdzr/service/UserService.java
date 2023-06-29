@@ -2,7 +2,7 @@ package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.dto.UserDto;
 import com.isa.jjdzr.repository.UserRepository;
-import com.isa.jjdzr.user.model.User;
+import com.isa.jjdzr.model.User;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

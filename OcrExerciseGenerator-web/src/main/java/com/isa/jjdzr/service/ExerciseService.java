@@ -1,18 +1,15 @@
 package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.dto.ExerciseDto;
-import com.isa.jjdzr.exercise.model.Exercise;
-import com.isa.jjdzr.exercise.service.PdfExerciseGenerator;
-import com.isa.jjdzr.exercise.service.RandomExerciseGenerator;
+import com.isa.jjdzr.model.Exercise;
 import com.isa.jjdzr.repository.ExerciseRepository;
-import com.isa.jjdzr.user.service.AdvancementLevelCategory;
+import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
