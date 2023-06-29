@@ -30,9 +30,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run unit tests
-        run: |
-          mvn install --file ./OcrExerciseGenerator-core/pom.xml
-          mvn test --file ./OcrExerciseGenerator-web/pom.xml
+        run: mvn test --file ./OcrExerciseGenerator-web/pom.xml
   integration_tests:
     needs: unit_tests
     runs-on: ubuntu-latest
@@ -45,7 +43,5 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run integration tests
-        run: |
-          mvn install --file ./OcrExerciseGenerator-core/pom.xml
-          mvn verify --file ./OcrExerciseGenerator-web/pom.xml
+        run: mvn verify --file ./OcrExerciseGenerator-web/pom.xml
           
