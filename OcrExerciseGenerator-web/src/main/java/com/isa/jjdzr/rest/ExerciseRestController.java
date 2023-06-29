@@ -1,7 +1,7 @@
 package com.isa.jjdzr.rest;
 
 import com.isa.jjdzr.dto.ExerciseDto;
-import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.model.Exercise;
 import com.isa.jjdzr.service.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

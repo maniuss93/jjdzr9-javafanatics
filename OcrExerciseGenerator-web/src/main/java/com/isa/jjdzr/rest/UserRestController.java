@@ -2,7 +2,7 @@ package com.isa.jjdzr.rest;
 
 import com.isa.jjdzr.dto.UserDto;
 import com.isa.jjdzr.service.UserService;
-import com.isa.jjdzr.user.model.User;
+import com.isa.jjdzr.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

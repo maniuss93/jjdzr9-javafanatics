@@ -1,4 +1,4 @@
-package com.isa.jjdzr.user.service;
+package com.isa.jjdzr.dictionary;
 
 public enum AdvancementLevelCategory {
     BEGINNER("Początkujący"),

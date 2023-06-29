@@ -2,8 +2,7 @@ package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.controller.ExerciseController;
 import com.isa.jjdzr.dto.ExerciseDto;
-import com.isa.jjdzr.exercise.model.Exercise;
-import com.isa.jjdzr.exercise.service.PdfExerciseGenerator;
+import com.isa.jjdzr.model.Exercise;
 import com.isa.jjdzr.repository.ExerciseRepository;
 import com.isa.jjdzr.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;

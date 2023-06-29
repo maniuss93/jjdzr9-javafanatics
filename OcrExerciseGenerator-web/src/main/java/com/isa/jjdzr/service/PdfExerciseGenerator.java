@@ -1,6 +1,6 @@
-package com.isa.jjdzr.exercise.service;
+package com.isa.jjdzr.service;
 
-import com.isa.jjdzr.exercise.model.Exercise;
+import com.isa.jjdzr.model.Exercise;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;

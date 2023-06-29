@@ -1,12 +1,14 @@
-package com.isa.jjdzr.exercise.service;
+package com.isa.jjdzr.service;
 
-import com.isa.jjdzr.exercise.model.Exercise;
-import com.isa.jjdzr.user.service.AdvancementLevelCategory;
+import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
+import com.isa.jjdzr.dictionary.ExerciseCategory;
+import com.isa.jjdzr.model.Exercise;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Component
 public class RandomExerciseGenerator {
@@ -21,10 +23,16 @@ public class RandomExerciseGenerator {
         double coreExercisesPoints = userLevel * indicatorOfCoreExercises;
         double stretchingPoints = userLevel * indicatorOfStretching;
         if (userLevel != 0) {
-            exerciseList.addAll(fillExerciseList(ExerciseDataBase.
-                    findExerciseByCategory(ExerciseCategory.WARM_UP, exercises), warmUpPoints));
-            exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory(ExerciseCategory.CORE_EXERCISES, exercises), coreExercisesPoints));
-            exerciseList.addAll(fillExerciseList(ExerciseDataBase.findExerciseByCategory(ExerciseCategory.STRETCHING, exercises), stretchingPoints));
+            exerciseList.addAll(fillExerciseList(
+                    exercises.stream()
+                            .filter(c -> c.getExerciseCategory().equals(ExerciseCategory.WARM_UP))
+                            .collect(Collectors.toList()), warmUpPoints));
+            exerciseList.addAll(fillExerciseList(
+                    exercises.stream().filter(c -> c.getExerciseCategory().equals(ExerciseCategory.CORE_EXERCISES))
+                            .collect(Collectors.toList()), coreExercisesPoints));
+            exerciseList.addAll(fillExerciseList(
+                    exercises.stream().filter(c -> c.getExerciseCategory().equals(ExerciseCategory.STRETCHING))
+                            .collect(Collectors.toList()), stretchingPoints));
         } else {
             System.out.println("Proszę wykonać: Test poziomu zaawansowania");
         }

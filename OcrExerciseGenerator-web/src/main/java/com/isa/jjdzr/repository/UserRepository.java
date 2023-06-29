@@ -1,6 +1,6 @@
 package com.isa.jjdzr.repository;
 
-import com.isa.jjdzr.user.model.User;
+import com.isa.jjdzr.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

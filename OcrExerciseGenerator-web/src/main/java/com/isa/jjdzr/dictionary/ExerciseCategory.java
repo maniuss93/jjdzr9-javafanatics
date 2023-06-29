@@ -1,4 +1,4 @@
-package com.isa.jjdzr.exercise.service;
+package com.isa.jjdzr.dictionary;
 
 public enum ExerciseCategory {
     WARM_UP ("Rozgrzewka"),
@@ -15,4 +15,5 @@ public enum ExerciseCategory {
     public String getDescription() {
         return description;
     }
+
 }

@@ -2,8 +2,8 @@ package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.dto.UserDto;
 import com.isa.jjdzr.repository.UserRepository;
-import com.isa.jjdzr.user.model.User;
-import com.isa.jjdzr.user.service.AdvancementLevelCategory;
+import com.isa.jjdzr.model.User;
+import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

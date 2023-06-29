@@ -1,7 +1,7 @@
 package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.dto.UserDto;
-import com.isa.jjdzr.user.model.User;
+import com.isa.jjdzr.model.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

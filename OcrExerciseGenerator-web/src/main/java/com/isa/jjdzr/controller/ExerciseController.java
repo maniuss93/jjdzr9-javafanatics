@@ -1,11 +1,11 @@
 package com.isa.jjdzr.controller;
 
 import com.isa.jjdzr.dto.ExerciseDto;
-import com.isa.jjdzr.exercise.model.Exercise;
-import com.isa.jjdzr.exercise.service.ExerciseCategory;
+import com.isa.jjdzr.model.Exercise;
+import com.isa.jjdzr.dictionary.ExerciseCategory;
 import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.service.ExerciseService;
-import com.isa.jjdzr.user.model.User;
+import com.isa.jjdzr.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
