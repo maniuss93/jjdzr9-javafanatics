@@ -1,118 +1,69 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocr Exercise Generator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <style>
-        header {
-            background-image: url('https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/landing_page/template_background/44380/a6e9ca3112fda15ca98cbba9f428660e.jpg');
+        body {
+            background-image: url("/images/background.jpg");
             background-size: cover;
+            background-repeat: no-repeat;
             background-position: center;
-            height: 600px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 100px;
+            background-attachment: fixed;
         }
-
-        .description {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background-color: #f2f2f2;
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin: 20px;
-            font-size: 20px;
-            width: 70%;
-            margin: 20px auto;
-        }
-
-        .row {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-
-        .column {
-            flex: 1;
-            padding: 0 10px;
-        }
-
-        .column img {
-            width: 100%;
-            cursor: pointer;
-        }
-
-        p {
-            display: block;
-            margin-block-start: 1em;
-            margin-block-end: 1em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
-        }
-
     </style>
 </head>
 <body>
-<header>
-    <h1>Ocr Exercise Generator</h1>
-</header>
+<header class="site-header">
 <div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
-<nav>
-    <ul>
-        <li><a href="/user/login">Logowanie</a></li>
-        <li><a href="/user/new">Rejestracja użytkownika</a></li>
-        <li><a href="/calendar">Kalendarz imprez</a></li>
-        <li><a href="/info">O nas</a></li>
-    </ul>
-</nav>
-<main>
     <div class="container">
-        <div class="description">
-            <p>
-                Czy jesteś gotowy, aby stawić czoła najtrudniejszym wyzwaniom i przekroczyć swoje fizyczne granice?
-                Nasz generator ćwiczeń OCR został zaprojektowany, aby przygotować Cię do ekscytującego świata wyścigów
-                z przeszkodami. Niezależnie od tego, czy jesteś doświadczonym entuzjastą OCR, czy początkującym, który
-                chce wziąć udział w swoim pierwszym wyścigu, nasza aplikacja jest najlepszym towarzyszem treningu.
-            </p>
-        </div>
-
         <div class="row">
-            <div class="column">
-                <a href="/images/exercises.jpg" data-fancybox="gallery">
-                    <img src="/images/exercises.jpg" alt="Image 1">
-                </a>
+            <div class="col-lg-2">
+                <div class="main-navigation">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a href="/calendar">Kalendarz imprez</a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-            <div class="column">
-                <a href="/images/addexercise.jpg" data-fancybox="gallery">
-                    <img src="/images/addexercise.jpg" alt="Image 2">
-                </a>
-            </div>
-            <div class="column">
-                <a href="/images/changedetails.jpg" data-fancybox="gallery">
-                    <img src="/images/changedetails.jpg" alt="Image 3">
-                </a>
-            </div>
-            <div class="column">
-                <a href="/images/profil.jpg" data-fancybox="gallery">
-                    <img src="/images/profil.jpg" alt="Image 4">
-                </a>
+            <div class="col-lg-10">
+                <div class="main-navigation">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a href="/user/login">Logowanie</a></li>
+                            <li><a href="/user/new">Rejestracja</a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
-
     </div>
-</main>
+</header>
+<main>
+    <section class="main-banner" id="home">
+        <div class="sec-wp">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="banner-text">
+                            <h1 class="h1-title">
+                                twój najlepszy
+                                <span>towarzysz</span>
+                                w codziennym treningu!
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+</main>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery.fancybox.min.js"></script>
 </body>
 </html>
