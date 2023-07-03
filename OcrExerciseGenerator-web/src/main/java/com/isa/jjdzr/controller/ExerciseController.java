@@ -1,11 +1,11 @@
 package com.isa.jjdzr.controller;
 
+import com.isa.jjdzr.dictionary.ExerciseCategory;
 import com.isa.jjdzr.dto.ExerciseDto;
 import com.isa.jjdzr.model.Exercise;
-import com.isa.jjdzr.dictionary.ExerciseCategory;
+import com.isa.jjdzr.model.User;
 import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.service.ExerciseService;
-import com.isa.jjdzr.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,7 +31,6 @@ public class ExerciseController {
     private final ExerciseService exerciseService;
     private final UserRepository userRepository;
 
-    //localhost:8080/exercises/not-approved
 
     @GetMapping("/exercises/not-approved")
     public String getNotApprovedExercises(Model model) {
@@ -39,7 +38,7 @@ public class ExerciseController {
         model.addAttribute("exercises", exercisesListNotApproved);
         return "not-approved-exercises";
     }
-    //localhost:8080/exercises/approved
+
 
     @GetMapping("/{id}/exercises/approved")
     public String getApprovedExercises(@PathVariable Long id, Model model) {
@@ -48,7 +47,7 @@ public class ExerciseController {
         return "all-exercises";
     }
 
-    //localhost:8080/{id}/exercises/random
+
     @GetMapping("/{id}/exercises/random")
     public String generateRandomExercises(@PathVariable Long id, Model model) {
         Optional<User> userFromDb = userRepository.findByUserId(id);

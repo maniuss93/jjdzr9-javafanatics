@@ -1,9 +1,9 @@
 package com.isa.jjdzr.controller;
 
-import com.isa.jjdzr.dto.UserDto;
-import com.isa.jjdzr.service.UserService;
-import com.isa.jjdzr.model.User;
 import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
+import com.isa.jjdzr.dto.UserDto;
+import com.isa.jjdzr.model.User;
+import com.isa.jjdzr.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,14 +27,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    //localhost:8080/user/new
     @GetMapping("/new")
     public String getCreateUserForm(Model model) {
         model.addAttribute("user", new User());
         return userCreateForm;
     }
 
-    //localhost:8080/user/new
     @PostMapping(value = "/new")
     public String createUser(@ModelAttribute("user") UserDto user,
                              @RequestParam("userPassword") String userPassword,
@@ -56,14 +54,12 @@ public class UserController {
         }
     }
 
-    //localhost:8080/user/login
     @GetMapping("/login")
     public String getLoginForm(Model model) {
         model.addAttribute("user", new User());
         return "user-login-form";
     }
 
-    //localhost:8080/user/login
     @PostMapping(value = "/login")
     public String userLogin(@ModelAttribute("user") UserDto user, Model model) {
         Optional<User> userByName = userService.findByUserName(user.getUserName());
@@ -109,7 +105,6 @@ public class UserController {
     }
 
 
-
     @GetMapping("/{id}/editpassword")
     public String getUserPasswordEditForm(@PathVariable Long id, Model model) {
         Optional<User> user = userService.findByUserId(id);
@@ -143,7 +138,7 @@ public class UserController {
         userService.deleteUser(id);
         return "redirect:/?successMessage=Uzytkownik+zostal+usuniety+pomyslnie";
     }
-    // http://localhost:8080/userpanel/{id}
+
     @GetMapping("/userpanel/{id}")
     public String getUserPanel(@PathVariable Long id) {
         return "user-panel";
