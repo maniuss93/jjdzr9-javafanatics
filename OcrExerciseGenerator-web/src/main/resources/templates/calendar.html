@@ -4,101 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalendarz imprez</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <style>
         body {
+            background-image: url("/images/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
             font-family: Arial, sans-serif;
             line-height: 1.6;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            background: #333;
-            color: #fff;
-            padding: 1rem;
-        }
-
-        header ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        header ul li {
-            margin-right: 1rem;
-        }
-
-        .event {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .event h2 {
-            margin-top: 0;
-        }
-
-        .event-details {
-            margin-bottom: 1rem;
-        }
-
-        .event-formulas {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-
-        .event-formula {
-            margin-right: 1rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #333;
-            color: #fff;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-        }
-
-        .subscribe {
-            display: flex;
-            justify-content: center;
-        }
-
-        .social {
-            display: flex;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
-        .social a {
-            margin-right: 1rem;
-        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<header>
-    <h1>Kalendarz imprez</h1>
+<header class="site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="main-navigation" style="justify-content: flex-start">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a href="/">Home</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="main-navigation">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a href="/user/login">Logowanie</a></li>
+                            <li><a href="/user/new">Rejestracja</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
-<nav>
-    <ul>
-        <li><a href="/">Strona główna</a></li>
-        <li><a href="/user/new">Rejestracja użytkownika</a></li>
-        <li><a href="/user/login">Logowanie</a></li>
-        <li><a href="/calendar">Kalendarz imprez</a></li>
-        <li><a href="/info">O nas</a></li>
-    </ul>
-</nav>
+
 <main>
-    <section class="container">
-        <h1>Kalendarz Imprez Runmageddon</h1>
+    <section class="container" style="padding-top: 70px; padding-bottom: 40px">
         <div class="event">
             <h2>RUNMAGEDDON BYDGOSZCZ</h2>
             <p>24.06.2023</p>
