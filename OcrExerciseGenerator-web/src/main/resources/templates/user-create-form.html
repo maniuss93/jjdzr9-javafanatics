@@ -3,56 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <title>Rejestracja</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        body {
+            background-image: url("/images/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
 <body>
-<header>
-    <h1>Ocr Exercise Generator</h1>
+<header class="site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="main-navigation" style="justify-content: flex-start">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a href="/">Home</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="main-navigation">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a href="/user/login">Logowanie</a></li>
+                            <li><a href="/calendar">Kalendarz imprez</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
-<nav>
-    <ul>
-        <li><a href="/">Strona główna</a></li>
-        <li><a href="/user/login">Logowanie</a></li>
-        <li><a href="/calendar">Kalendarz imprez</a></li>
-        <li><a href="/info">O nas</a></li>
-    </ul>
-</nav>
-<div id="space"></div>
-<div class="form-container">
-    <form method="post" th:action="@{/user/new}" th:object="${user}">
-        <h2>Rejestracja użytkownika</h2>
-        <div id="error" th:text="${usernameAlreadyTaken}"></div>
-        <div class="form-group">
-            <label for="input-userName">Nazwa użytkownika</label>
-            <input type="text" id="input-userName" name="userName" th:field="*{userName}" required>
+<main>
+    <section class="main-banner" id="login-container">
+        <div class="sec-wp">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-container2">
+                            <form method="post" th:action="@{/user/new}" th:object="${user}">
+                                <div id="error" th:text="${usernameAlreadyTaken}"></div>
+                                <div class="form-group">
+                                    <label for="input-userName">Nazwa użytkownika</label>
+                                    <input type="text" id="input-userName" name="userName" th:field="*{userName}"
+                                           required>
+                                </div>
+                                <div id="error2" th:text="${userEmailAlreadyTaken}"></div>
+                                <div class="form-group">
+                                    <label for="input-email">Adres email</label>
+                                    <input type="email" id="input-email" name="email" th:field="*{userEmail}"
+                                           PATTERN="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
+                                </div>
+                                <div id="error3" th:text="${userPasswordsDoNotMatch}"></div>
+                                <div class="form-group">
+                                    <label for="password">Hasło</label>
+                                    <input type="password" id="password" name="password" th:field="*{userPassword}"
+                                           minlength="6" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Powtórz hasło</label>
+                                    <input type="password" id="confirmPassword" name="confirmPassword" minlength="6"
+                                           required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-userAdvancementLevel">Twój poziom zaawansowania: </label>
+                                    <select id="input-userAdvancementLevel" name="userAdvancementLevel"
+                                            th:field="*{userAdvancementLevel}" required>
+                                        <option th:each="level: ${availableUserAdvancementLevel}"
+                                                th:text="${level.description}"
+                                                th:value="${level.name()}"/>
+                                    </select>
+                                </div>
+<!--                                <label>-->
+                                    <input type="number" hidden="true" th:field="*{userId}">
+<!--                                </label>-->
+                                <div class="login-button">
+                                    <button type="submit" class="btn btn-primary">Zarejestruj</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="error2" th:text="${userEmailAlreadyTaken}"></div>
-        <div class="form-group">
-            <label for="input-email">Adres email</label>
-            <input type="email" id="input-email" name="email" th:field="*{userEmail}" PATTERN="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
-        </div>
-        <div id="error3" th:text="${userPasswordsDoNotMatch}"></div>
-        <div class="form-group">
-            <label for="password">Hasło</label>
-            <input type="password" id="password" name="password" th:field="*{userPassword}" minlength="6" required>
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">Powtórz hasło</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" minlength="6" required>
-        </div>
-        <div class="form-group">
-            <label for="input-userAdvancementLevel">Twój poziom zaawansowania: </label>
-            <select id="input-userAdvancementLevel" name="userAdvancementLevel" th:field="*{userAdvancementLevel}" required>
-           <option th:each="level: ${availableUserAdvancementLevel}"
-                   th:text="${level.description}"
-                   th:value="${level.name()}"/>
-            </select>
-        </div>
-        <input type="number" hidden="true" th:field="*{userId}">
-        <button type="submit" class="btn btn-primary">Zarejestruj</button>
-    </form>
-</div>
+    </section>
+</main>
 </body>
 </html>

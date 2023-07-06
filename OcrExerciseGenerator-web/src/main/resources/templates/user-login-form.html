@@ -3,38 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <title>Logowanie</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        body {
+            background-image: url("/images/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
 <body>
-<header>
-    <h1>Ocr Exercise Generator</h1>
+<header class="site-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="main-navigation" style="justify-content: flex-start">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a href="/">Home</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <div class="main-navigation">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a href="/user/new">Rejestracja</a></li>
+                            <li><a href="/calendar">Kalendarz imprez</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
-<nav>
-    <ul>
-        <li><a href="/">Strona główna</a></li>
-        <li><a href="/user/new">Rejestracja użytkownika</a></li>
-        <li><a href="/calendar">Kalendarz imprez</a></li>
-        <li><a href="/info">O nas</a></li>
-    </ul>
-</nav>
-<div id="space"></div>
-<div class="form-container">
-    <form method="post" th:action="@{/user/login}" th:object="${user}">
-        <h3>Logowanie użytkownika</h3>
-        <div id="error" th:text="${incorrectDetails}"></div>
-        <div class="form-group">
-            <label for="input-userName">Nazwa użytkownika</label>
-            <input type="text" id="input-userName" name="userName" th:field="*{userName}" required>
+<main>
+    <section class="main-banner" id="login-container">
+        <div class="sec-wp">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-container">
+                            <form method="post" th:action="@{/user/login}" th:object="${user}">
+                                <div id="error" th:text="${incorrectDetails}"></div>
+                                <div class="form-group">
+                                    <label for="input-userName">Nazwa użytkownika</label>
+                                    <input type="text" id="input-userName" name="userName" th:field="*{userName}"
+                                           required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-password">Hasło</label>
+                                    <input type="password" id="input-password" name="password"
+                                           th:field="*{userPassword}" required>
+                                </div>
+                                <div class="login-button">
+                                    <button type="submit" class="btn btn-primary">Zaloguj</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="input-password">Hasło</label>
-            <input type="password" id="input-password" name="password" th:field="*{userPassword}" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Zaloguj</button>
-    </form>
-</div>
+    </section>
+</main>
 </body>
 </html>
 
