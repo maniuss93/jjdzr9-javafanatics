@@ -237,6 +237,14 @@ form {
     background-color: transparent !important;
     border: none !important;
 }
+.rounded-circle {
+    width: 250px;
+    height: 300px;
+}
+
+.nav-link {
+    padding: 0 !important;
+}
 
 
 
