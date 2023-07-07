@@ -16,28 +16,64 @@
     </style>
 </head>
 <body>
-<header>
-    <h1>Ocr Exercise Generator</h1>
+<header class="site-header">
+    <div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2" style="width: 70% !important;">
+                <div class="main-navigation" style="justify-content: flex-start">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a th:href="@{/{id}/exercises/all(id=${id})}" th:text="'Wszystkie ćwiczeń'"></a>
+                            </li>
+                            <li><a th:href="@{/{id}/exercise/add(id=${id})}" th:text="'Dodaj ćwiczenie'"></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-10" style="width: 30% !important">
+                <div class="main-navigation">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li style="display: inline-block" id="block">
+                                <form method="get" th:action="@{/generate-pdf}">
+                                    <input type="hidden" th:each="exercise : ${randomExercises}"
+                                           th:name="exerciseIds" th:value="${exercise.exerciseId}">
+                                    <button type="submit" id="pdf-button" class="btn btn-primary">Zapisz jako PDF
+                                    </button>
+                                </form>
+                            </li>
+                            <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 <div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
-<nav>
-    <ul>
-        <li><a th:href="@{/{id}/exercises/random(id=${id})}" th:text="'Wygeneruj losowy zestaw ćwiczeń'"></a></li>
-        <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a></li>
-    </ul>
-</nav>
-<div id="space"></div>
-<form method="get" th:action="@{/generate-pdf}">
-    <input type="hidden" th:each="exercise : ${randomExercises}"
-           th:name="exerciseIds" th:value="${exercise.exerciseId}">
-    <button type="submit" id="pdfbutton" class="btn btn-primary">Zapisz jako PDF</button></form>
-<div class="exercise" th:each="exercise : ${randomExercises}">
-    <h3 class="title" th:text="${exercise.exerciseName}"></h3>
-    <p><strong>Kategoria:</strong> <span th:text="${exercise.exerciseCategory.getDescription()}"></span></p>
-    <p><strong>Opis:</strong> <span th:text="${exercise.description}"></span></p>
-    <p><iframe width="420" height="315" th:src="${exercise.url}" title="YouTube video player"
-               frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-               gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
-</div>
+
+<section class="main-banner" id="login-container">
+    <div class="sec-wp">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="exercise" th:each="exercise : ${randomExercises}">
+                        <h3 class="title" th:text="${exercise.exerciseName}"></h3>
+                        <p><strong>Kategoria:</strong> <span
+                                th:text="${exercise.exerciseCategory.getDescription()}"></span></p>
+                        <p><strong>Opis:</strong> <span th:text="${exercise.description}"></span></p>
+                        <p>
+                            <iframe width="420" height="315" th:src="${exercise.url}" title="YouTube video player"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+                                        gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

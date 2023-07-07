@@ -24,6 +24,10 @@ body {
     padding-top: 120px !important;
 }
 
+#exercise-container {
+    padding-top: 60px !important;
+}
+
 .main-navigation .menu li a {
     border-radius: 30px;
     color: #dee2e6 !important;
@@ -69,8 +73,9 @@ a {
     font-weight: 900 !important;
 }
 
-p {
-    font-size: 16px;
+.text-muted {
+    font-size: 22px;
+    font-weight: 900;
     line-height: 30px;
 }
 
@@ -97,6 +102,12 @@ h2, h3, h4, h5, h6 {
     color: #dee2e6;
     font-family: 'Playfair Display', serif;
     font-weight: 900;
+}
+h5{
+    color: #dee2e6;
+    font-size: 25px !important;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900 !important;
 }
 
 .h1-title span {
@@ -132,10 +143,10 @@ label, input {
 }
 
 .btn {
+    padding: 0.4rem 0.75rem;
     background-color: #4f5050 !important;
     font-family: 'Poppins', sans-serif !important;
     font-weight: 700 !important;
-    padding-top: 5px !important;
     align-items: center !important;
     text-align: center !important;
     border: none !important;
@@ -150,11 +161,6 @@ label, input {
 
 form {
     padding-left: 10px;
-}
-
-.exercise {
-    padding: 30px;
-    margin-left: 30px;
 }
 
 .form-group {
@@ -194,13 +200,6 @@ form {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#pdfbutton {
-    float: right;
-    margin-left: auto;
-    margin-right: 40px;
-    margin-bottom: 0;
-}
-
 .error {
     color: red;
     font-size: 0.9em;
@@ -211,7 +210,6 @@ form {
     background-color: #c3e6cb;
     color: #155724;
 }
-
 
 .event-details {
     margin-bottom: 1rem;
@@ -233,10 +231,12 @@ form {
     padding: 1rem;
     margin-bottom: 1rem;
 }
+
 .dropdown-menu {
     background-color: transparent !important;
     border: none !important;
 }
+
 .rounded-circle {
     width: 250px;
     height: 300px;
@@ -246,5 +246,10 @@ form {
     padding: 0 !important;
 }
 
+#pdf-button {
+    background-color: transparent !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 19px !important;
+}
 
 
