@@ -38,7 +38,7 @@ public class PdfExerciseGenerator {
         document.add(title);
         Paragraph emptyLine = new Paragraph(" ");
         document.add(emptyLine);
-        Collections.sort(exercises, new Comparator<Exercise>() {
+        exercises.sort(new Comparator<Exercise>() {
             @Override
             public int compare(Exercise o1, Exercise o2) {
                 return o1.getExerciseCategory().compareTo(o2.getExerciseCategory());
