@@ -2,27 +2,60 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Usuń profil</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    <title>Usun profil</title>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        body {
+            background-image: url("/images/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
 <body>
-<header>
-    <h1>Ocr Exercise Generator</h1>
+<header class="site-header">
+    <div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10" style="width: 30% !important">
+                <div class="main-navigation" style="justify-content: flex-end">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
-<nav>
-    <ul>
-        <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a></li>
-    </ul>
-</nav>
-<div id="space"></div>
-    <form id="confirmdelete" method="get" th:action="@{/user/{id}/delete(id=${id})}">
-        <h2>Przykro nam że odchodzisz</h2>
-            <label for="reason">Twoja opinia jest dla nas ważna. Powiedz nam co możemy zrobić lepiej</label>
-            <textarea id="reason" name="reason" rows="4" cols="50"></textarea>
-        <button type="submit" class="btn btn-primary">Usuń profil</button>
-    </form>
+<div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
+
+
+<section class="main-banner" id="login-container">
+    <div class="sec-wp">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-container" style="width: 550px !important;">
+                        <form id="confirmdelete" method="get" th:action="@{/user/{id}/delete(id=${id})}">
+                            <h2>Przykro nam że odchodzisz..</h2>
+                            <label for="reason" style="width: 450px !important;">Twoja opinia jest dla nas ważna. Co możemy zrobić
+                                lepiej?</label>
+                            <textarea id="reason" name="reason" rows="4" cols="50"></textarea>
+                            <div class="login-button">
+                                <button type="submit" class="btn btn-primary">Usuń profil</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
