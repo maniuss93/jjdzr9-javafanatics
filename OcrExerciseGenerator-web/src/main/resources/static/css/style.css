@@ -137,9 +137,12 @@ h5{
 
 
 label, input {
+    width: 250px;
     display: block;
-    margin-left: 3px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+}
+select {
+    width: 130px;
 }
 
 .btn {
@@ -155,23 +158,26 @@ label, input {
 }
 
 .login-button {
-    margin-top: 40px;
-    margin-left: 85px;
+    width: fit-content;
+    margin-top: 30px;
+    margin-inline: auto;
 }
 
 form {
-    padding-left: 10px;
+    margin: 0 auto !important;
+    width: 250px !important;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .form-container {
-    padding: 30px;
-    width: 350px;
-    height: 300px;
-    margin: 0 auto;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width: 320px;
+    height: auto;
+    margin: auto;
     background: rgb(37, 207, 242, 0.40);
     border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -180,7 +186,7 @@ form {
 .form-container2 {
     padding: 30px;
     width: 350px;
-    height: 550px;
+    height: auto;
     margin: 0 auto;
     background: rgb(37, 207, 242, 0.40);
     border-radius: 20px;
@@ -192,12 +198,11 @@ form {
 }
 
 #confirmdelete {
-    padding: 20px;
-    width: 550px;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 450px !important;
+}
+
+#reason{
+    width: 450px !important;
 }
 
 .error {

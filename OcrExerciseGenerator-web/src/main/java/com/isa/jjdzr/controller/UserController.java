@@ -144,7 +144,8 @@ public class UserController {
         return "user-panel";
     }
 
-    @GetMapping("/user/{id}/confirmdelete")
+
+    @GetMapping("/{id}/confirmdelete")
     public String confirmDeleteUser(@PathVariable Long id) {
         return "user-confirm-delete";
     }
