@@ -2,62 +2,106 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dodawanie ćwiczenia</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Losowy zestaw ćwiczeń</title>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        body {
+            background-image: url("/images/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
 <body>
-<header>
-    <h1>Ocr Exercise Generator</h1>
+<header class="site-header">
+    <div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2" style="width: 70% !important;">
+                <div class="main-navigation" style="justify-content: flex-start">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a th:href="@{/{id}/exercises/random(id=${id})}"
+                                   th:text="'Losowy zestaw ćwiczeń'"></a></li>
+                            <li><a th:href="@{/{id}/exercises/all(id=${id})}" th:text="'Wszystkie ćwiczeń'"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-10" style="width: 30% !important">
+                <div class="main-navigation">
+                    <nav class="header-menu">
+                        <ul class="menu">
+                            <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
-<div th:if="${successMessage}" class="alert alert-success" role="alert">
-    <p th:text="${successMessage}"></p>
-</div>
+<div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
 
-<nav>
-    <ul>
-        <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a></li>
-    </ul>
-</nav>
-<div id="space"></div>
-<div class="form-container">
-    <form method="post" style="width: 400px" th:action="@{/{id}/exercise/add(id=${id})}" th:object="${exercise}">
-        <h3>Dodawanie ćwiczenia</h3>
-        <div id="error" th:text="${exerciseNameAlreadyTaken}"></div>
-        <div class="form-group">
-            <label for="input-exerciseName">Nazwa ćwiczenia</label>
-            <input type="text" style="width: 200px" id="input-exerciseName" name="exerciseName"  th:field="*{exerciseName}" required>
+
+<section class="main-banner" id="login-container">
+    <div class="sec-wp">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-container">
+                        <form method="post" style="width: 400px" th:action="@{/{id}/exercise/add(id=${id})}"
+                              th:object="${exercise}">
+                            <h3>Dodawanie ćwiczenia</h3>
+                            <div id="error" th:text="${exerciseNameAlreadyTaken}"></div>
+                            <div class="form-group">
+                                <label for="input-exerciseName">Nazwa ćwiczenia</label>
+                                <input type="text" style="width: 200px" id="input-exerciseName" name="exerciseName"
+                                       th:field="*{exerciseName}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-description">Opis</label>
+                                <textarea id="input-description" name="description" rows="4" cols="25"
+                                          th:field="*{description}" required></textarea>
+                            </div>
+                            <div id="error2" th:text="${addressUrlAlreadyTaken}"></div>
+                            <div class="form-group">
+                                <label for="input-url">Link do youtube</label>
+                                <input type="text" style="width: 200px;" id="input-url" name="exerciseName"
+                                       th:field="*{url}" pattern="^https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]+$"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-exerciseCategory">Kategoria: </label>
+                                <select id="input-exerciseCategory" name="exerciseCategory"
+                                        th:field="*{exerciseCategory}" required>
+                                    <option th:each="category: ${availableExerciseCategory}"
+                                            th:text="${category.description}"
+                                            th:value="${category.name()}"/>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-exercisePoints">Poziom trudności: </label>
+                                <select id="input-exercisePoints" name="exercisePoints" th:field="*{exercisePoints}"
+                                        required>
+                                    <option value="5">Łatwy</option>
+                                    <option value="10">Umiarkowany</option>
+                                    <option value="15">Trudny</option>
+                                </select>
+                            </div>
+                            <input type="number" hidden="true" th:field="*{exerciseId}">
+                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="input-description">Opis</label>
-            <textarea id="input-description" name="description" rows="4" cols="25" th:field="*{description}" required></textarea>
-        </div>
-        <div id="error2" th:text="${addressUrlAlreadyTaken}"></div>
-        <div class="form-group">
-            <label for="input-url">Link do youtube</label>
-            <input type="text" style="width: 200px;" id="input-url" name="exerciseName" th:field="*{url}" pattern="^https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9_-]+$" required>
-        </div>
-        <div class="form-group">
-            <label for="input-exerciseCategory">Kategoria: </label>
-            <select id="input-exerciseCategory" name="exerciseCategory" th:field="*{exerciseCategory}" required>
-                <option th:each="category: ${availableExerciseCategory}"
-                        th:text="${category.description}"
-                        th:value="${category.name()}"/>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="input-exercisePoints">Poziom trudności: </label>
-            <select id="input-exercisePoints" name="exercisePoints" th:field="*{exercisePoints}" required>
-                <option value="5">Łatwy</option>
-                <option value="10">Umiarkowany</option>
-                <option value="15">Trudny</option>
-            </select>
-        </div>
-        <input type="number" hidden="true" th:field="*{exerciseId}">
-        <button type="submit" class="btn btn-primary">Zapisz</button>
-    </form>
-</div>
+    </div>
+</section>
 </body>
 </html>
 
