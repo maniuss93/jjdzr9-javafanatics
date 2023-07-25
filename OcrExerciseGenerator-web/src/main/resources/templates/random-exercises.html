@@ -33,8 +33,17 @@
             </div>
             <div class="col-lg-10" style="width: 30% !important">
                 <div class="main-navigation">
-                    <nav class="header-menu">
+                    <nav class="header-menu" style="padding-top: 5px !important;">
                         <ul class="menu">
+
+                            <li style="display: inline-block" id="block">
+                                <form method="get" style="width: fit-content !important;" th:action="@{/generate-pdf}">
+                                    <input type="hidden" th:each="exercise : ${randomExercises}"
+                                           th:name="exerciseIds" th:value="${exercise.exerciseId}">
+                                    <button type="submit" id="pdf-button" class="btn btn-primary">Pobierz
+                                    </button>
+                                </form>
+                            </li>
                             <li><a th:href="@{/user/{id}/userpanel(id=${id})}" th:text="'Powrót'"></a>
                             </li>
                         </ul>

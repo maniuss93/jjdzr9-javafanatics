@@ -253,8 +253,14 @@ form {
 
 #pdf-button {
     background-color: transparent !important;
-    font-family: 'Poppins', sans-serif !important;
+    color: #dee2e6 !important;
     font-size: 19px !important;
 }
 
+.dropdown-item {
+    margin-top: 5px;
+    height: fit-content !important;
+    text-align: center !important;
+    background-color: rgb(128,128,128) !important;
+}
 
