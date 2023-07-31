@@ -2,10 +2,20 @@ package com.isa.jjdzr.model;
 
 import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,14 +35,23 @@ public class User {
     @Column(name = "user_advancement_level", nullable = false)
     private AdvancementLevelCategory userAdvancementLevel;
 
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles = new ArrayList<>();
+
+    public User(){
+    }
+
     public User(String userName, String userPassword, String userEmail, AdvancementLevelCategory userAdvancementLevel) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
         this.userAdvancementLevel = userAdvancementLevel;
-    }
-
-    public User() {
     }
 
     public Long getUserId() {
@@ -75,4 +94,44 @@ public class User {
         this.userAdvancementLevel = userAdvancementLevel;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (roles != null && !roles.isEmpty()) {
+            return roles.stream()
+                    .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getName()))
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public String getPassword() {
+        return userPassword;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

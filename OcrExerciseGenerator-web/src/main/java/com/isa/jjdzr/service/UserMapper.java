@@ -2,12 +2,15 @@ package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.dto.UserDto;
 import com.isa.jjdzr.model.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 @Component
 public class UserMapper {
+
+    PasswordEncoder passwordEncoder;
 
     public UserDto userEntityToDto(User user) {
         UserDto userDto = new UserDto();
@@ -24,14 +27,14 @@ public class UserMapper {
         user.setUserId(userDto.getUserId());
         user.setUserName(userDto.getUserName());
         user.setUserEmail(userDto.getUserEmail());
-        user.setUserPassword(userDto.getUserPassword());
+        user.setUserPassword( userDto.getUserPassword());
         user.setUserAdvancementLevel(userDto.getUserAdvancementLevel());
         return user;
     }
 
     public User updateEntity(User user, UserDto userDto) {
         user.setUserName(userDto.getUserName());
-        user.setUserPassword(userDto.getUserPassword());
+        user.setUserPassword(passwordEncoder.encode(userDto.getUserPassword()));
         user.setUserEmail(userDto.getUserEmail());
         user.setUserAdvancementLevel(userDto.getUserAdvancementLevel());
         return user;
