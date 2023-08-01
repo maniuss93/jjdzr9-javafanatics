@@ -1,7 +1,11 @@
 package com.isa.jjdzr.dto;
 
 import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
+import com.isa.jjdzr.model.Role;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserDto {
@@ -13,6 +17,8 @@ public class UserDto {
     private String userPassword;
 
     private String userEmail;
+
+    private List<Role> roles = new ArrayList<>();
 
     public UserDto(Long userId, String userName, String userPassword, String userEmail, AdvancementLevelCategory userAdvancementLevel) {
         this.userId = userId;
@@ -26,6 +32,14 @@ public class UserDto {
     }
 
     private AdvancementLevelCategory userAdvancementLevel;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public Long getUserId() {
         return userId;

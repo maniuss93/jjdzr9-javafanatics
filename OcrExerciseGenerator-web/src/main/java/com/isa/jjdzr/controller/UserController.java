@@ -4,7 +4,14 @@ import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
 import com.isa.jjdzr.dto.UserDto;
 import com.isa.jjdzr.model.User;
 import com.isa.jjdzr.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +22,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
     private static final String userEditDetails = "user-edit-details";
     private static final String userCreateForm = "user-create-form";
     private static final String userEditPassword = "user-edit-password";
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/new")
@@ -48,6 +57,7 @@ public class UserController {
             model.addAttribute("userPasswordsDoNotMatch", "Hasła muszą być identyczne");
             return userCreateForm;
         } else {
+            user.setUserPassword(passwordEncoder.encode(userPassword));
             model.addAttribute("user", userService.createUser(user));
             redirectAttributes.addAttribute("successMessage", "Użytkownik został dodany pomyślnie!");
             return "redirect:/";
@@ -63,29 +73,39 @@ public class UserController {
     @PostMapping(value = "/login")
     public String userLogin(@ModelAttribute("user") UserDto user, Model model) {
         Optional<User> userByName = userService.findByUserName(user.getUserName());
-        if (userByName.isEmpty() || !(userByName.get().getUserPassword()).equals(user.getUserPassword())) {
+        if (userByName.isEmpty() || !(userByName.get().getPassword()).equals(user.getUserPassword())) {
             model.addAttribute("incorrectDetails", "Dane nie są poprawne");
             return "user-login-form";
         }
         Long id = userByName.get().getUserId();
         return "redirect:/user/" + id + "/userpanel";
     }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/";
+    }
 
     @GetMapping("/{id}/userpanel")
-    public String showUserProfile(@PathVariable Long id, Model model) {
+    public String showUserProfile(@PathVariable Long id, Authentication authentication, Model model) {
+        userService.isUserAuthorized(id, authentication);
         Optional<User> user = userService.findByUserId(id);
         model.addAttribute("user", user.orElseThrow());
         return "user-panel";
     }
 
     @GetMapping("/{id}/editdetails")
-    public String getUserProfileEditForm(@PathVariable Long id, Model model) {
+    public String getUserProfileEditForm(@PathVariable Long id, Authentication authentication, Model model) {
+        userService.isUserAuthorized(id, authentication);
         Optional<User> user = userService.findByUserId(id);
         model.addAttribute("user", user.orElseThrow());
         return userEditDetails;
     }
 
-    @PostMapping(value = "/{id}/edit")
+    @PostMapping(value = "/{id}/editdetails")
     public String userProfileEdit(@Valid @ModelAttribute("user") UserDto user,
                                   @PathVariable Long id,
                                   Model model,
@@ -106,7 +126,8 @@ public class UserController {
 
 
     @GetMapping("/{id}/editpassword")
-    public String getUserPasswordEditForm(@PathVariable Long id, Model model) {
+    public String getUserPasswordEditForm(@PathVariable Long id, Authentication authentication, Model model) {
+        userService.isUserAuthorized(id, authentication);
         Optional<User> user = userService.findByUserId(id);
         model.addAttribute("user", user.orElseThrow());
         return userEditPassword;
@@ -120,13 +141,14 @@ public class UserController {
                                    @RequestParam("confirmPassword") String confirmPassword,
                                    Model model, RedirectAttributes redirectAttributes) {
         Optional<User> userFromDb = userService.findByUserId(id);
-        if (userFromDb.isPresent() && !userCurrentPassword.equals(userFromDb.get().getUserPassword())) {
+        if (userFromDb.isPresent() && !BCrypt.checkpw(userCurrentPassword, userFromDb.get().getPassword())) {
             model.addAttribute("wrongPassword", "Twoje aktualne hasło jest nie poprawne");
             return userEditPassword;
         } else if (!userPassword.equals(confirmPassword)) {
             model.addAttribute("userPasswordsDoNotMatch", "Hasła muszą być identyczne");
             return userEditPassword;
         } else {
+            user.setUserPassword(passwordEncoder.encode(userPassword));
             userService.editUser(user);
         }
         redirectAttributes.addAttribute("successMessage", "Aktualizacja hasła użytkownika przebiegła pomyślnie!");
@@ -134,19 +156,22 @@ public class UserController {
     }
 
     @GetMapping("/{id}/delete")
-    public String deleteUser(@PathVariable Long id) {
+    public String deleteUser(@PathVariable Long id, Authentication authentication) {
+        userService.isUserAuthorized(id, authentication);
         userService.deleteUser(id);
         return "redirect:/?successMessage=Uzytkownik+zostal+usuniety+pomyslnie";
     }
 
     @GetMapping("/userpanel/{id}")
-    public String getUserPanel(@PathVariable Long id) {
+    public String getUserPanel(@PathVariable Long id, Authentication authentication) {
+        userService.isUserAuthorized(id, authentication);
         return "user-panel";
     }
 
 
     @GetMapping("/{id}/confirmdelete")
-    public String confirmDeleteUser(@PathVariable Long id) {
+    public String confirmDeleteUser(@PathVariable Long id, Authentication authentication) {
+        userService.isUserAuthorized(id, authentication);
         return "user-confirm-delete";
     }
 

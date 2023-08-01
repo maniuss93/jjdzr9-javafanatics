@@ -2,10 +2,20 @@ package com.isa.jjdzr.model;
 
 import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +28,7 @@ public class User {
     @Column(name = "user_password", nullable = false)
     private String userPassword;
 
+    @Email(message = "Nieprawidlowy adres email")
     @Column(name = "user_email", nullable = false)
     private String userEmail;
 
@@ -25,14 +36,40 @@ public class User {
     @Column(name = "user_advancement_level", nullable = false)
     private AdvancementLevelCategory userAdvancementLevel;
 
-    public User(String userName, String userPassword, String userEmail, AdvancementLevelCategory userAdvancementLevel) {
+
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles = new ArrayList<>();
+
+    public User(){
+    }
+
+    public User(String userName, String userPassword, String userEmail, AdvancementLevelCategory userAdvancementLevel, List<Role> roles) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
         this.userAdvancementLevel = userAdvancementLevel;
+        this.roles = roles;
     }
 
-    public User() {
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public Long getUserId() {
@@ -43,16 +80,8 @@ public class User {
         this.userId = userID;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
     }
 
     public void setUserPassword(String userPassword) {
@@ -75,4 +104,44 @@ public class User {
         this.userAdvancementLevel = userAdvancementLevel;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (roles != null && !roles.isEmpty()) {
+            return roles.stream()
+                    .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getName()))
+                    .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public String getPassword() {
+        return userPassword;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

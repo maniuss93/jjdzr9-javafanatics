@@ -1,67 +1,103 @@
 package com.isa.jjdzr.config;
 
+import com.isa.jjdzr.handler.CustomAccessDeniedHandler;
+import com.isa.jjdzr.handler.CustomAuthenticationSuccessHandler;
+import com.isa.jjdzr.repository.UserRepository;
+import com.isa.jjdzr.service.DatabaseUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig {
 
-    @Bean
-    public InMemoryUserDetailsManager inMemoryUsers() {
-        UserDetails user = User.withUsername("User")
-                .password("user")
-                .roles("USER")
-                .build();
+    final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    final CustomAccessDeniedHandler customAccessDeniedHandler;
+    final UserRepository userRepository;
+    final DataSource dataSource;
 
-        UserDetails user2 = User.withUsername("User2")
-                .password("user2")
-                .roles("USER")
-                .build();
-        UserDetails admin = User.withUsername("admin")
-                .password("admin")
-                .roles("ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(user,user2,admin);
+    public SecurityConfig(CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler, CustomAccessDeniedHandler customAccessDeniedHandler, UserRepository userRepository, DataSource dataSource) {
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
+        this.customAccessDeniedHandler = customAccessDeniedHandler;
+        this.userRepository = userRepository;
+        this.dataSource = dataSource;
     }
 
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailServiceBean());
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
+
+    @Bean
+    UserDetailsService userDetailServiceBean() {
+        return new DatabaseUserDetailService(userRepository);
+    }
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests((autz) -> {
-                    try {
-                        autz
-                                .requestMatchers("/","/demo","/user/new","/calendar","/info").permitAll()
-                                .requestMatchers("/admin","/{id}/exercises/not-approved/**","/exercises/accept/**", "/exercises/delete/**").authenticated()
-                                //.anyRequest().authenticated()
-                                .and()
-                                .oauth2Login()
-                                .and()
-                                .formLogin()
-                                .and()
-                                .logout()
-                                .logoutSuccessUrl("/?logout=true")
-                                .and()
-                                .csrf().disable();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-        );
+        http.authorizeHttpRequests((authz) -> {
+            try {
+                authz
+                        .requestMatchers("/", "/user/new", "/calendar", "/user/login").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        .anyRequest().authenticated()
+                        .and()
+                        .exceptionHandling()
+                        .accessDeniedHandler(customAccessDeniedHandler)
+                        .and()
+                        .formLogin()
+                        .loginPage("/user/login")
+                        .successHandler(customAuthenticationSuccessHandler)
+                        .usernameParameter("userName")
+                        .passwordParameter("userPassword")
+                        .and()
+                        .rememberMe()
+                        .tokenRepository(persistentTokenRepository())
+                        .tokenValiditySeconds(86400)
+                        .and()
+                        .csrf()
+                        .and()
+                        .exceptionHandling()
+                        .and()
+                        .logout()
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
         return http.build();
     }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepositoryImpl = new JdbcTokenRepositoryImpl();
+        tokenRepositoryImpl.setDataSource(dataSource);
+        return tokenRepositoryImpl;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }

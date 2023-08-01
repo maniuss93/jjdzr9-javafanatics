@@ -1,4 +1,4 @@
-package com.isa.jjdzr.service;
+package com.isa.jjdzr.mapper;
 
 import com.isa.jjdzr.dto.ExerciseDto;
 import com.isa.jjdzr.model.Exercise;

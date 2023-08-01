@@ -6,14 +6,10 @@ import com.isa.jjdzr.model.Exercise;
 import com.isa.jjdzr.model.User;
 import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.service.ExerciseService;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import com.isa.jjdzr.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +26,7 @@ public class ExerciseController {
 
     private final ExerciseService exerciseService;
     private final UserRepository userRepository;
+    private final UserService userService;
 
 
     @GetMapping("/exercises/not-approved")
@@ -41,7 +38,8 @@ public class ExerciseController {
 
 
     @GetMapping("/{id}/exercises/approved")
-    public String getApprovedExercises(@PathVariable Long id, Model model) {
+    public String getApprovedExercises(@PathVariable Long id, Authentication authentication, Model model) {
+        userService.isUserAuthorized(id, authentication);
         List<Exercise> exercisesListApproved = exerciseService.getApprovedExercises();
         model.addAttribute("exercises", exercisesListApproved);
         return "all-exercises";
@@ -49,7 +47,8 @@ public class ExerciseController {
 
 
     @GetMapping("/{id}/exercises/random")
-    public String generateRandomExercises(@PathVariable Long id, Model model) {
+    public String generateRandomExercises(@PathVariable Long id, Authentication authentication, Model model) {
+        userService.isUserAuthorized(id, authentication);
         Optional<User> userFromDb = userRepository.findByUserId(id);
         List<Exercise> randomExercises = exerciseService.generateRandomExercises(userFromDb.orElseThrow().getUserAdvancementLevel());
         model.addAttribute("randomExercises", randomExercises);
@@ -58,7 +57,8 @@ public class ExerciseController {
     }
 
     @GetMapping("/{id}/exercises/all")
-    public String getAllExercises(@PathVariable Long id, Model model) {
+    public String getAllExercises(@PathVariable Long id, Authentication authentication, Model model) {
+        userService.isUserAuthorized(id, authentication);
         List<ExerciseDto> exercisesList = exerciseService.findAllExercises();
         model.addAttribute("exercises", exercisesList);
         return "all-exercises";
@@ -80,7 +80,8 @@ public class ExerciseController {
 
 
     @GetMapping("/{id}/exercise/add")
-    public String getAddExerciseForm(@PathVariable Long id, Model model) {
+    public String getAddExerciseForm(@PathVariable Long id, Authentication authentication, Model model) {
+        userService.isUserAuthorized(id, authentication);
         model.addAttribute("exercise", new Exercise());
         return "add-exercise-form";
     }
@@ -104,7 +105,6 @@ public class ExerciseController {
 
 
     @PostMapping("/exercises/accept/{exerciseId}")
-
     public String acceptExercise(@PathVariable Long exerciseId) {
         exerciseService.acceptExercise(exerciseId);
         return "redirect:/exercises/not-approved";
@@ -116,16 +116,6 @@ public class ExerciseController {
         exerciseService.deleteExercise(exerciseId);
         return "redirect:/exercises/not-approved";
     }
-
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/";
-    }
-
 
     @ModelAttribute("availableExerciseCategory")
     List<ExerciseCategory> getDescription() {

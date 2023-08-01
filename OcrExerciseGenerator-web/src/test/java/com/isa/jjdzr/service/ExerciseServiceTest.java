@@ -2,6 +2,7 @@ package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.controller.ExerciseController;
 import com.isa.jjdzr.dto.ExerciseDto;
+import com.isa.jjdzr.mapper.ExerciseMapper;
 import com.isa.jjdzr.model.Exercise;
 import com.isa.jjdzr.repository.ExerciseRepository;
 import com.isa.jjdzr.repository.UserRepository;
@@ -30,6 +31,8 @@ class ExerciseServiceTest {
     @Mock
     private UserRepository userRepository;
     @Mock
+    private UserService userService;
+    @Mock
     private ExerciseMapper exerciseMapper;
     @InjectMocks
     private ExerciseService exerciseService;
@@ -39,7 +42,7 @@ class ExerciseServiceTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        exerciseController = new ExerciseController(exerciseService, userRepository);
+        exerciseController = new ExerciseController(exerciseService, userRepository, userService);
     }
 
     @Test

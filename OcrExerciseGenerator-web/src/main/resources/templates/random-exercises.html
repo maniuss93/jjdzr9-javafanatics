@@ -17,7 +17,6 @@
 </head>
 <body>
 <header class="site-header">
-    <div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-2" style="width: 70% !important;">
@@ -53,8 +52,6 @@
         </div>
     </div>
 </header>
-<div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
-
 <section class="main-banner" id="login-container">
     <div class="sec-wp">
         <div class="container">

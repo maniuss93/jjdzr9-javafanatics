@@ -17,7 +17,6 @@
 </head>
 <body>
 <header class="site-header">
-    <div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-2" style="width: 70% !important;">
@@ -51,7 +50,7 @@
                                        th:href="@{/user/{id}/confirmdelete(id=${id})}">Usuń profil</a>
                                 </div>
                             </li>
-                            <li><a href="/">Wyloguj</a></li>
+                            <li><a href="/logout">Wyloguj</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -59,7 +58,7 @@
         </div>
     </div>
 </header>
-<div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
+<div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}" style="display: flex; justify-content: center" ></div>
 <section class="main-banner" id="exercise-container">
     <div class="sec-wp">
         <div class="container">
