@@ -1,9 +1,11 @@
 package com.isa.jjdzr.service;
 
-import com.isa.jjdzr.dto.UserDto;
-import com.isa.jjdzr.repository.UserRepository;
-import com.isa.jjdzr.model.User;
 import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
+import com.isa.jjdzr.dto.UserDto;
+import com.isa.jjdzr.mapper.UserMapper;
+import com.isa.jjdzr.model.Role;
+import com.isa.jjdzr.model.User;
+import com.isa.jjdzr.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -21,10 +23,10 @@ import static org.mockito.Mockito.when;
 class UserServiceTest {
 
     private static final List<User> mockUsers = List.of(
-            new User("andrzej1234", "12345", "andrzej1234@wp.pl", AdvancementLevelCategory.ADVANCE),
-            new User("pawel1234", "qwerty", "pawel1234@gmail.com", AdvancementLevelCategory.BEGINNER),
-            new User("mateusz", "asdf123", "mateusz.pl", AdvancementLevelCategory.PROFESSIONAL),
-            new User("paulina", "asdasd45", "paulina@wp.pl", AdvancementLevelCategory.ADVANCE));
+            new User("andrzej1234", "12345", "andrzej1234@wp.pl", AdvancementLevelCategory.ADVANCE, List.of(new Role("USER"))),
+            new User("pawel1234", "qwerty", "pawel1234@gmail.com", AdvancementLevelCategory.BEGINNER, List.of(new Role("USER"))),
+            new User("mateusz", "asdf123", "mateusz.pl", AdvancementLevelCategory.PROFESSIONAL, List.of(new Role("USER"))),
+            new User("paulina", "asdasd45", "paulina@wp.pl", AdvancementLevelCategory.ADVANCE, List.of(new Role("USER"))));
 
     @Mock
     private UserRepository userRepositoryMock;
@@ -73,7 +75,7 @@ class UserServiceTest {
     @Test
     void shouldReturnTrueIfUserExistsByName() {
         //GIVEN
-        String userName = mockUsers.get(0).getUserName();
+        String userName = mockUsers.get(0).getUsername();
         when(userRepositoryMock.existsByUserName(userName)).thenReturn(true);
         //WHEN
         boolean existsuserName = userService.existsByName(userName);
@@ -87,7 +89,7 @@ class UserServiceTest {
     void shouldReturnUserByUserName() {
         //GIVEN
         User expectedUser = mockUsers.get(2);
-        when(userRepositoryMock.findByUserName(expectedUser.getUserName())).thenReturn(Optional.of(expectedUser));
+        when(userRepositoryMock.findByUserName(expectedUser.getUsername())).thenReturn(Optional.of(expectedUser));
         //WHEN
         Optional<User> actualUser = userService.findByUserName("mateusz");
         //THEN

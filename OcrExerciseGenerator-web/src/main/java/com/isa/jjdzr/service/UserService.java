@@ -1,10 +1,13 @@
 package com.isa.jjdzr.service;
 
 import com.isa.jjdzr.dto.UserDto;
+import com.isa.jjdzr.mapper.UserMapper;
 import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.model.User;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,6 +43,14 @@ public class UserService {
         return userMapper.allUsersToDto(findAll);
     }
 
+    public void isUserAuthorized (Long id, Authentication authentication){
+        if (authentication == null || !(authentication.getPrincipal() instanceof User userDetails)) {
+            throw new AccessDeniedException("Access Denied");
+        }
+        if (!userDetails.getUserId().equals(id)) {
+            throw new AccessDeniedException("Access Denied");
+        }
+    }
     public boolean existsByEmail(String userEmail) {
         return userRepository.existsByUserEmail(userEmail);
     }
@@ -50,10 +61,6 @@ public class UserService {
 
     public Optional<User> findByUserName(String userName) {
         return userRepository.findByUserName(userName);
-    }
-    public UserDto getUserDtoById(Long id){
-        Optional<User> userFromDb = findByUserId(id);
-        return userMapper.userEntityToDto(userFromDb.orElseThrow());
     }
 
     public Optional<User> findByUserId(Long id) {

@@ -17,7 +17,6 @@
 </head>
 <body>
 <header class="site-header">
-    <div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-10" style="width: 100% !important; padding-right: 50px">
@@ -33,16 +32,13 @@
         </div>
     </div>
 </header>
-<div th:if="${param.successMessage != null}" class="alert alert-success" th:text="${param.successMessage}"></div>
-
-
 <section class="main-banner" id="login-container">
     <div class="sec-wp">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-container">
-                        <form method="post" th:action="@{/user/{id}/edit(id=${id})}" th:object="${user}">
+                        <form method="post" th:action="@{/user/{id}/editdetails(id=${id})}" th:object="${user}">
                             <input type="number" hidden="true" th:field="*{userId}">
                             <input type="text" hidden="true" th:field="*{userPassword}">
                             <h2>Zmień dane</h2>

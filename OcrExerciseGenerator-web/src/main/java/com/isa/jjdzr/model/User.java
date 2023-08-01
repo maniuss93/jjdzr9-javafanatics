@@ -2,10 +2,10 @@ package com.isa.jjdzr.model;
 
 import com.isa.jjdzr.dictionary.AdvancementLevelCategory;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +28,7 @@ public class User implements UserDetails {
     @Column(name = "user_password", nullable = false)
     private String userPassword;
 
+    @Email(message = "Nieprawidlowy adres email")
     @Column(name = "user_email", nullable = false)
     private String userEmail;
 
@@ -36,7 +37,7 @@ public class User implements UserDetails {
     private AdvancementLevelCategory userAdvancementLevel;
 
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -47,11 +48,28 @@ public class User implements UserDetails {
     public User(){
     }
 
-    public User(String userName, String userPassword, String userEmail, AdvancementLevelCategory userAdvancementLevel) {
+    public User(String userName, String userPassword, String userEmail, AdvancementLevelCategory userAdvancementLevel, List<Role> roles) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
         this.userAdvancementLevel = userAdvancementLevel;
+        this.roles = roles;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public Long getUserId() {
@@ -62,16 +80,8 @@ public class User implements UserDetails {
         this.userId = userID;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
     }
 
     public void setUserPassword(String userPassword) {

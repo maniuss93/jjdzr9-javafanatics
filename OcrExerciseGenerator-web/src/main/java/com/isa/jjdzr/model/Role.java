@@ -14,7 +14,6 @@ public class Role{
     private String name;
 
     protected Role() {
-        // empty constructor wanted by hibernate
     }
 
     public Role(String roleName) {

@@ -1,23 +1,19 @@
 package com.isa.jjdzr.config;
 
+import com.isa.jjdzr.handler.CustomAccessDeniedHandler;
+import com.isa.jjdzr.handler.CustomAuthenticationSuccessHandler;
 import com.isa.jjdzr.repository.UserRepository;
 import com.isa.jjdzr.service.DatabaseUserDetailService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.UserDetailsServiceFactoryBean;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -27,12 +23,17 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig {
 
+    final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    final CustomAccessDeniedHandler customAccessDeniedHandler;
     final UserRepository userRepository;
     final DataSource dataSource;
 
-    public SecurityConfig(UserRepository userRepository, DataSource dataSource) {
+    public SecurityConfig(CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler, CustomAccessDeniedHandler customAccessDeniedHandler, UserRepository userRepository, DataSource dataSource) {
+        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
+        this.customAccessDeniedHandler = customAccessDeniedHandler;
         this.userRepository = userRepository;
         this.dataSource = dataSource;
     }
@@ -60,14 +61,16 @@ public class SecurityConfig {
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                         .and()
+                        .exceptionHandling()
+                        .accessDeniedHandler(customAccessDeniedHandler)
+                        .and()
                         .formLogin()
                         .loginPage("/user/login")
-                        .defaultSuccessUrl("/user/1/userpanel", true)
+                        .successHandler(customAuthenticationSuccessHandler)
                         .usernameParameter("userName")
                         .passwordParameter("userPassword")
                         .and()
                         .rememberMe()
-                        .rememberMeParameter("remember-me")
                         .tokenRepository(persistentTokenRepository())
                         .tokenValiditySeconds(86400)
                         .and()
@@ -75,7 +78,10 @@ public class SecurityConfig {
                         .and()
                         .exceptionHandling()
                         .and()
-                        .logout();
+                        .logout()
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

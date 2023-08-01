@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users (user_id INT AUTO_INCREMENT PRIMARY KEY,
                                   user_password VARCHAR(100) NOT NULL,
                                   user_email VARCHAR(40) NOT NULL,
                                   user_advancement_level ENUM('BEGINNER', 'ADVANCE', 'PROFESSIONAL') NOT NULL,
-                                  role VARCHAR(25) NOT NULL
+                                  role VARCHAR(10) DEFAULT 'USER' NOT NULL
                                   );
 
 CREATE TABLE IF NOT EXISTS exercises (exercise_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS exercises (exercise_id INT AUTO_INCREMENT PRIMARY KEY
                                       exercise_category ENUM('WARM_UP', 'CORE_EXERCISES', 'STRETCHING') NOT NULL
                                       );
 CREATE TABLE IF NOT EXISTS roles (role_id INT AUTO_INCREMENT PRIMARY KEY,
-                                 name VARCHAR(25) NOT NULL
+                                 name VARCHAR(10) NOT NULL
                                  );
 
 CREATE TABLE IF NOT EXISTS users_roles (user_id INT NOT NULL,
@@ -31,14 +31,14 @@ INSERT INTO users (user_id, user_name, user_password, user_email, user_advanceme
                   (1, 'maniuss93', '$2a$10$aG4T/KPjSHQcYHENXUC88.o5IpCL/Nuiy2J3InhnUU1aov4awMB46', 'pm@wp.pl', 'BEGINNER', 'ADMIN');
 INSERT INTO users (user_id, user_name, user_password, user_email, user_advancement_level, role) VALUES
                   (2, 'jacek', '$2a$10$aG4T/KPjSHQcYHENXUC88.o5IpCL/Nuiy2J3InhnUU1aov4awMB46', 'jacek@jacek.pl', 'BEGINNER', 'USER');
-INSERT INTO users (user_id, user_name, user_password, user_email, user_advancement_level, role) VALUES
-                  (3, 'jacek1', '$2a$10$aG4T/KPjSHQcYHENXUC88.o5IpCL/Nuiy2J3InhnUU1aov4awMB46', 'jacek1@jacek.pl', 'BEGINNER', 'USER');
 
 INSERT INTO roles (role_id, name) VALUES (1, 'ADMIN');
 INSERT INTO roles (role_id, name) VALUES (2, 'USER');
 
 INSERT INTO users_roles  (user_id, role_id) VALUES (1,1);
 INSERT INTO users_roles  (user_id, role_id) VALUES (2,2);
+
+SELECT * FROM users;
 
 INSERT INTO exercises (exercise_id, exercise_points, exercise_name,
                        description, url, is_approved, exercise_category) VALUES
