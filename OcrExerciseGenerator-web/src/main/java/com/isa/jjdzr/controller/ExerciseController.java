@@ -28,11 +28,16 @@ public class ExerciseController {
     private final UserRepository userRepository;
     private final UserService userService;
 
+    private static final String redirectUser = "redirect:/user/";
+    private static final String userPanel = "/userpanel";
+    private static final String exercise = "exercise";
+    private static final String exerciseForm = "add-exercise-form";
+
 
     @GetMapping("/exercises/not-approved")
     public String getNotApprovedExercises(Model model) {
         List<Exercise> exercisesListNotApproved = exerciseService.getNotApprovedExercises();
-        model.addAttribute("exercises", exercisesListNotApproved);
+        model.addAttribute(exercise, exercisesListNotApproved);
         return "not-approved-exercises";
     }
 
@@ -41,7 +46,7 @@ public class ExerciseController {
     public String getApprovedExercises(@PathVariable Long id, Authentication authentication, Model model) {
         userService.isUserAuthorized(id, authentication);
         List<Exercise> exercisesListApproved = exerciseService.getApprovedExercises();
-        model.addAttribute("exercises", exercisesListApproved);
+        model.addAttribute(exercise, exercisesListApproved);
         return "all-exercises";
     }
 
@@ -60,14 +65,14 @@ public class ExerciseController {
     public String getAllExercises(@PathVariable Long id, Authentication authentication, Model model) {
         userService.isUserAuthorized(id, authentication);
         List<ExerciseDto> exercisesList = exerciseService.findAllExercises();
-        model.addAttribute("exercises", exercisesList);
+        model.addAttribute(exercise, exercisesList);
         return "all-exercises";
     }
 
     @GetMapping("/exercises/all")
     public String getAllExercises(Model model) {
         List<ExerciseDto> exercisesList = exerciseService.findAllExercises();
-        model.addAttribute("exercises", exercisesList);
+        model.addAttribute(exercise, exercisesList);
         return "admin-all-exercises";
     }
 
@@ -82,8 +87,8 @@ public class ExerciseController {
     @GetMapping("/{id}/exercise/add")
     public String getAddExerciseForm(@PathVariable Long id, Authentication authentication, Model model) {
         userService.isUserAuthorized(id, authentication);
-        model.addAttribute("exercise", new Exercise());
-        return "add-exercise-form";
+        model.addAttribute(exercise, new Exercise());
+        return exerciseForm;
     }
 
 
@@ -91,16 +96,16 @@ public class ExerciseController {
     public String createExercise(@PathVariable Long id, @ModelAttribute("exercise") ExerciseDto exercise, Model model, RedirectAttributes redirectAttributes) {
         if (exerciseService.existsByExerciseName(exercise.getExerciseName())) {
             model.addAttribute("exerciseNameAlreadyTaken", "Ćwiczenie z taką nazwą już istnieje");
-            return "add-exercise-form";
+            return exerciseForm;
         } else if (exerciseService.existsByUrl(exercise.getUrl())) {
             model.addAttribute("addressUrlAlreadyTaken", "Ćwiczenie z takim adresem url już istnieje");
-            return "add-exercise-form";
+            return exerciseForm;
         } else {
             model.addAttribute("exercise", exerciseService.addExercise(exercise));
             redirectAttributes.addAttribute("successMessage", "Ćwiczenie zostało dodane pomyślnie!");
 
         }
-        return "redirect:/user/" + id + "/userpanel";
+        return redirectUser + id + userPanel;
     }
 
 
