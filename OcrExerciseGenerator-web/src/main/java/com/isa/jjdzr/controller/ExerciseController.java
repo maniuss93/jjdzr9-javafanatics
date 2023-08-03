@@ -24,13 +24,12 @@ import java.util.Optional;
 @RequestMapping()
 public class ExerciseController {
 
-    private static final String redirectUser = "redirect:/user/";
-    private static final String userPanel = "/userpanel";
-
     private final ExerciseService exerciseService;
     private final UserRepository userRepository;
     private final UserService userService;
 
+    private static final String redirectUser = "redirect:/user/";
+    private static final String userPanel = "/userpanel";
     private static final String exercise = "exercise";
     private static final String exerciseForm = "add-exercise-form";
 
