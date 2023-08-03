@@ -27,6 +27,10 @@ public class UserController {
     private static final String userEditDetails = "user-edit-details";
     private static final String userCreateForm = "user-create-form";
     private static final String userEditPassword = "user-edit-password";
+    private static final String successMessage = "successMessage";
+    private static final String redirectHome = "redirect:/";
+    private static final String redirectUser = "redirect:/user/";
+    private static final String userPanel = "/userpanel/";
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
@@ -59,8 +63,8 @@ public class UserController {
         } else {
             user.setUserPassword(passwordEncoder.encode(userPassword));
             model.addAttribute("user", userService.createUser(user));
-            redirectAttributes.addAttribute("successMessage", "Użytkownik został dodany pomyślnie!");
-            return "redirect:/";
+            redirectAttributes.addAttribute(successMessage, "Użytkownik został dodany pomyślnie!");
+            return redirectHome;
         }
     }
 
@@ -78,7 +82,7 @@ public class UserController {
             return "user-login-form";
         }
         Long id = userByName.get().getUserId();
-        return "redirect:/user/" + id + "/userpanel";
+        return redirectUser + id + userPanel;
     }
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
@@ -86,7 +90,7 @@ public class UserController {
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/";
+        return redirectHome;
     }
 
     @GetMapping("/{id}/userpanel")
@@ -120,8 +124,8 @@ public class UserController {
             return userEditDetails;
         }
         userService.editUser(user);
-        redirectAttributes.addAttribute("successMessage", "Aktualizacja użytkownika przebiegła pomyślnie!");
-        return "redirect:/user/" + id + "/userpanel";
+        redirectAttributes.addAttribute(successMessage, "Aktualizacja użytkownika przebiegła pomyślnie!");
+        return redirectUser + id + userPanel;
     }
 
 
@@ -151,8 +155,8 @@ public class UserController {
             user.setUserPassword(passwordEncoder.encode(userPassword));
             userService.editUser(user);
         }
-        redirectAttributes.addAttribute("successMessage", "Aktualizacja hasła użytkownika przebiegła pomyślnie!");
-        return "redirect:/user/" + id + "/userpanel";
+        redirectAttributes.addAttribute(successMessage, "Aktualizacja hasła użytkownika przebiegła pomyślnie!");
+        return redirectUser + id + userPanel;
     }
 
     @GetMapping("/{id}/delete")
@@ -161,13 +165,6 @@ public class UserController {
         userService.deleteUser(id);
         return "redirect:/?successMessage=Uzytkownik+zostal+usuniety+pomyslnie";
     }
-
-    @GetMapping("/userpanel/{id}")
-    public String getUserPanel(@PathVariable Long id, Authentication authentication) {
-        userService.isUserAuthorized(id, authentication);
-        return "user-panel";
-    }
-
 
     @GetMapping("/{id}/confirmdelete")
     public String confirmDeleteUser(@PathVariable Long id, Authentication authentication) {

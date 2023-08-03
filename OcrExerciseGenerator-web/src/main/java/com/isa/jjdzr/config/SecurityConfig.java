@@ -7,7 +7,6 @@ import com.isa.jjdzr.service.DatabaseUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,7 +22,6 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfig {
 
     final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
@@ -39,7 +37,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailServiceBean());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -54,38 +52,32 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((authz) -> {
-            try {
-                authz
-                        .requestMatchers("/", "/user/new", "/calendar", "/user/login").permitAll()
-                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                        .anyRequest().authenticated()
-                        .and()
-                        .exceptionHandling()
-                        .accessDeniedHandler(customAccessDeniedHandler)
-                        .and()
-                        .formLogin()
-                        .loginPage("/user/login")
-                        .successHandler(customAuthenticationSuccessHandler)
-                        .usernameParameter("userName")
-                        .passwordParameter("userPassword")
-                        .and()
-                        .rememberMe()
-                        .tokenRepository(persistentTokenRepository())
-                        .tokenValiditySeconds(86400)
-                        .and()
-                        .csrf()
-                        .and()
-                        .exceptionHandling()
-                        .and()
-                        .logout()
-                        .invalidateHttpSession(true)
-                        .clearAuthentication(true)
-                        .deleteCookies("JSESSIONID");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        http.authorizeHttpRequests()
+                .requestMatchers("/", "/user/new", "/calendar", "/user/login").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(customAccessDeniedHandler)
+                .and()
+                .formLogin()
+                .loginPage("/user/login")
+                .successHandler(customAuthenticationSuccessHandler)
+                .usernameParameter("userName")
+                .passwordParameter("userPassword")
+                .and()
+                .rememberMe()
+                .tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(86400)
+                .and()
+                .csrf()
+                .and()
+                .exceptionHandling()
+                .and()
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID");
         return http.build();
     }
 

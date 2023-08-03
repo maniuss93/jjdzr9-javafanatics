@@ -38,8 +38,6 @@ INSERT INTO roles (role_id, name) VALUES (2, 'USER');
 INSERT INTO users_roles  (user_id, role_id) VALUES (1,1);
 INSERT INTO users_roles  (user_id, role_id) VALUES (2,2);
 
-SELECT * FROM users;
-
 INSERT INTO exercises (exercise_id, exercise_points, exercise_name,
                        description, url, is_approved, exercise_category) VALUES
                        (1, 10, 'Zwis na prostym drazku.','Wisisz obiema rekami przez 20 sekund z 20-sekundowa przerwa. Aktywny zwis, ramiona napiete, nogi przed soba. Jesli nie mozesz wisiec przez 20 sekund bez przerwy, podloz pudelko pod nogi krzesla lub podeprzyj sie, ale nie mozesz puscic drazka przez 20 sekund.',
